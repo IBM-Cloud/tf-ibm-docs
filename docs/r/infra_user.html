@@ -1,0 +1,309 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Terraform documentation">
+    <title>
+        IBM Cloud
+    </title>
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+</head>
+<!-- end _meta.erb -->
+
+<body>
+<div class="container-fluid page-wrapper">
+    		<div class="docs-sidebar col-md-2 hidden-print affix-top" role="complementary">
+			<ul class="nav docs-sidenav">
+				<li>
+                </li>
+
+				<li>
+				<a href="/index.html"><h4>IBM Cloud Provider</h4></a>
+                </li>
+
+				<li>
+				<a href="#">Infrastructure Data Sources</a>
+                <ul class="nav nav-visible">
+					<li>
+					<a href="/d/cf_account.html">cf_account</a>
+					</li>
+					<li>
+					<a href="/d/cf_org.html">cf_org</a>
+					</li>
+					<li>
+					<a href="/d/cf_service_instance.html">cf_service_instance</a>
+					</li>
+					<li>
+					<a href="/d/cf_service_key.html">cf_service_key</a>
+					</li>
+					<li>
+					<a href="/d/cf_service_plan.html">cf_service_plan</a>
+					</li>
+					<li>
+					<a href="/d/cf_space.html">cf_space</a>
+					</li>
+                	<li>
+					<a href="/d/cs_cluster.html">cs_cluster</a>
+					</li>
+					<li>
+					<a href="/d/cs_cluster_config.html">cs_cluster_config</a>
+					</li>
+					<li>
+					<a href="/d/cs_worker.html">cs_worker</a>
+					</li>
+					<li>
+					<a href="/d/infra_dns_domain.html">infra_dns_domain</a>
+					</li>
+					<li>
+					<a href="/d/infra_image_template.html">infra_image_template</a>
+					</li>			
+					<li>
+					<a href="/d/infra_ssh_key.html">infra_ssh_key</a>
+					</li>
+					<li>
+					<a href="/d/infra_vlan.html">infra_vlan</a>
+					</li>
+				</ul>
+				</li>
+
+				<li>
+				<a href="#">Infrastructure Resources</a>
+                <ul class="nav nav-visible">
+					<li>
+					 <a href="/r/cf_service_instance.html">cf_service_instance</a>
+					</li>
+					<li>
+					 <a href="/r/cf_service_key.html">cf_service_key</a>
+					</li>
+					<li>
+					 <a href="/r/cs_cluster.html">cs_cluster</a>
+					</li>
+					<li>
+					 <a href="/r/cs_cluster_bind_service.html">cs_cluster_bind_service</a>
+					</li>
+                	<li>
+					 <a href="/r/infra_bare_metal.html">infra_bare_metal</a>
+					</li>
+					<li>
+					 <a href="/r/infra_basic_monitor.html">infra_basic_monitor</a>
+					</li>
+					<li>
+					 <a href="/r/infra_block_storage.html">infra_block_storage</a>
+					</li>
+					<li>
+					 <a href="/r/infra_dns_domain.html">infra_dns_domain</a>
+					</li>
+					<li>
+					<a href="/r/infra_dns_domain_record.html">infra_dns_domain_record</a>
+					</li>
+					<li>
+                    <a href="/r/infra_file_storage.html">infra_file_storage</a>
+                    </li>
+					<li>
+					 <a href="/r/infra_fw_hardware_dedicated.html">infra_fw_hardware_dedicated</a>
+					</li>
+					</li>
+					<li>
+					 <a href="/r/infra_fw_hardware_dedicated_rules.html">infra_fw_hardware_dedicated_rules</a>
+					</li>
+					<li>
+					 <a href="/r/infra_global_ip.html">infra_global_ip</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_local.html">infra_lb_local</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_local_service.html">infra_lb_local_service</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_local_service_group.html">infra_lb_local_service_group</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_vpx.html">infra_lb_vpx</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_vpx_ha.html">infra_lb_vpx_ha</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_vpx_service.html">infra_lb_vpx_service</a>
+					</li>
+					<li>
+					 <a href="/r/infra_lb_vpx_vip.html">infra_lb_local_vpx_vip</a>
+					</li>
+					<li>
+					 <a href="/r/infra_objectstorage_account.html">infra_objectstorage_account</a>
+					</li>
+					<li>
+					<a href="/r/infra_provisioning_hook.html">infra_provisioning_hook</a>
+					</li>
+					<li>
+					 <a href="/r/infra_scale_group.html">infra_scale_group</a>
+					</li>
+					<li>
+					 <a href="/r/infra_scale_policy.html">infra_scale_policy</a>
+					</li>
+					<li>
+					<a href="/r/infra_security_certificate.html">infra_security_certificate</a>
+					</li>
+					<li>
+					<a href="/r/infra_ssh_key.html">infra_ssh_key</a>
+					</li>
+					<li>
+					<a href="/r/infra_user.html">infra_user</a>
+					</li>
+					<li>
+					 <a href="/r/infra_virtual_guest.html">infra_virtual_guest</a>
+					</li>
+					<li>
+					 <a href="/r/infra_vlan.html">infra_vlan</a>
+					</li>
+
+				</ul>
+				</li>
+			</ul>
+		</div>
+
+
+    <div class="col-md-10 grid-md-10">
+        <div class="content">
+            <h1 id="ibmcloud_infra_user">ibmcloud_infra_user</h1>
+
+<p>You can retrieve, create, update, and delete SoftLayer users with this resource. You can manage either SoftLayer or IBMid accounts.</p>
+
+<h2 id="softlayer-account">SoftLayer Account</h2>
+
+<p>When you use this resource to create SoftLayer local credentials, you need to define the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> arguments. You can use the user name and password to log in to the SoftLayer portal. </p>
+
+<p>To access the SoftLayer API, you need to log in with the user name and API key. An <code class="prettyprint">api_key</code> is generated by SoftLayer when the <code class="prettyprint">has_api_key</code> flag is <code class="prettyprint">true</code>.</p>
+
+<p>If the SoftLayer API <a href="https://api.softlayer.com/rest/v3/SoftLayer_Account/getBlueIdAuthenticationRequiredFlag">getBlueIdAuthenticationRequiredFlag</a> returns <code class="prettyprint">false</code>, the account is a local account.</p>
+
+<h3 id="example-usage">Example Usage</h3>
+
+<p>The following example shows how to use this resource with SoftLayer accounts:</p>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_user" "joe" {
+    address1     = "12345 Any Street"
+    address2     = "Suite #99"
+    city         = "Atlanta"
+    company_name = "Comp Inc"
+    country      = "US"
+    email        = "joe@doe.com"
+    first_name   = "Joe"
+    has_api_key  = false
+    last_name    = "Doe"
+    username     = "testuser"
+    password     = "Change3Me!"
+    permissions  = [
+        "ACCESS_ALL_GUEST",
+        "ACCESS_ALL_HARDWARE",
+        "SERVER_ADD",
+        "SERVER_CANCEL",
+        "RESET_PORTAL_PASSWORD"
+    ]
+    state        = "GA"
+    timezone     = "EST"
+}
+</code></pre>
+
+<h2 id="ibmid-account">IBMid Account</h2>
+
+<p>You can use an IBMid instead of your SoftLayer credentials. By default, the <code class="prettyprint">email</code> address that is associated with your SoftLayer account is used for your IBMid. </p>
+
+<p>If you use this resource for an IBMid account, the resource should not contain <code class="prettyprint">username</code> and <code class="prettyprint">password</code> arguments. The user name is generated by SoftLayer and the password is not used in an IBMid account.</p>
+
+<p>When a user is created, you can log in to the SoftLayer API with the username and API key. </p>
+
+<p>When a user is created, an activation email is sent to IBMid. After activation, the user can log in to the SoftLayer portal with IBMid. </p>
+
+<p>If the SoftLayer API  <a href="https://api.softlayer.com/rest/v3/SoftLayer_Account/getBlueIdAuthenticationRequiredFlag">getBlueIdAuthenticationRequiredFlag</a>
+returns <code class="prettyprint">true</code> (please use <code class="prettyprint">username</code> and <code class="prettyprint">api_key</code> for authentication), the account is an IBMid.</p>
+
+<h3 id="example-usage">Example Usage</h3>
+
+<p>The following example shows how to use this resource with IBMid accounts:</p>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_user" "joe" {
+    address1     = "12345 Any Street"
+    address2     = "Suite #99"
+    city         = "Atlanta"
+    company_name = "Comp Inc"
+    country      = "US"
+    email        = "joe@doe.com"
+    first_name   = "Joe"
+    has_api_key  = false
+    last_name    = "Doe"
+    permissions  = [
+        "ACCESS_ALL_GUEST",
+        "ACCESS_ALL_HARDWARE",
+        "SERVER_ADD",
+        "SERVER_CANCEL",
+        "RESET_PORTAL_PASSWORD"
+    ]
+    state        = "GA"
+    timezone     = "EST"
+}
+</code></pre>
+
+<p><strong>NOTE</strong>: An <a href="https://www.ibm.com/account/profile/us">IBMid</a> is used as a consistent way to access IBM products. You can create IBMid in advance.</p>
+
+<p>For additional details, see the <a href="http://sldn.softlayer.com/reference/datatypes/ibmcloud_infra_user_Customer">SoftLayer API documentation</a>.</p>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<p>The following arguments are supported:</p>
+
+<ul>
+<li><code class="prettyprint">address1</code> - (Required, string) The first line of the user&rsquo;s street address.</li>
+<li><code class="prettyprint">address2</code> - (Optional, string) The second line of the user&rsquo;s street address.</li>
+<li><code class="prettyprint">city</code> - (Required, string) The user&rsquo;s city.</li>
+<li><code class="prettyprint">company_name</code> - (Required, string) The user&rsquo;s company.</li>
+<li><code class="prettyprint">country</code> - (Required, string) The user&rsquo;s country.</li>
+<li><code class="prettyprint">email</code> - (Required, string) The email address associated with this account.</li>
+<li><code class="prettyprint">first_name</code> - (Required, string) The user&rsquo;s first name.</li>
+<li><code class="prettyprint">has_api_key</code> - (Optional, string) If set to <code class="prettyprint">true</code>, a SoftLayer API key is created for the user. They key is returned in the <code class="prettyprint">api_key</code> attribute. Default: <code class="prettyprint">False</code>. If set to <code class="prettyprint">false</code>, any existing SoftLayer API keys for the user are deleted.</li>
+<li><code class="prettyprint">last_name</code> - (Required, string) The user&rsquo;s last name.</li>
+<li><code class="prettyprint">username</code> - (Required for SoftLayer accounts, Optional for IBMid accounts, string) A unique name to identify a user globally across all SoftLayer logins. It is also the user login. Once a user login is created, it cannot be changed. You need to define a username when your account is a SoftLayer account. </li>
+</ul>
+
+<p>For an IBMid account, the user name is generated by SoftLayer. For example, if an IBMid account number is <code class="prettyprint">1234567</code> and the email(IBMid) is <code class="prettyprint">test@example.com</code>, <code class="prettyprint">1234567_test@example.com</code> is generated by SoftLayer as a user name. This argument is optional for an IBMid account.</p>
+
+<ul>
+<li><code class="prettyprint">password</code> - (Required for SoftLayer accounts, string) Initial password for this user account. This string value needs to conform to SoftLayer&rsquo;s password policies to avoid failures. You can find the password policies in the SoftLayer portal profile page. 
+Valid passwords must be 8 to 20 characters in length with a combination of upper and lowercase characters, at least one number, and at least one of the following special characters: <code class="prettyprint">_</code>, <code class="prettyprint">-</code>, <code class="prettyprint">|</code>, <code class="prettyprint">@</code>, <code class="prettyprint">.</code>, <code class="prettyprint">,</code>, <code class="prettyprint">?</code>, <code class="prettyprint">/</code>, <code class="prettyprint">!</code>, <code class="prettyprint">~</code>, <code class="prettyprint">#</code>, <code class="prettyprint">$</code>, <code class="prettyprint">%</code>, <code class="prettyprint">^</code>, <code class="prettyprint">&amp;</code>, <code class="prettyprint">*</code>, <code class="prettyprint">(</code>, <code class="prettyprint">)</code>, <code class="prettyprint">{</code>, <code class="prettyprint">}</code>, <code class="prettyprint">[</code>, <code class="prettyprint">]</code>, <code class="prettyprint">=</code>. 
+The password specified here is hashed and encoded before it is stored in the Terraform state file.
+For an IBMid account, the password arguments are ignored.</li>
+<li><code class="prettyprint">permissions</code> - (Optional, string) Permissions assigned to this user. This is a set of zero or more string values. See the <a href="http://sldn.softlayer.com/reference/datatypes/User_Customer_CustomerPermission_Permission">SoftLayer API doc for user permissions</a>.</li>
+<li><code class="prettyprint">state</code> - (Required, string) The state of a user&rsquo;s street address.</li>
+<li><code class="prettyprint">timezone</code> - (Required, string) The user&rsquo;s timezone as a short name value (e.g., &ldquo;EST&rdquo;). For accepted values, see the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Locale_Timezone">SoftLayer API doc for timezones </a>.</li>
+<li><code class="prettyprint">user_status</code> - (Optional, string) The users login status. For accepted values, see the <a href="http://sldn.softlayer.com/reference/datatypes/ibmcloud_infra_user_Customer_Status">SoftLayer API doc for user status</a>. Default: <code class="prettyprint">ACTIVE</code>.</li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">api_key</code>: The SoftLayer API key that is created for the user.</li>
+<li><code class="prettyprint">id</code>: The unique SoftLayer ID that is created for for the user.</li>
+<li><code class="prettyprint">ibm_id</code>: The user name for IBMid accounts. This attribute is generated by SoftLayer when the IBMid is activated. </li>
+</ul>
+
+<h2 id="additional-notes">Additional Notes</h2>
+
+<p>In SoftLayer, there is a delay when user logins are deleted from SoftLayer backend systems. SoftLayer acknowledges delete requests and immediately updates the user status to <code class="prettyprint">CANCEL_PENDING</code>. The actual deletion from the SoftLayer system processes at an unspecified time in the future. </p>
+
+<p>This delay may be significant, especially during your project&rsquo;s testing phase. If you create a user login, delete it, and create it again, you may receive an error, as SoftLayer backend has not completely processed the previous delete operation. If you do want to run through the create-delete-recreate cycle, you need to specify a new, globally-unique user name in your subsequent requests.</p>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
