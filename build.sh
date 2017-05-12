@@ -22,10 +22,11 @@ cd terraform
 # switch to the provider team base branch
 # As of May 12 2017 it is "provider/ibm-cloud"
 git checkout provider/ibm-cloud
-cp -R website/source/docs/providers/ibmcloud/ ../source/provider/
+cp -R website/source/docs/providers/ibmcloud/ ../source/
 # build with middleman
-#bundle install
-#bundle exec middleman build --verbose --clean
+cd ../source
+bundle install
+bundle exec middleman build --verbose --clean
 
 # cleanup artifacts before exit
 cleanup

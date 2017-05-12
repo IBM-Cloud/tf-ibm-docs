@@ -3,4 +3,6 @@
 terraform/
 
 # this will come from the terraform repo, no reason to commit to git
-source/provider
+source/d
+source/r
+source/index.html.markdown
