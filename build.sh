@@ -13,12 +13,7 @@ function cleanup() {
   cd $PARENT_DIR
   set +e
   rm -rf ./terraform
-  cd ./source
-  rm -rf d
-  rm -rf r
-  rm index.md
   set -e
-  cd $PARENT_DIR # put us back at the base
 }
 
 # In the event cleanup did not occur on a previous failed run
@@ -29,7 +24,7 @@ cd terraform
 # switch to the provider team base branch
 # As of May 12 2017 it is "provider/ibm-cloud"
 git checkout provider/ibm-cloud
-cp -R website/source/docs/providers/ibmcloud/ ../website/source
+cp -R website/source/docs/providers/ibmcloud/ ../source
 # build with middleman
 cd ../source
 bundle install

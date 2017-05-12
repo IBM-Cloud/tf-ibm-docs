@@ -3,6 +3,8 @@
 
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
+  config.cascade  = false
+  config.inline   = true
 end
 
 # Layouts
@@ -14,6 +16,7 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 
 # Markdown
+set :markdown_engine, :redcarpet
 set :markdown,
     fenced_code_blocks: true,
     smartypants: true,
@@ -23,6 +26,9 @@ set :markdown,
     no_intra_emphasis: true,
     autolink: true,
     lax_spacing: true
+
+# Activate the syntax highlighter
+activate :syntax
 
 # Assets
 set :css_dir, 'stylesheets'
