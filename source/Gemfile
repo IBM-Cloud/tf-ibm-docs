@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+
+gem 'middleman', '~>3.4.1'
+gem 'rouge', '~> 1.9.0'
+gem 'redcarpet', '~> 3.3.2'

@@ -7,15 +7,25 @@
 # Copyright (c) 2017 IBM under MIT License
 
 set -e
+PARENT_DIR=$(pwd)
 
 function cleanup() {
+  cd $PARENT_DIR
   rm -rf ./terraform
 }
 
 # In the event cleanup did not occur on a previous failed run
 cleanup
-
+# clone IBM terraform
 git clone https://github.com/IBM-Bluemix/terraform
+cd terraform
+# switch to the provider team base branch
+# As of May 12 2017 it is "provider/ibm-cloud"
+git checkout provider/ibm-cloud
+cp -R website/source/docs/providers/ibmcloud/ ../source/provider/
+# build with middleman
+#bundle install
+#bundle exec middleman build --verbose --clean
 
 # cleanup artifacts before exit
 cleanup

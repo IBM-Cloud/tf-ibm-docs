@@ -1,0 +1,6 @@
+# in the event the build.sh cleanup function doesn't run
+# prevents accidental commit
+terraform/
+
+# this will come from the terraform repo, no reason to commit to git
+source/provider
