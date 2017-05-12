@@ -12,7 +12,7 @@ PARENT_DIR=$(pwd)
 function cleanup() {
   cd $PARENT_DIR
   rm -rf ./terraform
-  cd source
+  cd website/source
   rm -rf d
   rm -rf r
   rm index.md
@@ -26,10 +26,9 @@ cd terraform
 # switch to the provider team base branch
 # As of May 12 2017 it is "provider/ibm-cloud"
 git checkout provider/ibm-cloud
-cp -R website/source/docs/providers/ibmcloud/ ../source/
+cp -R website/source/docs/providers/ibmcloud/ ../website/source
 # build with middleman
-cd ../source
-mv index.html.markdown index.md
+cd ../website
 bundle install
 bundle exec middleman build --verbose --clean
 
