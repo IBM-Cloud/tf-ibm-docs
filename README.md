@@ -8,6 +8,12 @@ To pull and build the necessary IBM documentation (contributed by IBM) from http
 - Ruby 2.3.0 or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
 
-# Running / Building
+# Running locally
+
+- Execute `bundle exec middleman server`
+- Point a browser at `http://localhost:4567/`
+
+# Building static site
 
 - Execute the `build.sh` script
+- Static file will be placed in the `./build` directory
