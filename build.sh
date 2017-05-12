@@ -24,14 +24,22 @@ function cleanup() {
 # lots of kelnerhax
 function cleansidebar() {
   grep -v "<% wrap_layout :inner do %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+
   grep -v "<% content_for :sidebar do %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+
   grep -v "<% end %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+
   grep -v "<%= yield %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+
   sed -i -e 's/<%= sidebar_current.*%>//g' layouts/sidebar.erb
+
   grep -v "<a href=\"/docs/providers/index.html\">All Providers</a>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
-  sed -i -e 's/<a href=\"\/docs\/providers\/ibmcloud\/index.html\">IBM Cloud Provider<\/a>/<a href=\"\/index.html\"><h4>IBM Cloud Provider<\/h4><\/a>/g' layouts/sidebar.erb
+
+  sed -i -e 's/<a href=\"\/docs\/providers\/ibmcloud\/index.html\">IBM Cloud Provider<\/a>/<a href=\"\/tf-ibm-docs\/index.html\"><h4>IBM Cloud Provider<\/h4><\/a>/g' layouts/sidebar.erb
+
   sed -i -e 's/docs-sidebar hidden-print affix-top/docs-sidebar col-md-2 hidden-print affix-top/g' layouts/sidebar.erb
-  sed -i -e 's/\/docs\/providers\/ibmcloud//g' layouts/sidebar.erb
+
+  sed -i -e 's/\/docs\/providers\/ibmcloud/\/tf-ibm-docs/g' layouts/sidebar.erb
 }
 
 # In the event cleanup did not occur on a previous failed run
