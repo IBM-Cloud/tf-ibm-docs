@@ -49,6 +49,8 @@ cleansidebar
 # build with middleman
 bundle install
 bundle exec middleman build --verbose --clean
+# NOTE: This is only for GitHub Pages - if we don't use it, then probably be rid of it
+mv build docs
 
 # cleanup artifacts before exit
 cleanup
