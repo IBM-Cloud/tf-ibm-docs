@@ -12,10 +12,7 @@ set :markdown,
 
 # Assets
 set :css_dir, 'stylesheets'
-set :js_dir, 'javascripts'
-# @ckelner: we don't activate this in support of having "/docs/assets" pulled from remotes
-#set :images_dir, 'images'
-set :fonts_dir, 'fonts'
+set :js_dir, 'javascript'
 
 # Activate the syntax highlighter
 activate :syntax
@@ -25,11 +22,6 @@ activate :autoprefixer do |config|
   config.cascade  = false
   config.inline   = true
 end
-
-# ~~Github pages require relative links~~ (strikethrough)
-# @ckelner: we don't activate this in support of having "/docs/assets" pulled from remotes
-#activate :relative_assets
-#set :relative_links, true
 
 # Build Configuration
 configure :build do
