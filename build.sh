@@ -11,11 +11,14 @@ PARENT_DIR=$(pwd)
 
 function cleanup() {
   cd $PARENT_DIR
+  set +e
   rm -rf ./terraform
-  cd website/source
+  cd ./source
   rm -rf d
   rm -rf r
   rm index.md
+  set -e
+  cd $PARENT_DIR # put us back at the base
 }
 
 # In the event cleanup did not occur on a previous failed run
@@ -28,7 +31,7 @@ cd terraform
 git checkout provider/ibm-cloud
 cp -R website/source/docs/providers/ibmcloud/ ../website/source
 # build with middleman
-cd ../website
+cd ../source
 bundle install
 bundle exec middleman build --verbose --clean
 

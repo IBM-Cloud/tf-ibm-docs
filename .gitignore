@@ -3,6 +3,6 @@
 terraform/
 
 # this will come from the terraform repo, no reason to commit to git
-website/source/d
-website/source/r
-website/source/index.html.markdown
+source/d
+source/r
+source/index.html.markdown
