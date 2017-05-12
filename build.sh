@@ -12,6 +12,10 @@ PARENT_DIR=$(pwd)
 function cleanup() {
   cd $PARENT_DIR
   rm -rf ./terraform
+  cd source
+  rm -rf d
+  rm -rf r
+  rm index.md
 }
 
 # In the event cleanup did not occur on a previous failed run
@@ -25,6 +29,7 @@ git checkout provider/ibm-cloud
 cp -R website/source/docs/providers/ibmcloud/ ../source/
 # build with middleman
 cd ../source
+mv index.html.markdown index.md
 bundle install
 bundle exec middleman build --verbose --clean
 

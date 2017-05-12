@@ -1,0 +1,16 @@
+@charset "utf-8";
+@import 'normalize';
+
+html, body {
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  height: 100%;
+  -webkit-text-size-adjust: none; /* Never autoresize text */
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}

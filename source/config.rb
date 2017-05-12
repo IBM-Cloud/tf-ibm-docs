@@ -1,5 +1,4 @@
 # Markdown
-set :markdown_engine, :redcarpet
 set :markdown,
     fenced_code_blocks: true,
     smartypants: true,
@@ -13,15 +12,6 @@ set :markdown,
 # Assets
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascript'
-
-# Activate the syntax highlighter
-activate :syntax
-
-activate :autoprefixer do |config|
-  config.browsers = ['last 2 version', 'Firefox ESR']
-  config.cascade  = false
-  config.inline   = true
-end
 
 # Build Configuration
 configure :build do
