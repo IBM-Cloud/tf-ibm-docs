@@ -11,3 +11,5 @@ source/index.html.markdown
 
 # should always be built from source and pushed somewhere
 build/
+
+source/layouts/sidebar.erb
