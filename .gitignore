@@ -1,0 +1,15 @@
+# in the event the build.sh cleanup function doesn't run
+# prevents accidental commit
+terraform/
+
+# this will come from the terraform repo, no reason to commit to git
+source/d
+source/r
+source/index.html.markdown
+
+.sass-cache/
+
+# should always be built from source and pushed somewhere
+build/
+
+source/layouts/sidebar.erb
