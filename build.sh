@@ -67,10 +67,12 @@ fi
 cp -R ./docs/. ~/tmp/docs
 git checkout gh-pages
 cp -R ~/tmp/docs/. ./docs
+# cleanup artifacts before commit & exit
+cleanup
+# push to gh-pages
 git add -A
 git commit -m "latest docs"
 git push
-
-# cleanup artifacts before exit
-cleanup
+# switch back branch
+git checkout master
 exit 0
