@@ -21,25 +21,35 @@ function cleanup() {
 }
 
 # cleanup sidebar.erb - can't use as-is
-# lots of kelnerhax
 function cleansidebar() {
   grep -v "<% wrap_layout :inner do %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
 
   grep -v "<% content_for :sidebar do %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
 
-  grep -v "<% end %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+  grep -v "<% end %>" layouts/sidebar.erb > tmp
+  mv tmp layouts/sidebar.erb
 
-  grep -v "<%= yield %>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+  grep -v "<%= yield %>" layouts/sidebar.erb > tmp
+  mv tmp layouts/sidebar.erb
 
   sed -i -e 's/<%= sidebar_current.*%>//g' layouts/sidebar.erb
 
-  grep -v "<a href=\"/docs/providers/index.html\">All Providers</a>" layouts/sidebar.erb > tmp; mv tmp layouts/sidebar.erb
+  grep -v "<a href=\"/docs/providers/index.html\">All Providers</a>" layouts/sidebar.erb > tmp
+  mv tmp layouts/sidebar.erb
 
   sed -i -e 's/<a href=\"\/docs\/providers\/ibmcloud\/index.html\">IBM Cloud Provider<\/a>/<a href=\"\/tf-ibm-docs\/index.html\"><h4>IBM Cloud Provider<\/h4><\/a>/g' layouts/sidebar.erb
 
   sed -i -e 's/docs-sidebar hidden-print affix-top/docs-sidebar col-md-2 hidden-print affix-top/g' layouts/sidebar.erb
 
   sed -i -e 's/\/docs\/providers\/ibmcloud/\/tf-ibm-docs/g' layouts/sidebar.erb
+}
+
+# Adds arbitrary material to index
+function addtoindex() {
+  # TODO: Kelner - this can be fraught with failure if the text changes, and
+  # will fail to inject the extra content
+  sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
+  mv tmp index.html.markdown
 }
 
 # In the event cleanup did not occur on a previous failed run
