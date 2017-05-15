@@ -64,6 +64,8 @@ cp -R website/source/docs/providers/ibmcloud/ ../source
 cp website/source/layouts/ibmcloud.erb ../source/layouts/sidebar.erb
 cd ../source
 cleansidebar
+# inject contents into index
+addtoindex
 # build with middleman
 bundle install
 bundle exec middleman build --verbose --clean
@@ -77,8 +79,6 @@ fi
 cp -R ./docs/. ~/tmp/docs
 git checkout gh-pages
 cp -R ~/tmp/docs/. ./
-# inject contents into index
-addtoindex
 # cleanup artifacts before commit & exit
 cleanup
 # push to gh-pages

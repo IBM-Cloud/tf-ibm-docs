@@ -14,3 +14,5 @@ source/layouts/sidebar.erb-e
 # should always be built from source and pushed to gh-pages
 build/
 docs/
+
+tmp
