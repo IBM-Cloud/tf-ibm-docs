@@ -60,6 +60,16 @@ bundle exec middleman build --verbose --clean
 # NOTE: This is only for GitHub Pages - if we don't use it, then probably be rid of it
 cd $PARENT_DIR
 cp -R ./build/. ./docs
+# need to move to the gh-pages branch
+if [ ! -d "~/tmp" ]; then
+  mkdir -p ~/tmp
+fi
+cp -R ./docs/. ~/tmp/docs
+git checkout gh-pages
+cp -R ~/tmp/docs/. ./docs
+git add -A
+git commit -m "latest docs"
+git push
 
 # cleanup artifacts before exit
 cleanup
