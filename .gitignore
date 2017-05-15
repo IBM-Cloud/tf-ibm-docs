@@ -12,3 +12,6 @@ source/layouts/sidebar.erb
 
 # should always be built from source and pushed somewhere
 build/
+docs/d
+docs/r
+docs/index.html
