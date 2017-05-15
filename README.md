@@ -3,13 +3,13 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 
 # Objective
 
-To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
+To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
 
 # How it works
 
 Currently a manual process by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme.
 
-Eventually some central CI/CD server will be required (not Travis) that can monitor the [IBM Terraform fork](https://github.com/IBM-Bluemix/) for activity and then trigger a checkout of this repository and run the `./build.sh` and `./publish.sh` scripts automatically.
+Eventually some central CI/CD server will be required (not Travis) that can monitor the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) for activity and then trigger a checkout of this repository and run the `./build.sh` and `./publish.sh` scripts automatically.
 
 # Prerequisites
 
