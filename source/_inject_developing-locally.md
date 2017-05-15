@@ -11,21 +11,27 @@ If you want to develop locally on your system, complete the following steps:
 
     In the following example, `/opt/provider/terraform-provider-ibmcloud` is the route to the directory.
 
+      ```
         # ~/.terraformrc
         providers {
             ibmcloud = "/opt/provider/terraform-provider-ibmcloud"
         }
+      ```
 
 4. Configure the plug-in provider and your IBM credentials to work with Terraform.
 
     To provide your credentials as environment variables, you can use the following code in your `.tf` file.
 
+      ```hcl
         provider "ibmcloud" {
             ibmid = "${var.ibmid}"
             ibmid_password = "${var.ibmidpw}"
         }
+      ```
 
     You can then export your credentials in your terminal.
 
+      ```bash
         export ibmid="IBMid"
         export ibmid_password="IBMid password"
+      ```
