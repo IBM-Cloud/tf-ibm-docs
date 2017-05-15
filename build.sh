@@ -70,9 +70,11 @@ cp -R ~/tmp/docs/. ./docs
 # cleanup artifacts before commit & exit
 cleanup
 # push to gh-pages
+set +e # allow to continue on error (git exits non-zero when no changes)
 git add -A
 git commit -m "latest docs"
 git push
+set -e
 # switch back branch
 git checkout master
 exit 0
