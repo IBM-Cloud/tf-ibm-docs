@@ -77,6 +77,8 @@ fi
 cp -R ./docs/. ~/tmp/docs
 git checkout gh-pages
 cp -R ~/tmp/docs/. ./
+# inject contents into index
+addtoindex
 # cleanup artifacts before commit & exit
 cleanup
 # push to gh-pages
