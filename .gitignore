@@ -6,10 +6,10 @@ terraform/
 source/d
 source/r
 source/index.html.markdown
+source/layouts/sidebar.erb
 
 .sass-cache/
 
-# should always be built from source and pushed somewhere
+# should always be built from source and pushed to gh-pages
 build/
-
-source/layouts/sidebar.erb
+docs/
