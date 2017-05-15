@@ -66,7 +66,7 @@ if [ ! -d "~/tmp" ]; then
 fi
 cp -R ./docs/. ~/tmp/docs
 git checkout gh-pages
-cp -R ~/tmp/docs/. ./docs
+cp -R ~/tmp/docs/. ./
 # cleanup artifacts before commit & exit
 cleanup
 # push to gh-pages
