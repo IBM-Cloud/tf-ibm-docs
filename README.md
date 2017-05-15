@@ -51,6 +51,21 @@ Bundle complete! 7 Gemfile dependencies, 46 gems now installed.
 == Finishing Request: d/cf_account.html (0.01s)
       create  build/d/cf_account.html
 Project built successfully.
+Switched to branch 'gh-pages'
+Your branch is up-to-date with 'origin/gh-pages'.
+[gh-pages c6dbf0e] latest docs
+ 2 files changed, 60 insertions(+)
+ create mode 100644 _inject_developing-locally.md
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 1.15 KiB | 0 bytes/s, done.
+Total 4 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 2 local objects.
+To https://github.com/IBM-Bluemix/tf-ibm-docs.git
+   ca2dec0..c6dbf0e  gh-pages -> gh-pages
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
 ```
 - Static file will be placed in the `./build` directory
 - The `./build` directory will be copied to `./docs` for publishing on GitHub pages (this may be temporary)
