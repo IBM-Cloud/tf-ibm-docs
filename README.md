@@ -1,6 +1,15 @@
 # Terraform IBM Docs
 IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.io/tf-ibm-docs/
 
+# Objective
+
+To automatically generate a static site for the [IBM Terraform
+fork](https://github.com/IBM-Bluemix/) when there are changes to the fork in the `provider/ibm-cloud` branch.
+
+# How it works
+
+TBD
+
 # Prerequisites
 
 - `git` must be available on the workstation running the script
