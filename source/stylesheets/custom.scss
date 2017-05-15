@@ -1,0 +1,240 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+$ibmblue: #466BB0;
+$black: black;
+$pink: #E95F6A;
+$purple: #5F2D4F;
+$off-white: #fffbf7;
+$cream: #fff4ea;
+$grey-text: #434343;
+$purple1: #442744;
+$purple2: #602d4e;
+$purple3: #8f4476;
+$purple4: #aa6192;
+$red: #d0011b;
+
+// Our variables
+$base-font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-size:   16px;
+$base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+$spacing-unit:     30px;
+$text-color:       #111;
+$background-color: #fdfdfd;
+$brand-color:      #2a7ae2;
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// Width of the content area
+$content-width:    1000px;
+$nav-content-width:    1200px;
+$on-palm:          600px;
+$on-palm--custom:  730px;
+$on-laptop:        800px;
+$on-desktop:      1024px;
+
+%vertical-rhythm {
+    margin-bottom: $spacing-unit / 2;
+}
+
+// Use media queries like this:
+// @include media-query($on-palm) {
+//     .wrapper {
+//         padding-right: $spacing-unit / 2;
+//         padding-left: $spacing-unit / 2;
+//     }
+// }
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+/* --- General Overrides --- */
+article {
+    min-height: 800px;
+}
+
+.content {
+    font-family: 'Lora', 'Times New Roman', serif;
+    font-size: 18px;
+    color: #404040;
+    //position: relative;
+    //background: #FFF;
+
+    padding: 20px 15px;
+}
+
+.content p {
+    line-height: 1.5;
+    margin: 15px 0;
+    }
+
+.content h1,h2,h3,h4,h5,h6 {
+    font-family: 'Open Sans Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 800;
+    }
+
+.sidebar-content {
+    //background-color: $grey-color-light;
+    font-family: $base-font-family;
+    font-size: 18px;
+    padding: 20px 20px;
+
+    li {
+        padding-bottom: 0;
+        padding-top: 0;
+        // border-bottom: 1px solid $grey-color-light;
+    }
+}
+
+.tree>li>a {
+    font-size: 85%;
+}
+
+#content-container {
+
+}
+
+#sidebar-container {
+  float: left;
+  padding:0px;
+  background-color: #fff;
+  border-right: 1px solid rgba(0, 0, 0, .15);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+#sidebar-tab {
+  border: none;
+  border-top: 1px solid #adadad;
+  border-right: 1px solid #adadad;
+  border-bottom: 1px solid #adadad;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 10px 5px 10px 5px;
+  //margin-top: -21px;
+  margin-left: -15px;
+}
+
+.post-content img {
+    display: block;
+    width: 100%;
+
+    @media screen and (min-width: $on-desktop) {
+        width: 60%;
+    }
+}
+
+
+.navbar {
+    border-radius: 0;
+    min-height: 60px;
+}
+
+.navbar ul {
+    padding-top: 10px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    text-decoration: underline;
+}
+
+.brand-icon {
+    width: 150px;
+    max-width: 150px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+    padding-top: 20px;
+}
+
+i.fa {
+    padding-right: 3px;
+}
+
+.icon {
+
+    > svg {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+
+        path {
+            fill: $background-color;
+        }
+    }
+}
+
+.top-block {
+   background-image: linear-gradient(to right,$ibmblue, lighten($ibmblue, 20%));
+   color: white;
+   text-align: center;
+   margin-bottom: 0; /* remove default bootstrap nav margin */
+}
+
+/**
+ * Site footer
+ */
+ .edit-page-link{
+    font-family: $base-font-family;
+    float: right;
+    text-align: right;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    z-index: 9999;
+
+    a{
+        text-transform: uppercase;
+        color: $grey-color-dark;
+    }
+}
+
+.site-footer {
+    // border-top: 1px solid $grey-color-light;
+    background-image: linear-gradient(to right,$ibmblue, lighten($ibmblue, 20%));
+
+    padding-top: 25px;
+
+    color: white;
+    font-size: 15px;
+
+    a{
+      text-decoration: underline;
+      color: white;
+    }
+
+    li {
+        padding-bottom: 5px;
+    }
+
+    .social-list a {
+        text-decoration: none;
+    }
+
+    @include media-query($on-palm--custom) {
+      padding-top: 2rem;
+    }
+
+}
+
+.brand-icon-footer{
+  max-width: 150px;
+  margin-top: -8px;
+}
+
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: $spacing-unit / 2;
+}

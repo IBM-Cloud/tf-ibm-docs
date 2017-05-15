@@ -1,12 +1,53 @@
 <%= partial "layouts/meta" %>
 <body>
-<div class="container-fluid page-wrapper">
+  <div class="container-fluid page-wrapper">
+    <nav class="top-block navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#">
+                <i class="fa fa-lg fa-github"></i>GitHub</a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-lg fa-slack"></i>
+                Slack</a>
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
     <%= partial "layouts/sidebar" %>
     <div class="col-md-10 grid-md-10">
         <div class="content">
             <%= yield %>
         </div>
     </div>
-</div>
+  </div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="col-md-9">
+          <ul class="list-inline social-list">
+            <li><a href="#"><i class="fa fa-lg fa-github"></i> GitHub</a></li>
+            <li><a href="#"><i class="fa fa-lg fa-slack"></i> Slack</a></li>
+          </ul>
+      </div>
+      <div class="col-md-3">
+        IBM Cloud Provider for Terraform&trade;
+      </div>
+    </div>
+  </footer>
+  <%= javascript_include_tag :sidemenu %>
 </body>
 </html>
