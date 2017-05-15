@@ -3,17 +3,18 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 
 # Objective
 
-To automatically generate a static site for the [IBM Terraform
-fork](https://github.com/IBM-Bluemix/) when there are changes to the fork in the `provider/ibm-cloud` branch.
+To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
 
 # How it works
 
-TBD
+Currently a manual process by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme.
+
+Eventually some central CI/CD server will be required (not Travis) that can monitor the [IBM Terraform fork](https://github.com/IBM-Bluemix/) for activity and then trigger a checkout of this repository and run the `./build.sh` and `./publish.sh` scripts automatically.
 
 # Prerequisites
 
 - `git` must be available on the workstation running the script
-- XCode command line tools should be available, on OSX run `xcode-select --install`
+- For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
 - Ruby 2.3.0 or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
 
