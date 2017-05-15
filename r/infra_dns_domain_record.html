@@ -1,0 +1,335 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Terraform documentation">
+    <title>
+        IBM Cloud
+    </title>
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+</head>
+<!-- end _meta.erb -->
+
+<body>
+<div class="container-fluid page-wrapper">
+    		<div class="docs-sidebar col-md-2 hidden-print affix-top" role="complementary">
+			<ul class="nav docs-sidenav">
+				<li>
+                </li>
+
+				<li>
+				<a href="/tf-ibm-docs/index.html"><h4>IBM Cloud Provider</h4></a>
+                </li>
+
+				<li>
+				<a href="#">Infrastructure Data Sources</a>
+                <ul class="nav nav-visible">
+					<li>
+					<a href="/tf-ibm-docs/d/cf_account.html">cf_account</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cf_org.html">cf_org</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cf_service_instance.html">cf_service_instance</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cf_service_key.html">cf_service_key</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cf_service_plan.html">cf_service_plan</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cf_space.html">cf_space</a>
+					</li>
+                	<li>
+					<a href="/tf-ibm-docs/d/cs_cluster.html">cs_cluster</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cs_cluster_config.html">cs_cluster_config</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/cs_worker.html">cs_worker</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/infra_dns_domain.html">infra_dns_domain</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/infra_image_template.html">infra_image_template</a>
+					</li>			
+					<li>
+					<a href="/tf-ibm-docs/d/infra_ssh_key.html">infra_ssh_key</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/d/infra_vlan.html">infra_vlan</a>
+					</li>
+				</ul>
+				</li>
+
+				<li>
+				<a href="#">Infrastructure Resources</a>
+                <ul class="nav nav-visible">
+					<li>
+					 <a href="/tf-ibm-docs/r/cf_service_instance.html">cf_service_instance</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/cf_service_key.html">cf_service_key</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/cs_cluster.html">cs_cluster</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/cs_cluster_bind_service.html">cs_cluster_bind_service</a>
+					</li>
+                	<li>
+					 <a href="/tf-ibm-docs/r/infra_bare_metal.html">infra_bare_metal</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_basic_monitor.html">infra_basic_monitor</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_block_storage.html">infra_block_storage</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_dns_domain.html">infra_dns_domain</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/r/infra_dns_domain_record.html">infra_dns_domain_record</a>
+					</li>
+					<li>
+                    <a href="/tf-ibm-docs/r/infra_file_storage.html">infra_file_storage</a>
+                    </li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated.html">infra_fw_hardware_dedicated</a>
+					</li>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated_rules.html">infra_fw_hardware_dedicated_rules</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_global_ip.html">infra_global_ip</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_local.html">infra_lb_local</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_local_service.html">infra_lb_local_service</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_local_service_group.html">infra_lb_local_service_group</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_vpx.html">infra_lb_vpx</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_vpx_ha.html">infra_lb_vpx_ha</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_vpx_service.html">infra_lb_vpx_service</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_lb_vpx_vip.html">infra_lb_local_vpx_vip</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_objectstorage_account.html">infra_objectstorage_account</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/r/infra_provisioning_hook.html">infra_provisioning_hook</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_scale_group.html">infra_scale_group</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_scale_policy.html">infra_scale_policy</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/r/infra_security_certificate.html">infra_security_certificate</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/r/infra_ssh_key.html">infra_ssh_key</a>
+					</li>
+					<li>
+					<a href="/tf-ibm-docs/r/infra_user.html">infra_user</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_virtual_guest.html">infra_virtual_guest</a>
+					</li>
+					<li>
+					 <a href="/tf-ibm-docs/r/infra_vlan.html">infra_vlan</a>
+					</li>
+
+				</ul>
+				</li>
+			</ul>
+		</div>
+
+
+    <div class="col-md-10 grid-md-10">
+        <div class="content">
+            <h1 id="ibmcloud_infra_dns_domain_record">ibmcloud_infra_dns_domain_record</h1>
+
+<p>Represents a single-resource record entry in <code class="prettyprint">ibmcloud_infra_dns_domain</code>. Each resource record contains a <code class="prettyprint">host</code> and <code class="prettyprint">data</code> property to define the name and target data of a resource.</p>
+
+<p>The Bluemix Infrastructure (SoftLayer) object  <a href="https://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord">SoftLayer_Dns_Domain_ResourceRecord</a> is used for most CRUD operations. For SRV record types, the Bluemix Infrastructure (SoftLayer) object <a href="https://sldn.softlayer.com/reference/services/SoftLayer_Dns_Domain_ResourceRecord_SrvType">SoftLayer_Dns_Domain_ResourceRecord_SrvType</a> is used.</p>
+
+<p>You cannot create SOA nor NS record types, as these are automatically created by Bluemix Infrastructure (SoftLayer) when the domain is created.</p>
+
+<h2 id="example-usage">Example Usage</h2>
+
+<h3 id="a-record-sldn"><code class="prettyprint">A</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_AType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain" "main" {
+    name = "main.example.com"
+}
+
+resource "ibmcloud_infra_dns_domain_record" "www" {
+    data = "123.123.123.123"
+    domain_id = "${bmcloud_infra_dns_domain.main.id}"
+    host = "www.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "a"
+}
+</code></pre>
+
+<h3 id="aaaa-record-sldn"><code class="prettyprint">AAAA</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_AaaaType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "aaaa" {
+    data = "fe80:0000:0000:0000:0202:b3ff:fe1e:8329"
+    domain_id = "${ibmcloud_infra_dns_domain.main.id}"
+    host = "www.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 1000
+    type = "aaaa"
+}
+</code></pre>
+
+<h3 id="cname-record-sldn"><code class="prettyprint">CNAME</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_CnameType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "cname" {
+    data = "real-host.example.com."
+    domain_id = "${ibmcloud_infra_dns_domain.main.id}"
+    host = "alias.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "cname"
+}
+</code></pre>
+
+<h3 id="mx-record-sldn"><code class="prettyprint">MX</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_MxType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "sibmcloud_infra_dns_domain_record" "recordMX-1" {
+    data = "mail-1"
+    domain_id = "${ibmcloud_infra_dns_domain.main.id}"
+    host = "@"
+    mx_priority = "10"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "mx"
+}
+</code></pre>
+
+<h3 id="spf-record-sldn"><code class="prettyprint">SPF</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_SpfType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "recordSPF" {
+    data = "v=spf1 mx:mail.example.org ~all"
+    domain_id = "${ibmcloud_infra_dns_domain.main.id}"
+    host = "mail-1"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "spf"
+}
+</code></pre>
+
+<h3 id="txt-record-sldn"><code class="prettyprint">TXT</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_TxtType/">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "recordTXT" {
+    data = "host"
+    domain_id = "${bmcloud_infra_dns_domain.main.id}"
+    host = "A SPF test host"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "txt"
+}
+</code></pre>
+
+<h3 id="srv-record-sldn"><code class="prettyprint">SRV</code> Record | <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_SrvType">SLDN</a></h3>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "recordSRV" {
+    data = "ns1.example.org"
+    domain_id = "${bmcloud_infra_dns_domain.main.id}"
+    host = "hosta-srv.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "srv"
+    port = 8080
+    priority = 3
+    protocol = "_tcp"
+    weight = 3
+    service = "_mail"
+}
+</code></pre>
+
+<h3 id="ptr-record"><code class="prettyprint">PTR</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_PtrType/">Bluemix Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">PTR</code> record. </p>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_dns_domain_record" "recordPTR" {
+    data = "ptr.example.com"
+    domain_id = "${ibmcloud_infra_dns_domain.main.id}"
+# The host is the last octet of IP address in the range of the subnet
+    host = "45"  
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "ptr"
+}
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<p>The following arguments are supported:</p>
+
+<ul>
+<li><code class="prettyprint">data</code> - (Required, string) The value of a domain&rsquo;s resource record. This can be an IP address or a hostname. Fully qualified host and domain name data must end with the <code class="prettyprint">.</code> character.</li>
+<li><code class="prettyprint">domain_id</code> - (Required, integer) The identifier belonging to the domain that a resource record is associated with.</li>
+<li><code class="prettyprint">expire</code> - (Integer) The duration, expressed in seconds, that a secondary name server (or servers) holds a zone before it is no longer considered authoritative.</li>
+<li><code class="prettyprint">host</code> - (Required, string) The host defined by a resource record. The <code class="prettyprint">@</code> symbol denotes a wildcard.</li>
+<li><code class="prettyprint">minimum_ttl</code> - (Integer) The duration, expressed in seconds, that a domain&rsquo;s resource records are valid. This is also known as a minimum time to live (TTL), and can be overridden by an individual resource record&rsquo;s TTL.</li>
+<li><code class="prettyprint">mx_priority</code> - (Integer) Useful in cases where a domain has more than one mail exchanger, the priority property is the priority of the MTA that delivers mail for a domain. A lower number denotes a higher priority, and mail will attempt to deliver through that MTA before moving to lower priority mail servers. Priority is defaulted to 10 upon resource record creation.</li>
+<li><code class="prettyprint">refresh</code> - (Integer) The duration, expressed in seconds, that a secondary name server waits to check for a new copy of a DNS zone from the domain&rsquo;s primary name server. If a zone file has changed, the secondary DNS server updates its copy of the zone to match the primary DNS server&rsquo;s zone.</li>
+<li><code class="prettyprint">responsible_person</code> - (Required, string) The email address of the person responsible for a domain, with the <code class="prettyprint">@</code> symbol replaced with a <code class="prettyprint">.</code>. Example usage: <a href="mailto:root@example.org">root@example.org</a> SOA responsibility would be expressed as <code class="prettyprint">root.example.org.</code>.</li>
+<li><code class="prettyprint">retry</code> - (Integer) The duration, expressed in seconds, that a domain&rsquo;s primary name server (or servers) wait before attempting to refresh a domain&rsquo;s zone with the secondary name server. The retry action is triggered after a previous failed attempt to refresh by a secondary name server. </li>
+<li><code class="prettyprint">ttl</code> - (Required, integer) The time to live (TTL) duration, expressed in seconds, of a resource record. TTL is used by a name server to determine how long to cache a resource record. An SOA record&rsquo;s TTL value defines the domain&rsquo;s overall TTL.</li>
+<li><code class="prettyprint">type</code> - (Required, string) The type of domain resource record. Accepted values are as follows:
+
+<ul>
+<li><code class="prettyprint">a</code> for address records</li>
+<li><code class="prettyprint">aaaa</code> for address records</li>
+<li><code class="prettyprint">cname</code> for canonical name records</li>
+<li><code class="prettyprint">mx</code> for mail exchanger records</li>
+<li><code class="prettyprint">ptr</code> for pointer records in reverse domains</li>
+<li><code class="prettyprint">spf</code> for sender policy framework records</li>
+<li><code class="prettyprint">srv</code> for service records</li>
+</ul></li>
+<li><code class="prettyprint">txt</code> - (String) Used for text records.</li>
+<li><code class="prettyprint">service</code> - (<code class="prettyprint">SRV</code> records only, string) The symbolic name of the desired service. </li>
+<li><code class="prettyprint">protocol</code> - (<code class="prettyprint">SRV</code> records only, string) The protocol of the desired service; this is usually TCP or UDP.</li>
+<li><code class="prettyprint">port</code> - (<code class="prettyprint">SVR</code> records only, integer) The TCP or UDP port on which the service is to be found.</li>
+<li><code class="prettyprint">priority</code> - (<code class="prettyprint">SVR</code> records only, integer) The priority of the target host. The lowest numerical value is given the highest priority.</li>
+<li><code class="prettyprint">weight</code> - (<code class="prettyprint">SVR</code> records only, integer) A relative weight for records that have the same priority.</li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - A domain resource record&rsquo;s internal identifier.</li>
+</ul>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
