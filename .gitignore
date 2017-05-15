@@ -6,10 +6,12 @@ terraform/
 source/d
 source/r
 source/index.html.markdown
+source/layouts/sidebar.erb
 
 .sass-cache/
 
 # should always be built from source and pushed somewhere
 build/
-
-source/layouts/sidebar.erb
+docs/d
+docs/r
+docs/index.html
