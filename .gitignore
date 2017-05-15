@@ -7,11 +7,10 @@ source/d
 source/r
 source/index.html.markdown
 source/layouts/sidebar.erb
+source/layouts/sidebar.erb-e
 
 .sass-cache/
 
-# should always be built from source and pushed somewhere
+# should always be built from source and pushed to gh-pages
 build/
-docs/d
-docs/r
-docs/index.html
+docs/
