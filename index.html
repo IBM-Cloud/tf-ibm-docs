@@ -181,6 +181,36 @@
 
 <p>Use the navigation menu on the left to read about the available resources.</p>
 
+<h2 id="developing-locally">Developing locally</h2>
+
+<p>If you want to develop locally on your system, complete the following steps:</p>
+
+<ol>
+<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p><a href="https://github.com/IBM-Bluemix/terraform/releases">Download the Terraform binary for the {{site.data.keyword.IBM_notm}} Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the Terraform binary.</p>
+
+<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibmcloud</code> is the route to the directory.</p>
+<pre class="highlight plaintext"><code># ~/.terraformrc
+providers {
+    ibmcloud = "/opt/provider/terraform-provider-ibmcloud"
+}
+</code></pre></li>
+<li><p>Configure the plug-in provider and your {{site.data.keyword.IBM_notm}} credentials to work with Terraform.</p>
+
+<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
+<pre class="highlight plaintext"><code>provider "ibmcloud" {
+    ibmid = "${var.ibmid}"
+    ibmid_password = "${var.ibmidpw}"
+}
+</code></pre>
+
+<p>You can then export your credentials in your terminal.</p>
+<pre class="highlight plaintext"><code>export ibmid="IBMid"
+export ibmid_password="IBMid password"
+</code></pre></li>
+</ol>
+
 <h2 id="example-usage">Example Usage</h2>
 <pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
 provider "ibmcloud" {
