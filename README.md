@@ -19,6 +19,7 @@ TBD
 
 # Running locally
 
+- Execute the `./build.sh` script
 - Execute `bundle exec middleman server`
 - Point a browser at `http://localhost:4567/`
 
@@ -51,6 +52,15 @@ Bundle complete! 7 Gemfile dependencies, 46 gems now installed.
 == Finishing Request: d/cf_account.html (0.01s)
       create  build/d/cf_account.html
 Project built successfully.
+```
+- Static file will be placed in the `./build` directory
+- The `./build` directory will be copied to `./docs` for publishing on GitHub pages (this may be temporary)
+
+# Publishing the static site
+
+- Execute the `/.publish.sh` script - this will push to GitHub
+- Successful output will look similar to:
+```
 Switched to branch 'gh-pages'
 Your branch is up-to-date with 'origin/gh-pages'.
 [gh-pages c6dbf0e] latest docs
@@ -67,5 +77,3 @@ To https://github.com/IBM-Bluemix/tf-ibm-docs.git
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
 ```
-- Static file will be placed in the `./build` directory
-- The `./build` directory will be copied to `./docs` for publishing on GitHub pages (this may be temporary)
