@@ -1,70 +1,74 @@
 <%= partial "layouts/meta" %>
 <body>
-  <div class="container-fluid page-wrapper">
-    <nav class="top-block navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#">
-                <i class="fa fa-lg fa-github"></i>GitHub</a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-lg fa-slack"></i>
-                Slack</a>
-            </li>
-          </ul>
-        </div>
-        <!--/.nav-collapse -->
+  <nav class="top-block navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
       </div>
-    </nav>
-
-    <div id="sidebar-container" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-      <div class="sidebar-content">
-        <ul class="list-unstyled">
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
           <li>
-            <label class="tree-toggle">
-              <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
-            <ul class="list-unstyled tree">
-              <% Dir.foreach("build/d/") do |doc| %>
-                <% if doc.index('.html') != nil %>
-                  <li>
-                    <a href="/tf-ibm-docs/d/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
+            <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
+              <i class="fa fa-lg fa-github"></i>GitHub</a>
           </li>
-
           <li>
-            <label class="tree-toggle">
-              <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
-            <ul class="list-unstyled tree">
-              <% Dir.foreach("build/r/") do |doc| %>
-                <% if doc.index('.html') != nil %>
-                  <li>
-                    <a href="/tf-ibm-docs/r/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
+            <a href="https://ibm-cloud-schematics.slack.com/signup">
+              <i class="fa fa-lg fa-slack"></i>
+              Slack</a>
           </li>
         </ul>
       </div>
+      <!--/.nav-collapse -->
     </div>
+  </nav>
 
-    <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-      <div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <div class="sidebar-content">
+          <ul class="list-unstyled">
+            <li>
+              <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
+              <ul class="list-unstyled tree">
+                <% Dir.foreach("build/d/") do |doc| %>
+                  <% if doc.index('.html') != nil %>
+                    <li>
+                      <a href="/tf-ibm-docs/d/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+
+            <li>
+              <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
+              <ul class="list-unstyled tree">
+                <% Dir.foreach("build/r/") do |doc| %>
+                  <% if doc.index('.html') != nil %>
+                    <li>
+                      <a href="/tf-ibm-docs/r/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+        <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+      </div>
+
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
         <%= yield %>
       </div>
     </div>
@@ -75,12 +79,12 @@
       <div class="col-md-9">
         <ul class="list-inline social-list">
           <li>
-            <a href="#">
+            <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
               <i class="fa fa-lg fa-github"></i>
               GitHub</a>
           </li>
           <li>
-            <a href="#">
+            <a href="https://ibm-cloud-schematics.slack.com/signup">
               <i class="fa fa-lg fa-slack"></i>
               Slack</a>
           </li>
