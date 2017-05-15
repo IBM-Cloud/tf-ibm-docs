@@ -9,13 +9,6 @@
 set -e
 PARENT_DIR=$(pwd)
 
-function cleanup() {
-  cd $PARENT_DIR
-  set +e
-  rm -rf ./terraform
-  set -e
-}
-
 # Adds arbitrary material to index
 function addtoindex() {
   # TODO: Kelner - this can be fraught with failure if the text changes, and
@@ -24,11 +17,14 @@ function addtoindex() {
   mv tmp index.html.markdown
 }
 
-# In the event cleanup did not occur on a previous failed run
-cleanup
-# clone IBM terraform
-git clone https://github.com/IBM-Bluemix/terraform
-cd terraform
+if [ ! -d "terraform" ]; then
+  # clone IBM terraform
+  git clone https://github.com/IBM-Bluemix/terraform
+  cd terraform
+else
+  cd terraform
+  git pull
+fi
 # switch to the provider team base branch
 # As of May 12 2017 it is "provider/ibm-cloud"
 git checkout provider/ibm-cloud
@@ -39,8 +35,5 @@ addtoindex
 # build with middleman
 bundle install
 bundle exec middleman build --verbose --clean
-cd $PARENT_DIR
-# cleanup artifacts before commit & exit
-cleanup
 
 exit 0
