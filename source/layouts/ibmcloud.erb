@@ -28,20 +28,63 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-    <%= partial "layouts/sidebar" %>
+
+    <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-11">
+      <div class="sidebar-content">
+        <ul class="list-unstyled">
+          <li>
+            <label class="tree-toggle">
+              <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
+            <ul class="list-unstyled tree">
+              <% Dir.foreach("build/d/") do |doc| %>
+                <% if doc.index('.html') != nil %>
+                  <li>
+                    <a href="/tf-ibm-docs/d/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+
+          <li>
+            <label class="tree-toggle">
+              <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
+            <ul class="list-unstyled tree">
+              <% Dir.foreach("build/r/") do |doc| %>
+                <% if doc.index('.html') != nil %>
+                  <li>
+                    <a href="/tf-ibm-docs/r/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <div class="col-md-10 grid-md-10">
-        <div class="content">
-            <%= yield %>
-        </div>
+      <div class="content">
+        <%= yield %>
+      </div>
     </div>
   </div>
+
   <footer class="site-footer">
     <div class="container">
       <div class="col-md-9">
-          <ul class="list-inline social-list">
-            <li><a href="#"><i class="fa fa-lg fa-github"></i> GitHub</a></li>
-            <li><a href="#"><i class="fa fa-lg fa-slack"></i> Slack</a></li>
-          </ul>
+        <ul class="list-inline social-list">
+          <li>
+            <a href="#">
+              <i class="fa fa-lg fa-github"></i>
+              GitHub</a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-lg fa-slack"></i>
+              Slack</a>
+          </li>
+        </ul>
       </div>
       <div class="col-md-3">
         IBM Cloud Provider for Terraform&trade;
