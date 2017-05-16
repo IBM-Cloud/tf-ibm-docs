@@ -26,6 +26,9 @@ The following commands are NOT idempotent, therefore they can only be run once; 
   - Run the export command output from the above command
 - Start docker, follow instructions Bluemix docs.
   - For me this was: `docker-machine start default` followed by `eval $(docker-machine env default)`.
+- Now execute the docker bash script for IBM Containers: `bash ./docker.sh`
+- This will start a Jenkins 2 container on IBM's cloud
+- Follow the instructions under "Setting Up Jenkins 2.0" [here](https://www.cloudbees.com/blog/get-started-jenkins-20-docker)
 
 # Where
 
