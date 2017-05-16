@@ -15,13 +15,17 @@ Unfortunately this was required because Travis was already in place as part of t
 
 # How
 
-The following commands are idempotent, therefore they can only be run once:
+The following commands are NOT idempotent, therefore they can only be run once; where `$NAME` is your own value. These closely follow https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials but are trimmed for brevity:
 
 - `bx login -a https://api.ng.bluemix.net`
 - `bx cs init`
-- `bx cs cluster-create --name tf-ibm-docs-jenkins`
+- `bx cs cluster-create --name $NAME`
   - Start times vary, mine took almost an hour
-- `bx cs cluster-config tf-ibm-docs-jenkins`
+  - `watch -n 10 bx cs workers $NAME` until complete
+- `bx cs cluster-config $NAME`
+  - Run the export command output from the above command
+- Start docker, follow instructions Bluemix docs.
+  - For me this was: `docker-machine start default` followed by `eval $(docker-machine env default)`.
 
 # Where
 
