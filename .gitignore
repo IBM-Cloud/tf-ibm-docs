@@ -8,6 +8,10 @@ source/r
 source/index.html.markdown
 source/layouts/sidebar.erb
 source/layouts/sidebar.erb-e
+source/ibmcloud-v0.1-beta
+source/ibmcloud-v0.2-beta
+source/ibmcloud-v0.3-beta
+source/tf-0.9.3-bluemix-api-key
 
 .sass-cache/
 
