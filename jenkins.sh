@@ -11,6 +11,7 @@ PARENT_DIR=$(pwd)
 
 # checkout yourself...
 git clone https://github.com/IBM-Bluemix/tf-ibm-docs
+cd tf-ibm-docs
 bash build.sh
 bash publish.sh
 
