@@ -1,0 +1,252 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Terraform Provider documentation">
+    <title>
+      IBM Cloud Terraform Documentation
+    </title>
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <!-- these were in footer_scripts.html but need to load early or refactor -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <!-- end _meta.erb -->
+
+<body>
+  <nav class="top-block navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
+            <i class="fa fa-lg fa-github"></i>GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+  <div class="sidebar-content">
+    <ul class="list-unstyled">
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+        </ul>
+      </li>
+
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_bare_metal.html">infra_bare_metal</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_basic_monitor.html">infra_basic_monitor</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_block_storage.html">infra_block_storage</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_dns_domain.html">infra_dns_domain</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_dns_domain_record.html">infra_dns_domain_record</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_file_storage.html">infra_file_storage</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated.html">infra_fw_hardware_dedicated</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated_rules.html">infra_fw_hardware_dedicated_rules</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_global_ip.html">infra_global_ip</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_local.html">infra_lb_local</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_local_service.html">infra_lb_local_service</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_local_service_group.html">infra_lb_local_service_group</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_vpx.html">infra_lb_vpx</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_vpx_ha.html">infra_lb_vpx_ha</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_vpx_service.html">infra_lb_vpx_service</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_lb_vpx_vip.html">infra_lb_vpx_vip</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_objectstorage_account.html">infra_objectstorage_account</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_provisioning_hook.html">infra_provisioning_hook</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_scale_group.html">infra_scale_group</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_scale_policy.html">infra_scale_policy</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_security_certificate.html">infra_security_certificate</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_ssh_key.html">infra_ssh_key</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_user.html">infra_user</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_virtual_guest.html">infra_virtual_guest</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/r/infra_vlan.html">infra_vlan</a>
+                </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+  <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
+
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <h1 id="ibmcloud_infra_lb_vpx_service">ibmcloud_infra_lb_vpx_service</h1>
+
+<p>Create, update, and delete VPX Load Balancer Services. For additional details please refer to the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">API documentation</a>.
+<em>Please Note</em>: If Netscaler VPX 10.5 is used, terraform uses Netscaler&rsquo;s REST API(<a href="https://docs.citrix.com/en-us/netscaler/11/nitro-api.html">NITRO API</a>) for softlayer_lb_vpx_service resource management. The NITRO API is only accessable in SoftLayer private network, so it is necessary to execute terraform in SoftLayer&rsquo;s private network. SoftLayer <a href="http://www.softlayer.com/VPN-Access">SSL VPN</a> also can be used for private network connection. </p>
+
+<h2 id="example-usage">Example Usage</h2>
+
+<p>Create a new vpx load balancer service</p>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_lb_vpx_service" "test_service" {
+  name = "test_load_balancer_service"
+  vip_id = "${ibmcloud_infra_lb_vpx_vip.testacc_vip.id}"
+  destination_ip_address = "${ibmcloud_infra_virtual_guest.test_server.ipv4_address}"
+  destination_port = 80
+  weight = 55
+  connection_limit = 5000
+  health_check = "HTTP"
+}
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<ul>
+<li><code class="prettyprint">name</code> | <em>string</em>
+
+<ul>
+<li>(Required) The unique identifier for the VPX Load Balancer Service.</li>
+</ul></li>
+<li><code class="prettyprint">vip_id</code> | <em>string</em>
+
+<ul>
+<li>(Required) The ID of the VPX Load Balancer Virtual IP Address that the VPX Load Balancer Service is assigned to.</li>
+</ul></li>
+<li><code class="prettyprint">destination_ip_address</code> | <em>string</em>
+
+<ul>
+<li>(Required) The IP address of the server traffic will be directed to. If Netscaler VPX 10.1 is used, destination_ip_address should be a public IP address in a SoftLayer account. If Netscaler VPX 10.5 is used, any IP address can be a destination_ip_address.</li>
+</ul></li>
+<li><code class="prettyprint">destination_port</code> | <em>int</em>
+
+<ul>
+<li>(Required) The destination port of the server traffic will be directed to.</li>
+</ul></li>
+<li><code class="prettyprint">weight</code> | <em>int</em>
+
+<ul>
+<li>(Required) Set the weight of this VPX Load Balancer service. Affects the choices the VPX Load Balancer makes between the various services. See <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">the documentation</a> for details.</li>
+<li>In VPX 10.5, weight value is ignored. </li>
+</ul></li>
+<li><code class="prettyprint">connection_limit</code> | <em>int</em>
+
+<ul>
+<li>(Required) Set the connection limit for this service. The range is 0 ~ 4294967294. See <a href="https://docs.citrix.com/en-us/netscaler/11/reference/netscaler-command-reference/basic/service.html">maxClient</a> for details.</li>
+</ul></li>
+<li><code class="prettyprint">health_check</code> | <em>string</em>
+
+<ul>
+<li>(Required) Set the health check for the VPX Load Balancer Service. See <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">the documentation</a> for details.</li>
+</ul></li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<ul>
+<li><code class="prettyprint">id</code> - The VPX Load Balancer Service unique identifier.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="col-md-9">
+      <ul class="list-inline social-list">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
+            <i class="fa fa-lg fa-github"></i>
+            GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      IBM Cloud Provider for Terraform&trade;
+    </div>
+  </div>
+</footer>
+
+  <script src="../../javascript/sidemenu.js"></script>
+</body>
+</html>

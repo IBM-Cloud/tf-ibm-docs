@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Terraform Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -54,30 +54,79 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div  id="content-container" class="content col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1 id="ibm-cloud-terraform-provider-documentation">IBM Cloud Terraform Provider Documentation</h1>
+      <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+  <div class="sidebar-content">
+    <ul class="list-unstyled">
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+                <li>
+                  <a href="/tf-ibm-docs/d/d/infra_dns_domain.html">infra_dns_domain</a>
+                </li>
+                <li>
+                  <a href="/tf-ibm-docs/d/d/infra_ssh_key.html">infra_ssh_key</a>
+                </li>
+        </ul>
+      </li>
 
-<p>The following documentation is for the <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">IBM Cloud Terraform Provider</a>. It covers how to configure the provider and the resources that are made available.</p>
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<p>Below is the documentation for the versions which are available:</p>
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+  <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
 
-<!-- REPLACEME -->
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <h1 id="ibmcloud_infra_ssh_key">ibmcloud_infra_ssh_key</h1>
 
-<h2 id="internal-schematic-releases">Internal Schematic Releases</h2>
+<p>Use this data source to import the details of an <em>existing</em> SSH key as a read-only data source.</p>
+
+<h2 id="example-usage">Example Usage</h2>
+<pre class="highlight plaintext"><code>data "ibmcloud_infra_ssh_key" "public_key" {
+    label = "Terraform Public Key"
+}
+</code></pre>
+
+<p>The fields of the data source can then be referenced by other resources within the same configuration using
+interpolation syntax. For example, when specifying SSH keys in a ibmcloud_infra_virtual_guest resource configuration,
+the numeric &ldquo;IDs&rdquo; are often unknown. Using the above data source as an example, it would be possible to
+reference the <code class="prettyprint">id</code> property in a ibmcloud_infra_virtual_guest resource:</p>
+<pre class="highlight plaintext"><code>resource "ibmcloud_infra_virtual_guest" "vm1" {
+    ...
+    ssh_key_ids = ["${data.ibmcloud_infra_ssh_key.public_key.id}"]
+    ...
+}
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
 
 <ul>
-<li><a href="ibmcloud-v0.1-beta">ibmcloud-v0.1-beta</a></li>
-<li><a href="ibmcloud-v0.2-beta">ibmcloud-v0.2-beta</a></li>
-<li><a href="ibmcloud-v0.3-beta">ibmcloud-v0.3-beta</a></li>
-<li><a href="tf-0.9.3-bluemix-api-key">tf-0.9.3-bluemix-api-key</a></li>
+<li><code class="prettyprint">label</code> - (Required) The label of the SSH key, as it was defined in SoftLayer</li>
+<li><code class="prettyprint">most_recent</code> - (Optional) If more than SSH key matches the label, use the most recent key</li>
 </ul>
 
-<h2 id="publics-releases">Publics Releases</h2>
+<p>NOTE: If more or less than a single match is returned by the search, Terraform will fail.
+Ensure that your label is specific enough to return a single SSH key only,
+or use <em>most_recent</em> to choose the most recent one.</p>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p><code class="prettyprint">id</code> is set to the ID of the SSH key.  In addition, the following attributes are exported:</p>
 
 <ul>
-<li><a href="tf-v0.9.3-ibm-provider-v0.1">tf-v0.9.3-ibm-provider-v0.1</a></li>
-<li><a href="tf-v0.9.3-ibm-provider-v0.2">tf-v0.9.3-ibm-provider-v0.2</a></li>
-<li><a href="tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
+<li><code class="prettyprint">fingerprint</code> - sequence of bytes to authenticate or lookup a longer ssh key</li>
+<li><code class="prettyprint">public_key</code> - the public key contents</li>
+<li><code class="prettyprint">notes</code> - notes stored with the SSH key</li>
 </ul>
 
       </div>
@@ -105,5 +154,6 @@
   </div>
 </footer>
 
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
