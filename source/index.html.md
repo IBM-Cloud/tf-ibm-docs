@@ -11,4 +11,4 @@ The following documentation is for the [IBM Cloud Terraform Provider](https://gi
 
 Below is the documentation for the versions which are available:
 
-<!-- REPLACEMENT -->
+<!-- REPLACEME -->
