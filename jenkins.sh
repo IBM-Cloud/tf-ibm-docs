@@ -9,10 +9,6 @@
 set -ex
 PARENT_DIR=$(pwd)
 
-# Hax?
-
-apt-get install ruby-dev
-
 # checkout yourself...
 if [ ! -d "tf-ibm-docs" ]; then
   git clone https://github.com/IBM-Bluemix/tf-ibm-docs
