@@ -12,6 +12,10 @@ source/ibmcloud-v0.1-beta
 source/ibmcloud-v0.2-beta
 source/ibmcloud-v0.3-beta
 source/tf-0.9.3-bluemix-api-key
+source/tf-v0.9.3-ibm-k8s-v0.1
+source/tf-v0.9.3-ibm-provider-v0.1
+source/tf-v0.9.3-ibm-provider-v0.2
+source/tf-v0.9.3-ibm-provider-v0.2.1
 
 .sass-cache/
 
