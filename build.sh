@@ -27,21 +27,47 @@ EXTERNAL_RELEASES=( \
 )
 EXTERNAL_REPO="https://github.com/IBM-Bluemix/terraform"
 
+# The version of the provider that schematics is using
+SCHEMATICS_VERSION="ibmcloud-v0.3-beta"
+SCHEMATICS_REPO=$INTERNAL_REPO
+
 # Adds arbitrary material to index
 # Takes one argument:
 # $1 Boolean: if true, uses old dev local, if false, uses new
 function addtoindex() {
+  cp _inject-schematics.md _inject-old.md
+  cat _inject.md >> _inject-old.md
+  cp _inject-schematics.md _inject-new.md
+  cat _inject-v1.md >> _inject-new.md
   if $1; then
     # TODO: Kelner - this can be fraught with failure if the text changes, and
     # will fail to inject the extra content
-    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject_developing-locally.md' index.html.markdown > tmp
+    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject-old.md' index.html.markdown > tmp
     # TODO: Kelner - cleanup hax, language in old docs is different... see above
-    sed '/Use the navigation to the left to read about the available resources./r./../_inject_developing-locally.md' index.html.markdown > tmp
+    sed '/Use the navigation to the left to read about the available resources./r./../_inject-old.md' index.html.markdown > tmp
     mv tmp index.html.markdown
   else
-    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject_developing-locally-v1.md' index.html.markdown > tmp
+    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject-new.md' index.html.markdown > tmp
     mv tmp index.html.markdown
   fi
+  rm _inject-old.md _inject-new.md
+}
+
+function buildversionlist() {
+  echo "## Internal Schematic Releases" >> source/_inject-schematics.md
+  for release in "${INTERNAL_RELEASES[@]}"; do
+    echo "- [$release]($release)" >> source/_inject-schematics.md
+  done
+  echo "" >> source/_inject-schematics.md
+  echo "## Publics Releases" >> source/_inject-schematics.md
+  for release in "${EXTERNAL_RELEASES[@]}"; do
+    echo "- [$release]($release)" >> source/_inject-schematics.md
+  done
+}
+
+function cleanindex() {
+  sed '/<!-- REPLACEME -->/q' source/_inject-schematics.md > tmp
+  mv tmp source/_inject-schematics.md
 }
 
 # Expects three arguements:
@@ -71,28 +97,20 @@ function getdocs() {
   cd $PARENT_DIR
 }
 
-# slightly special function to get the latest documentation
-# this will keep schematics bluemix documentation for breaking for now (asof 2017-05-18)
-function getlatestdocs() {
+# slightly special function to get the correct documentation for the schematics service
+function getschematicsdocs() {
   if [ ! -d "./terraform" ]; then
     mkdir ./terraform
   fi
-  if [ ! -d "./terraform/latest" ]; then
+  if [ ! -d "./terraform/schematics" ]; then
     # clone IBM terraform
-    git clone --branch "provider/ibm-cloud" $EXTERNAL_REPO --depth=1 ./terraform/latest
-    cd ./terraform/latest
+    git clone --branch $SCHEMATICS_VERSION $SCHEMATICS_REPO --depth=1 ./terraform/schematics
+    cd ./terraform/schematics
   else
-    cd ./terraform/latest
+    cd ./terraform/schematics
     git pull
   fi
-  if [ ! -d "../../source/d" ]; then
-    mkdir ../../source/d
-  fi
-  if [ ! -d "../../source/r" ]; then
-    mkdir ../../source/r
-  fi
-  cp -R website/source/docs/providers/ibmcloud/d/* ../../source/d/
-  cp -R website/source/docs/providers/ibmcloud/r/* ../../source/r/
+  cp -R website/source/docs/providers/ibmcloud/* ../../source/
   cd $PARENT_DIR
 }
 
@@ -138,23 +156,6 @@ function cleanup() {
   cleanindex
 }
 
-function cleanindex() {
-  sed '/<!-- REPLACEME -->/q' source/index.html.md > tmp
-  mv tmp source/index.html.md
-}
-
-function buildversionlist() {
-  echo "## Internal Schematic Releases" >> source/index.html.md
-  for release in "${INTERNAL_RELEASES[@]}"; do
-    echo "- [$release]($release)" >> source/index.html.md
-  done
-  echo "" >> source/index.html.md
-  echo "## Publics Releases" >> source/index.html.md
-  for release in "${EXTERNAL_RELEASES[@]}"; do
-    echo "- [$release]($release)" >> source/index.html.md
-  done
-}
-
 # ensure clean start
 preclean
 
@@ -168,9 +169,8 @@ for release in "${EXTERNAL_RELEASES[@]}"; do
   getdocs $release $EXTERNAL_REPO false
 done
 
-# get the latest release to deploy behind the scenes, this will keep
-# schematics bluemix documentation for breaking for now (asof 2017-05-18)
-getlatestdocs
+# get the version of the docs that the scematic service is using
+getschematicsdocs
 
 # put all version in index
 buildversionlist
