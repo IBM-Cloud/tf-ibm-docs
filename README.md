@@ -1,6 +1,22 @@
 # Terraform IBM Docs
 IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.io/tf-ibm-docs/
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+- [Objective](#objective)
+- [Current Release Targets](#current-release-targets)
+- [Adding Release Targets](#adding-release-targets)
+- [Execution](#execution)
+  - [Manual](#manual)
+  - [Prerequisites](#prerequisites)
+  - [Running locally](#running-locally)
+    - [CAVEATS](#caveats)
+    - [Building static site](#building-static-site)
+    - [Publishing the static site](#publishing-the-static-site)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Objective
 
 To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate multiple static sites for all release targets.
@@ -46,6 +62,10 @@ The docs can be manually built and deployed by executing the [Building static si
 - Execute the `./build.sh` script
 - Execute `bundle exec middleman server`
 - Point a browser at `http://localhost:4567/`
+
+### CAVEATS
+
+Certain links will NOT work locally. They are prefixed with `tf-ibm-docs` for deployment on GitHub pages. **This is known for local dev and simply must be worked around for now** _We will work on fixing this for the future_
 
 ### Building static site
 
