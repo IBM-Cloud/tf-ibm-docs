@@ -24,21 +24,24 @@ If you want to develop locally on your system, complete the following steps:
 
       ```hcl
         provider "ibmcloud" {
-            ibmid = "${var.ibmid}"
-            ibmid_password = "${var.ibmidpw}"
+          bluemix_api_key    = "${var.ibmcloud_bmx_api_key}"
+          softlayer_username = "${var.ibmcloud_sl_username}"
+          softlayer_api_key  = "${var.ibmcloud_sl_api_key}"
         }
       ```
 
     Be sure to also define these variables in your `.tf` files:
 
       ```hcl
-        variable ibmid {}
-        variable ibmidpw {}
+        variable ibmcloud_bmx_api_key {}
+        variable ibmcloud_sl_username {}
+        variable ibmcloud_sl_api_key {}
       ```
 
     You can then export your credentials in your terminal, where `$VALUE` is your credential.
 
       ```bash
-        export TF_VAR_ibmid="$VALUE"
-        export TF_VAR_ibmidpw="$VALUE"
+        export TF_VAR_ibmcloud_bmx_api_key="$VALUE"
+        export ibmid_ibmcloud_sl_username="$VALUE"
+        export TF_VAR_bmcloud_sl_api_key="$VALUE"
       ```
