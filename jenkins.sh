@@ -6,7 +6,7 @@
 
 # EXECUTED BY JENKINS AFTER CHECKING OUT https://github.com/IBM-Bluemix/terraform
 
-set -e
+set -ex
 PARENT_DIR=$(pwd)
 
 # checkout yourself...
