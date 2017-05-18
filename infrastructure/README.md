@@ -21,7 +21,7 @@ Steps to create necessary infrastructure for automatically building the Terrafor
 
 ## Setup Commands
 
-The following commands are NOT idempotent, therefore they can only be run once; where `$NAME` is your own value. These closely follow https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials but are trimmed for brevity:
+The following commands are NOT idempotent, therefore they can only be run once; where `$NAME` is your own value (in the case of running infrastructure, we've used `tf-ibm-docs-jenkins`). These closely follow https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials but are trimmed for brevity:
 
 - `bx login -a https://api.ng.bluemix.net`
 - `bx cs init`
@@ -56,3 +56,9 @@ Space:          test
 ```
 
 However I ran into `You are not authorized to perform this action based on your current user role. You must have the Editor role for the cluster in IBM Bluemix Container Service. Contact the account administrator and request the required access. (E0068)` when trying to create clusters.
+
+# Gaps
+
+Currently the plugins, jobs, and git configuration aren't automated for the setup of Jenkins. I spent some significant time on this (several hours) without much luck. Partial to the solution is a secrets management tool (something like Chef w/ encrypted data-bags) but I am without something like it at the moment.
+
+So it will need to be setup manually.

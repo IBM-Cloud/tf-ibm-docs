@@ -5,26 +5,38 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 
 To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
 
-# How it works
+# Execution
 
-Currently a manual process by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme.
+## Automated
 
-Eventually some central CI/CD server will be required (not Travis) that can monitor the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) for activity and then trigger a checkout of this repository and run the `./build.sh` and `./publish.sh` scripts automatically.
+A Jenkins job, hosted at http://schematics-jenkins.chriskelner.com:30173/ using IBM Container free-tier (see [./infrastructure](infrastructure) for details) executes when pushes are made to the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) branch `provider/ibm-cloud` via GitHub webhook:
 
-# Prerequisites
+![webhook-screenshot](./images/webhook.png)
+
+`./build.sh` and `./publish.sh` scripts
+
+### Gaining Access
+
+Contact Chris Kelner via an authenticated means (IBM channels) to get access to the Jenkins server.
+
+## Manual
+
+The docs can be manually built and deployed by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme. Must be done from a workstation that meets the requirements in the [Prerequisites](#prerequisites) section.
+
+## Prerequisites
 
 - `git` must be available on the workstation running the script
 - For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
 - Ruby 2.3.0 or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
 
-# Running locally
+## Running locally
 
 - Execute the `./build.sh` script
 - Execute `bundle exec middleman server`
 - Point a browser at `http://localhost:4567/`
 
-# Building static site
+### Building static site
 
 - Execute the `build.sh` script
 - Successful output will look something like:
@@ -57,7 +69,7 @@ Project built successfully.
 - Static file will be placed in the `./build` directory
 - The `./build` directory will be copied to `./docs` for publishing on GitHub pages (this may be temporary)
 
-# Publishing the static site
+### Publishing the static site
 
 - Execute the `/.publish.sh` script - this will push to GitHub
 - Successful output will look similar to:
