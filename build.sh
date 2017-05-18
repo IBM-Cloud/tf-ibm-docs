@@ -34,12 +34,12 @@ function addtoindex() {
   if $1; then
     # TODO: Kelner - this can be fraught with failure if the text changes, and
     # will fail to inject the extra content
-    sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
+    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject_developing-locally.md' index.html.markdown > tmp
     # TODO: Kelner - cleanup hax, language in old docs is different... see above
-    sed '/Use the navigation to the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
+    sed '/Use the navigation to the left to read about the available resources./r./../_inject_developing-locally.md' index.html.markdown > tmp
     mv tmp index.html.markdown
   else
-    sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally-v1.md' index.html.markdown > tmp
+    sed '/Use the navigation menu on the left to read about the available resources./r./../_inject_developing-locally-v1.md' index.html.markdown > tmp
     mv tmp index.html.markdown
   fi
 }
@@ -117,6 +117,7 @@ function buildversionlist() {
   for release in "${INTERNAL_RELEASES[@]}"; do
     echo "- [$release]($release)" >> source/index.html.md
   done
+  echo "" >> source/index.html.md
   echo "## Publics Releases" >> source/index.html.md
   for release in "${EXTERNAL_RELEASES[@]}"; do
     echo "- [$release]($release)" >> source/index.html.md
