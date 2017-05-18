@@ -72,7 +72,6 @@ function getdocs() {
 }
 
 function cleanuprelease() {
-  cd $PARENT_DIR
   if [ -d "./source/$1" ]; then
     rm -rf ./source/$1
   fi
@@ -84,7 +83,6 @@ function cleanuprelease() {
     # for every .git file
     #rm -rf ./terraform
   #fi
-  cd $PARENT_DIR
 }
 
 function preclean() {
@@ -99,6 +97,7 @@ function preclean() {
 }
 
 function cleanup() {
+  cd $PARENT_DIR
   for release in "${INTERNAL_RELEASES[@]}"; do
     cleanuprelease $release
   done
@@ -109,7 +108,8 @@ function cleanup() {
 }
 
 function cleanindex() {
-  sed '/<!-- REPLACEME -->/q' source/index.html.md
+  sed '/<!-- REPLACEME -->/q' source/index.html.md > tmp
+  mv tmp source/index.html.md
 }
 
 function buildversionlist() {
