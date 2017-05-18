@@ -16,3 +16,7 @@ build/
 docs/
 
 tmp
+
+# bundler
+vendor
+.bundle
