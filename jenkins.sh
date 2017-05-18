@@ -10,8 +10,13 @@ set -e
 PARENT_DIR=$(pwd)
 
 # checkout yourself...
-git clone https://github.com/IBM-Bluemix/tf-ibm-docs
+if [ ! -d "tf-ibm-docs" ]; then
+  git clone https://github.com/IBM-Bluemix/tf-ibm-docs
+fi
+
 cd tf-ibm-docs
+git pull
+
 bash build.sh
 bash publish.sh
 
