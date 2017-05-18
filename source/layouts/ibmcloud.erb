@@ -1,126 +1,15 @@
 <%= partial "layouts/meta" %>
 <body>
-  <nav class="top-block navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
-              <i class="fa fa-lg fa-github"></i>GitHub</a>
-          </li>
-          <li>
-            <a href="https://ibm-cloud-schematics.slack.com/signup">
-              <i class="fa fa-lg fa-slack"></i>
-              Slack</a>
-          </li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-  </nav>
-
+  <%= partial "layouts/topnav" %>
   <div class="container-fluid">
     <div class="row">
-      <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-        <div class="sidebar-content">
-          <ul class="list-unstyled">
-            <li>
-              <label class="tree-toggle">
-                <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
-              <ul class="list-unstyled tree">
-                <!-- Kelner: Ugly hax :( -->
-                <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") != nil %>
-                  <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
-                    <% if doc.index(".html") != nil %>
-                      <li>
-                        <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                      </li>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                  <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") == nil %>
-                    <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/d") do |doc| %>
-                      <% if doc.index(".html") != nil %>
-                        <li>
-                          <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                        </li>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </ul>
-            </li>
-
-            <li>
-              <label class="tree-toggle">
-                <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
-              <ul class="list-unstyled tree">
-                <!-- Kelner: Ugly hax :( -->
-                <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") != nil %>
-                  <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
-                    <% if doc.index(".html") != nil %>
-                      <li>
-                        <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                      </li>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                  <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") == nil %>
-                    <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/r") do |doc| %>
-                      <% if doc.index(".html") != nil %>
-                        <li>
-                          <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/r/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                        </li>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
-      </div>
-
+      <%= partial "layouts/sidenav" %>
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
         <%= yield %>
       </div>
     </div>
   </div>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="col-md-9">
-        <ul class="list-inline social-list">
-          <li>
-            <a href="https://github.com/IBM-Bluemix/terraform/tree/provider/ibm-cloud">
-              <i class="fa fa-lg fa-github"></i>
-              GitHub</a>
-          </li>
-          <li>
-            <a href="https://ibm-cloud-schematics.slack.com/signup">
-              <i class="fa fa-lg fa-slack"></i>
-              Slack</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        IBM Cloud Provider for Terraform&trade;
-      </div>
-    </div>
-  </footer>
+  <%= partial "layouts/footer" %>
   <%= javascript_include_tag :sidemenu %>
 </body>
 </html>

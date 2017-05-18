@@ -1,0 +1,63 @@
+<div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+  <div class="sidebar-content">
+    <ul class="list-unstyled">
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+          <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") != nil %>
+            <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
+              <% if doc.index(".html") != nil %>
+                <li>
+                  <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                </li>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") == nil %>
+              <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/d") do |doc| %>
+                <% if doc.index(".html") != nil %>
+                  <li>
+                    <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
+
+      <li>
+        <label class="tree-toggle">
+          <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
+        <ul class="list-unstyled tree">
+          <!-- Kelner: Ugly hax :( -->
+          <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") != nil %>
+            <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
+              <% if doc.index(".html") != nil %>
+                <li>
+                  <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                </li>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") == nil %>
+              <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/r") do |doc| %>
+                <% if doc.index(".html") != nil %>
+                  <li>
+                    <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/r/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+  <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
