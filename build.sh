@@ -28,19 +28,27 @@ EXTERNAL_RELEASES=( \
 EXTERNAL_REPO="https://github.com/IBM-Bluemix/terraform"
 
 # Adds arbitrary material to index
+# Takes one argument:
+# $1 Boolean: if true, uses old dev local, if false, uses new
 function addtoindex() {
-  # TODO: Kelner - this can be fraught with failure if the text changes, and
-  # will fail to inject the extra content
-  sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
-  # TODO: Kelner - cleanup hax, language in old docs is different... see above
-  sed '/Use the navigation to the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
-  mv tmp index.html.markdown
+  if $1; then
+    # TODO: Kelner - this can be fraught with failure if the text changes, and
+    # will fail to inject the extra content
+    sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
+    # TODO: Kelner - cleanup hax, language in old docs is different... see above
+    sed '/Use the navigation to the left to read about the available resources./r./_inject_developing-locally.md' index.html.markdown > tmp
+    mv tmp index.html.markdown
+  else
+    sed '/Use the navigation menu on the left to read about the available resources./r./_inject_developing-locally-v1.md' index.html.markdown > tmp
+    mv tmp index.html.markdown
+  fi
 }
 
-# Expects two arguements:
+# Expects three arguements:
 # $1 is the release tag as specified in git, should come from INTERNAL_RELEASES
 # or EXTERNAL_RELEASES
 # $2 is the git repo to target, should either be INTERNAL_REPO or EXTERNAL_REPO
+# $3 is whether this is internal (true) or not (false)
 function getdocs() {
   if [ ! -d "./source/$1" ]; then
     mkdir ./source/$1
@@ -59,7 +67,7 @@ function getdocs() {
   cp -R website/source/docs/providers/ibmcloud/* ../../source/$1
   cd ../../source/$1
   # inject contents into index
-  addtoindex
+  addtoindex $3
   cd $PARENT_DIR
 }
 
@@ -120,12 +128,12 @@ preclean
 
 # pull all releases from IBM GitHub
 for release in "${INTERNAL_RELEASES[@]}"; do
-  getdocs $release $INTERNAL_REPO
+  getdocs $release $INTERNAL_REPO true
 done
 
 # pull all releases from IBM GitHub
 for release in "${EXTERNAL_RELEASES[@]}"; do
-  getdocs $release $EXTERNAL_REPO
+  getdocs $release $EXTERNAL_REPO false
 done
 
 # put all version in index
