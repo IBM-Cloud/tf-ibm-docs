@@ -71,6 +71,31 @@ function getdocs() {
   cd $PARENT_DIR
 }
 
+# slightly special function to get the latest documentation
+# this will keep schematics bluemix documentation for breaking for now (asof 2017-05-18)
+function getlatestdocs() {
+  if [ ! -d "./terraform" ]; then
+    mkdir ./terraform
+  fi
+  if [ ! -d "./terraform/latest" ]; then
+    # clone IBM terraform
+    git clone --branch "provider/ibm-cloud" $EXTERNAL_REPO --depth=1 ./terraform/latest
+    cd ./terraform/latest
+  else
+    cd ./terraform/latest
+    git pull
+  fi
+  if [ ! -d "../../source/d" ]; then
+    mkdir ../../source/d
+  fi
+  if [ ! -d "../../source/r" ]; then
+    mkdir ../../source/r
+  fi
+  cp -R website/source/docs/providers/ibmcloud/d/* ../../source/d/
+  cp -R website/source/docs/providers/ibmcloud/r/* ../../source/r/
+  cd $PARENT_DIR
+}
+
 function cleanuprelease() {
   if [ -d "./source/$1" ]; then
     rm -rf ./source/$1
@@ -104,6 +129,12 @@ function cleanup() {
   for release in "${EXTERNAL_RELEASES[@]}"; do
     cleanuprelease $release
   done
+  if [ -d "./source/r" ]; then
+    rm -r ./source/r
+  fi
+  if [ -d "./source/d" ]; then
+    rm -r ./source/d
+  fi
   cleanindex
 }
 
@@ -136,6 +167,10 @@ done
 for release in "${EXTERNAL_RELEASES[@]}"; do
   getdocs $release $EXTERNAL_REPO false
 done
+
+# get the latest release to deploy behind the scenes, this will keep
+# schematics bluemix documentation for breaking for now (asof 2017-05-18)
+getlatestdocs
 
 # put all version in index
 buildversionlist
