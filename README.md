@@ -13,6 +13,8 @@ The docs can be manually built and deployed by executing the [Building static si
 ## Prerequisites
 
 - `git` must be available on the workstation running the script
+- `git` must be configured to checkout from both github.com and github.ibm.com (for older documentation)
+- `git` must be able to push to https://github.com/IBM-Bluemix/tf-ibm-docs
 - For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
 - Ruby 2.3.0 or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
