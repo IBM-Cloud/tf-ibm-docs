@@ -6,19 +6,6 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
 
 # Execution
-
-## Automated
-
-A Jenkins job, hosted at http://schematics-jenkins.chriskelner.com:30173/ using IBM Container free-tier (see [./infrastructure](infrastructure) for details) executes when pushes are made to the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) branch `provider/ibm-cloud` via GitHub webhook:
-
-![webhook-screenshot](./images/webhook.png)
-
-`./build.sh` and `./publish.sh` scripts
-
-### Gaining Access
-
-Contact Chris Kelner via an authenticated means (IBM channels) to get access to the Jenkins server.
-
 ## Manual
 
 The docs can be manually built and deployed by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme. Must be done from a workstation that meets the requirements in the [Prerequisites](#prerequisites) section.
