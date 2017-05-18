@@ -6,7 +6,7 @@
 # @Author: Chris Kelner
 # Copyright (c) 2017 IBM under MIT License
 
-set -e
+set -ex
 PARENT_DIR=$(pwd)
 
 # Adds arbitrary material to index
@@ -19,7 +19,7 @@ function addtoindex() {
 
 if [ ! -d "terraform" ]; then
   # clone IBM terraform
-  git clone https://github.com/IBM-Bluemix/terraform
+  git clone https://github.com/IBM-Bluemix/terraform --depth=1
   cd terraform
 else
   cd terraform
