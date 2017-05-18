@@ -28,7 +28,7 @@ fi
 # switch to the provider team base branch
 # As of May 12 2017 it is "provider/ibm-cloud"
 git checkout provider/ibm-cloud
-cp -R website/source/docs/providers/ibmcloud/ ../source
+cp -R website/source/docs/providers/ibmcloud/* ../source
 cd ../source
 # inject contents into index
 addtoindex
