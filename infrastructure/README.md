@@ -96,6 +96,8 @@ Just one job is needed to build and publish the project.
 - Create a new job: http://schematics-jenkins.chriskelner.com:30173/newJob
 - Make it a freestyle project and give it a name
 - Check the "GitHub Project" box and input `https://github.com/IBM-Bluemix/terraform`
-- Under "Source Code Management" select `Git` and input `https://github.com/IBM-Bluemix/tf-ibm-docs.git`
+- Under "Source Code Management" select `Git` and input `https://github.com/IBM-Bluemix/terraform.git`
   - Under "Branches to build" change the default to `*/provider/ibm-cloud`
 - Check the `GitHub hook trigger for GITScm polling` option
+- Under "Build" select `Execute Shell`
+  - Input: `curl https://raw.githubusercontent.com/IBM-Bluemix/tf-ibm-docs/master/jenkins.sh | bash`
