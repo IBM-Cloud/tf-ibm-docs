@@ -33,7 +33,7 @@ cd ../source
 # inject contents into index
 addtoindex
 # build with middleman
-bundle install
+bundle install --no-cache --path vendor/bundle
 bundle exec middleman build --verbose --clean
 
 exit 0
