@@ -23,6 +23,8 @@ To provide an alternative theme for the [IBM Terraform fork](https://github.com/
 
 # Current Release Targets
 
+The documentation landing page (what is shown when you https://ibm-bluemix.github.io/tf-ibm-docs/) presents the documentation for whatever version that Schematics is currently using. This is controlled in the `.build.sh` script via `SCHEMATICS_VERSION` and `SCHEMATICS_REPO` variables.
+
 From https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases (Internal):
 
 - [`ibmcloud-v0.1-beta`](https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases/tag/ibmcloud-v0.1-beta)
@@ -42,6 +44,8 @@ From https://github.com/IBM-Bluemix/terraform/releases (external):
 - First, update the "[Current Release Targets](#current-release-targets)" section of this README.
 - Modify the [`build.sh`](./build.sh) script `INTERNAL_RELEASES` and `EXTERNAL_RELEASES` arrays with the new values.
 - Update [`.gitignore`](.gitignore) with the `./source/$VERSION` directory, where `$VERSION` is the value you've added to `build.sh`
+- To change the landing page version (what version Schematics uses) update the `SCHEMATICS_VERSION` and `SCHEMATICS_REPO` variables in [`build.sh`](./build.sh).
+- Update `./source/_inject-schematics.md` to indicate which version Schematics is using and is being presented to the user on the landing page.
 
 # Execution
 ## Manual

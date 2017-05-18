@@ -35,10 +35,10 @@ SCHEMATICS_REPO=$INTERNAL_REPO
 # Takes one argument:
 # $1 Boolean: if true, uses old dev local, if false, uses new
 function addtoindex() {
-  cp _inject-schematics.md _inject-old.md
-  cat _inject.md >> _inject-old.md
-  cp _inject-schematics.md _inject-new.md
-  cat _inject-v1.md >> _inject-new.md
+  cp ../_inject-schematics.md ../_inject-old.md
+  cat ../_inject.md >> ../_inject-old.md
+  cp ../_inject-schematics.md ../_inject-new.md
+  cat ../_inject-v1.md >> ../_inject-new.md
   if $1; then
     # TODO: Kelner - this can be fraught with failure if the text changes, and
     # will fail to inject the extra content
@@ -50,22 +50,22 @@ function addtoindex() {
     sed '/Use the navigation menu on the left to read about the available resources./r./../_inject-new.md' index.html.markdown > tmp
     mv tmp index.html.markdown
   fi
-  rm _inject-old.md _inject-new.md
+  rm ../_inject-old.md ../_inject-new.md
 }
 
 function buildversionlist() {
-  echo "## Internal Schematic Releases" >> source/_inject-schematics.md
+  echo "#### Internal Schematic Releases" >> source/_inject-schematics.md
   for release in "${INTERNAL_RELEASES[@]}"; do
     echo "- [$release]($release)" >> source/_inject-schematics.md
   done
   echo "" >> source/_inject-schematics.md
-  echo "## Publics Releases" >> source/_inject-schematics.md
+  echo "#### Publics Releases" >> source/_inject-schematics.md
   for release in "${EXTERNAL_RELEASES[@]}"; do
     echo "- [$release]($release)" >> source/_inject-schematics.md
   done
 }
 
-function cleanindex() {
+function cleaninject() {
   sed '/<!-- REPLACEME -->/q' source/_inject-schematics.md > tmp
   mv tmp source/_inject-schematics.md
 }
@@ -111,6 +111,10 @@ function getschematicsdocs() {
     git pull
   fi
   cp -R website/source/docs/providers/ibmcloud/* ../../source/
+  cd ../../source
+  # inject contents into index
+  sed '/Use the navigation menu on the left to read about the available resources./r./_inject-schematics.md' index.html.markdown > tmp
+  mv tmp index.html.markdown
   cd $PARENT_DIR
 }
 
@@ -136,7 +140,7 @@ function preclean() {
     rm -rf ./docs
   fi
   cleanup
-  cleanindex
+  cleaninject
 }
 
 function cleanup() {
@@ -153,7 +157,7 @@ function cleanup() {
   if [ -d "./source/d" ]; then
     rm -r ./source/d
   fi
-  cleanindex
+  cleaninject
 }
 
 # ensure clean start
@@ -169,11 +173,11 @@ for release in "${EXTERNAL_RELEASES[@]}"; do
   getdocs $release $EXTERNAL_REPO false
 done
 
-# get the version of the docs that the scematic service is using
-getschematicsdocs
-
 # put all version in index
 buildversionlist
+
+# get the version of the docs that the scematic service is using
+getschematicsdocs
 
 # build with middleman
 bundle install
