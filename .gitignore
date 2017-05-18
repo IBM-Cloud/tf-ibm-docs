@@ -28,3 +28,5 @@ tmp
 # bundler
 vendor
 .bundle
+source/_inject-new.md
+source/_inject-old.md
