@@ -1,19 +1,25 @@
 # Terraform IBM Docs Infrastructure
 
-This directory provides infrastructure for the automation components required to automatically build the [IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform) docs from source.
+This directory provides infrastructure for the automation components required to automatically build the [IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform) docs from source when changes are made.
 
 # Why
 
-Unfortunately this was required because Travis was already in place as part of the OSS project (see here: [IBM-Bluemix/terraform/.travis.yml](https://github.com/IBM-Bluemix/terraform/blob/provider/ibm-cloud/.travis.yml)). By altering the existing travis configuration it would cause complications with contributing code changes back upstream (to hashicorp).
+[IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform/) must be monitored, as it is the repository that contains the actual documentation. Therefore we cannot trigger on this repository (alternatively a schedule/timer could be set to pull the IBM-Bluemix/terraform repo periodically; Unfortunately Travis doesn't support periodic builds).
 
-# Prerequisites
+Jenkins was chosen; this was necessary because Travis was already in place as part of the OSS project [IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform/) as seen here: [IBM-Bluemix/terraform/.travis.yml](https://github.com/IBM-Bluemix/terraform/blob/provider/ibm-cloud/.travis.yml)). By altering the existing travis configuration it would cause complications with contributing code changes back upstream (to hashicorp).
+
+# Setup
+
+Steps to create necessary infrastructure for automatically building the Terraform IBM Cloud Provider docs when changes are made to [IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform) branch `provider/ibm-cloud`.
+
+## Prerequisites
 
 - Install Bluemix CLI: http://clis.ng.bluemix.net/ui/home.html
 - Install Bluemix CS plugin: `bx plugin install container-service -r Bluemix`
 - Install Bluemix CR plugin: `bx plugin install container-registry -r Bluemix`
 - Install `kubectl` per [IBM Container Service instructions](https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials)
 
-# How
+## Setup Commands
 
 The following commands are NOT idempotent, therefore they can only be run once; where `$NAME` is your own value. These closely follow https://console.ng.bluemix.net/docs/containers/cs_tutorials.html#cs_tutorials but are trimmed for brevity:
 
@@ -29,8 +35,11 @@ The following commands are NOT idempotent, therefore they can only be run once; 
 - Now execute the docker bash script for IBM Containers: `bash ./docker.sh`
 - This will start a Jenkins 2 container on IBM's cloud
 - Follow the instructions under "Setting Up Jenkins 2.0" [here](https://www.cloudbees.com/blog/get-started-jenkins-20-docker)
+  - For the very first step (getting the unlock password) you'll need to take the output from the last command executed by `./docker.sh` and use it in `kubectl exec $OUTPUT cat /var/jenkins_home/secrets/initialAdminPassword`
 
 # Where
+
+Currently Jenkins is available at http://169.48.140.31:30173/ - this is a free tier IBM Container so IP is subject to change. Currently http://schematics-jenkins.chriskelner.com:30173/ points here also.
 
 All infrastructure is deployed to:
 ```

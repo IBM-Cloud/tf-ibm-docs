@@ -15,6 +15,7 @@ bx cr images
 kubectl run tf-ibm-docs-deployment --image=registry.ng.bluemix.net/tf_ibm_docs/jenkins2
 kubectl expose deployment/tf-ibm-docs-deployment --type=NodePort --port=8080 --name=tf-ibm-docs-jenkins
 kubectl describe service tf-ibm-docs-jenkins
+kubectl get pods
 
 # local
 # docker run --name=jenkins-data jenkins-data
