@@ -37,6 +37,8 @@ The following commands are NOT idempotent, therefore they can only be run once; 
 - Follow the instructions under "Setting Up Jenkins 2.0" [here](https://www.cloudbees.com/blog/get-started-jenkins-20-docker)
   - For the very first step (getting the unlock password) you'll need to take the output from the last command executed by `./docker.sh` and use it in `kubectl exec $OUTPUT cat /var/jenkins_home/secrets/initialAdminPassword`
 
+See [Gaps](#gaps) for remaining setup.
+
 # Where
 
 Currently Jenkins is available at http://169.48.140.31:30173/ - this is a free tier IBM Container so IP is subject to change. Currently http://schematics-jenkins.chriskelner.com:30173/ points here also.
@@ -62,3 +64,38 @@ However I ran into `You are not authorized to perform this action based on your 
 Currently the plugins, jobs, and git configuration aren't automated for the setup of Jenkins. I spent some significant time on this (several hours) without much luck. Partial to the solution is a secrets management tool (something like Chef w/ encrypted data-bags) but I am without something like it at the moment.
 
 So it will need to be setup manually.
+
+## First Time Admin login
+
+You'll need to run `kubectl exec $PODNAME cat /var/jenkins_home/secrets/initialAdminPassword` - where `$PODNAME` is the name for the active pod output in `kubectl get pods`. You'll use the output from the `exec` command when you navigate your browser to http://schematics-jenkins.chriskelner.com:30173/
+
+## Plugins
+
+During initial setup only select these:
+
+- `Build timeout`
+- `Credentials Binding`
+- `Timestamper`
+- `Workspace Cleanup`
+- `Git`
+- `Matrix Authorization Strategy Plugin`
+
+After setup, navigate to `Manage Jenkins > Manage Plugins > Available` and install: `GitHub Authentication`
+
+## Configure
+
+- `Manage Jenkins > Configure Global Security > Access Control > Github Authentication Plugin`
+  - Here you'll need a custom OAuth application
+  - For "Authorization" select "Matrix-based security" and type in the GitHub usernames for users that need access to Jenkins; provide them the appropriate level of permissions by checking the boxes in the table.
+- `Manage Jenkins > Configure System > Git` and fill in the info
+
+### Job
+
+Just one job is needed to build and publish the project.
+
+- Create a new job: http://schematics-jenkins.chriskelner.com:30173/newJob
+- Make it a freestyle project and give it a name
+- Check the "GitHub Project" box and input `https://github.com/IBM-Bluemix/terraform`
+- Under "Source Code Management" select `Git` and input `https://github.com/IBM-Bluemix/tf-ibm-docs.git`
+  - Under "Branches to build" change the default to `*/provider/ibm-cloud`
+- Check the `GitHub hook trigger for GITScm polling` option
