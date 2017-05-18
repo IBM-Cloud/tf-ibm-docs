@@ -1,3 +1,5 @@
+# THIS APPROACH IS NOW DEPRECAtED - IT IS ONLY HERE FOR POSTERITY SAKE
+
 # Terraform IBM Docs Infrastructure
 
 This directory provides infrastructure for the automation components required to automatically build the [IBM-Bluemix/terraform](https://github.com/IBM-Bluemix/terraform) docs from source when changes are made.
