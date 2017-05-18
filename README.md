@@ -3,12 +3,34 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 
 # Objective
 
-To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate the static site when there are changes to the fork in the `provider/ibm-cloud` branch.
+To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate multiple static sites for all release targets.
+
+# Current Release Targets
+
+From https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases (Internal):
+
+- [`ibmcloud-v0.1-beta`](https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases/tag/ibmcloud-v0.1-beta)
+- [`ibmcloud-v0.2-beta`](https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases/tag/ibmcloud-v0.2-beta)
+- [`ibmcloud-v0.3-beta`](https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases/tag/ibmcloud-v0.3-beta)
+- [`tf-0.9.3-bluemix-api-key`](https://github.ibm.com/blueprint/bluemix-terraform-provider-dev/releases/tag/tf-0.9.3-bluemix-api-key)
+
+From https://github.com/IBM-Bluemix/terraform/releases (external):
+
+- [`tf-v0.9.3-ibm-provider-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.1)
+- ~~[`tf-v0.9.3-ibm-k8s-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-k8s-v0.1)~~ - This release is not included because it does not contain documentation in `website/source/docs/providers/ibmcloud/`
+- [`tf-v0.9.3-ibm-provider-v0.2`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2)
+- [`tf-v0.9.3-ibm-provider-v0.2.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2.1)
+
+# Adding Release Targets
+
+- First, update the "[Current Release Targets](#current-release-targets)" section of this README.
+- Modify the [`build.sh`](./build.sh) script `INTERNAL_RELEASES` and `EXTERNAL_RELEASES` arrays with the new values.
+- Update [`.gitignore`](.gitignore) with the `./source/$VERSION` directory, where `$VERSION` is the value you've added to `build.sh`
 
 # Execution
 ## Manual
 
-The docs can be manually built and deployed by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections found in this Readme. Must be done from a workstation that meets the requirements in the [Prerequisites](#prerequisites) section.
+The docs can be manually built and deployed by executing the [Building static site](#building-static-site) and [Publishing the static site](#publishing-the-static-site) sections. Must be done from a workstation that meets the requirements in the [Prerequisites](#prerequisites) section.
 
 ## Prerequisites
 
@@ -16,7 +38,7 @@ The docs can be manually built and deployed by executing the [Building static si
 - `git` must be configured to checkout from both github.com and github.ibm.com (for older documentation)
 - `git` must be able to push to https://github.com/IBM-Bluemix/tf-ibm-docs
 - For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
-- Ruby 2.3.0 or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
+- Ruby `2.3.3` or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
 
 ## Running locally

@@ -10,8 +10,22 @@ set -ex
 PARENT_DIR=$(pwd)
 
 # Array of iternal releases on https://github.ibm.com/blueprint/bluemix-terraform-provider-dev
-INTERNAL_RELEASES=("ibmcloud-v0.1-beta" "ibmcloud-v0.2-beta" \
-  "ibmcloud-v0.3-beta" "tf-0.9.3-bluemix-api-key")
+INTERNAL_RELEASES=( \
+  "ibmcloud-v0.1-beta" \
+  "ibmcloud-v0.2-beta" \
+  "ibmcloud-v0.3-beta" \
+  "tf-0.9.3-bluemix-api-key" \
+)
+INTERNAL_REPO="https://github.ibm.com/blueprint/bluemix-terraform-provider-dev"
+
+# Array of external releases on https://github.com/IBM-Bluemix/terraform/releases
+EXTERNAL_RELEASES=( \
+  "tf-v0.9.3-ibm-provider-v0.1" \
+  #"tf-v0.9.3-ibm-k8s-v0.1" \
+  "tf-v0.9.3-ibm-provider-v0.2" \
+  "tf-v0.9.3-ibm-provider-v0.2.1" \
+)
+EXTERNAL_REPO="https://github.com/IBM-Bluemix/terraform"
 
 # Adds arbitrary material to index
 function addtoindex() {
@@ -21,8 +35,11 @@ function addtoindex() {
   mv tmp index.html.markdown
 }
 
-# Expects one arguement, the release tag as specified in git
-function olddocs() {
+# Expects two arguements:
+# $1 is the release tag as specified in git, should come from INTERNAL_RELEASES
+# or EXTERNAL_RELEASES
+# $2 is the git repo to target, should either be INTERNAL_REPO or EXTERNAL_REPO
+function getdocs() {
   if [ ! -d "./source/$1" ]; then
     mkdir ./source/$1
   fi
@@ -31,7 +48,7 @@ function olddocs() {
   fi
   if [ ! -d "./terraform/$1" ]; then
     # clone IBM terraform
-    git clone --branch $1 https://github.ibm.com/blueprint/bluemix-terraform-provider-dev --depth=1 ./terraform/$1
+    git clone --branch $1 $2 --depth=1 ./terraform/$1
     cd ./terraform/$1
   else
     cd ./terraform/$1
@@ -45,6 +62,13 @@ function olddocs() {
 }
 
 function cleanup() {
+  cd $PARENT_DIR
+  if [ -d "./build" ]; then
+    rm -rf ./build
+  fi
+  if [ -d "./docs" ]; then
+    rm -rf ./docs
+  fi
   if [ -d "./source/$1" ]; then
     rm -rf ./source/$1
   fi
@@ -55,24 +79,36 @@ function cleanup() {
     # for every .git file
     rm -rf ./terraform
   fi
+  cd $PARENT_DIR
 }
 
 # ensure clean from start
 for release in "${INTERNAL_RELEASES[@]}"; do
   cleanup $release
 done
+for release in "${EXTERNAL_RELEASES[@]}"; do
+  cleanup $release
+done
 
 # pull all releases from IBM GitHub
 for release in "${INTERNAL_RELEASES[@]}"; do
-  olddocs $release
+  getdocs $release $INTERNAL_REPO
+done
+
+# pull all releases from IBM GitHub
+for release in "${EXTERNAL_RELEASES[@]}"; do
+  getdocs $release $EXTERNAL_REPO
 done
 
 # build with middleman
 bundle install
-bundle exec middleman build --clean
+bundle exec middleman build --clean --verbose
 
 # cleanup
 for release in "${INTERNAL_RELEASES[@]}"; do
+  cleanup $release
+done
+for release in "${EXTERNAL_RELEASES[@]}"; do
   cleanup $release
 done
 
