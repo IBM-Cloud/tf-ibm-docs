@@ -37,11 +37,24 @@
               <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
               <ul class="list-unstyled tree">
-                <% Dir.foreach("build/d/") do |doc| %>
-                  <% if doc.index('.html') != nil %>
-                    <li>
-                      <a href="/tf-ibm-docs/d/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
-                    </li>
+                <!-- Kelner: Ugly hax :( -->
+                <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") != nil %>
+                  <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
+                    <% if doc.index(".html") != nil %>
+                      <li>
+                        <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                      </li>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") == nil %>
+                    <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/d") do |doc| %>
+                      <% if doc.index(".html") != nil %>
+                        <li>
+                          <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                        </li>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 <% end %>
               </ul>
@@ -51,11 +64,24 @@
               <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
               <ul class="list-unstyled tree">
-                <% Dir.foreach("build/r/") do |doc| %>
-                  <% if doc.index('.html') != nil %>
-                    <li>
-                      <a href="/tf-ibm-docs/r/<%= doc %>"><%= doc.downcase.sub('.html','') %></a>
-                    </li>
+                <!-- Kelner: Ugly hax :( -->
+                <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") != nil %>
+                  <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
+                    <% if doc.index(".html") != nil %>
+                      <li>
+                        <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                      </li>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") == nil %>
+                    <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/r") do |doc| %>
+                      <% if doc.index(".html") != nil %>
+                        <li>
+                          <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/r/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
+                        </li>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 <% end %>
               </ul>
