@@ -166,6 +166,9 @@ function cleanup() {
 # ensure clean start
 preclean
 
+# put all version in index
+buildversionlist
+
 # pull all releases from IBM GitHub
 for release in "${INTERNAL_RELEASES[@]}"; do
   getdocs $release $INTERNAL_REPO true
@@ -175,9 +178,6 @@ done
 for release in "${EXTERNAL_RELEASES[@]}"; do
   getdocs $release $EXTERNAL_REPO false
 done
-
-# put all version in index
-buildversionlist
 
 # get the version of the docs that the scematic service is using
 getschematicsdocs
