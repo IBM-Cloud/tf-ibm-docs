@@ -75,15 +75,17 @@ The docs are manually built and deployed from a local workstation by executing t
 - For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
 - Ruby `2.3.3` or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
+- Python `2.7.x` or higher is required to run a local webserver for testing
 
 ## Testing locally
 
 - Execute the `./build.sh` script
 - Change into the build directory: `cd build`
-- Run your favorite lightweight web server, I prefer Python's: `python -m SimpleHTTPServer 8000` but any web server will do
+- Execute `./run.sh` which will start a web server in the build directory
+  - Run your favorite lightweight web server, I prefer Python's: `python -m SimpleHTTPServer 8000` but any web server will do
   - You cannot use `bundle exec middleman server` from the parent directory; it will not be inclusive of a number of actions take by the `build.sh` script
-- Point a browser at `http://localhost:$PORT/` where `$PORT` is whatever your web server is configured for.
-
+- Point a browser at `http://localhost:8000/` or if you ran your own web server connect to it at the appropriate address.
+- ctrl+c to kill `./run.sh` when you are done
 
 ## Building static site
 
@@ -94,4 +96,4 @@ The docs are manually built and deployed from a local workstation by executing t
 
 ## Publishing the static site
 
-- Execute the `/.publish.sh` script - this will push to GitHub
+- Execute the `/.publish.sh` script - this will push to GitHub automatically using your locally configured git credentials
