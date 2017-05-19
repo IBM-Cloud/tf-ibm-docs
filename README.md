@@ -13,7 +13,6 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 - [Building and Publishing](#building-and-publishing)
   - [Prerequisites](#prerequisites)
   - [Testing locally](#testing-locally)
-    - [CAVEATS](#caveats)
   - [Building static site](#building-static-site)
   - [Publishing the static site](#publishing-the-static-site)
 

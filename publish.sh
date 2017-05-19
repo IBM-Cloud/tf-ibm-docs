@@ -36,4 +36,8 @@ git checkout master
 # cleanup
 rm -r ~/tmp/docs
 
+# restore small hack to make docs work locally
+cd build
+ln -s . tf-ibm-docs
+
 exit 0
