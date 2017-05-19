@@ -4,6 +4,7 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
+
 - [Objective](#objective)
 - [Current Release Targets](#current-release-targets)
 - [Adding Release Targets](#adding-release-targets)
