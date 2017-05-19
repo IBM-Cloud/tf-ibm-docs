@@ -64,8 +64,10 @@ The docs can be manually built and deployed by executing the [Building static si
 ## Running locally
 
 - Execute the `./build.sh` script
-- Execute `bundle exec middleman server`
-- Point a browser at `http://localhost:4567/`
+- Change into the build directory: `cd build`
+- Run your favorite lightweight web server, I prefer Python's: `python -m SimpleHTTPServer 8000`
+  - You cannot use `bundle exec middleman server` from the parent directory; it will not be inclusive of a number of actions take by the `build.sh` script
+- Point a browser at `http://localhost:$PORT/` where `$PORT` is whatever your web server is configured for.
 
 ### CAVEATS
 
