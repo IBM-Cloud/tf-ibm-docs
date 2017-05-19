@@ -3,9 +3,11 @@
   @cf_data_sources = []
   @cs_data_sources = []
   @infra_data_sources = []
+  @other_data_sources = []
   @cf_resources = []
   @cs_resources = []
   @infra_resources = []
+  @other_resources =[]
   # Processes a given directory and populates arrays with resource html links
   # Arguements:
   # => target_dir, String, e.g. /tf-v0.9.3-ibm-provider-v0.2.1/r/
@@ -47,6 +49,11 @@
               '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
               doc_title + '</a>'
             )
+          else
+            @other_data_sources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
           end
         else
           # if it is a cloud foundry resource
@@ -64,6 +71,11 @@
           # if it is an infra resource
           elsif doc_title.index("infra_") != nil
             @infra_resources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          else
+            @other_resources.push(
               '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
               doc_title + '</a>'
             )
@@ -160,6 +172,21 @@
           </ul>
         </li>
       <% end %>
+      <%if @other_data_sources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Other Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @other_data_sources.each do |other_link| %>
+              <li>
+                <%= other_link %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
       <%if @cf_resources.size > 0 %>
         <li>
           <label class="tree-toggle">
@@ -200,6 +227,21 @@
             <% @infra_resources.each do |infra_link| %>
               <li>
                 <%= infra_link %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <%if @other_resources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Other Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @other_resources.each do |other_link| %>
+              <li>
+                <%= other_link %>
               </li>
             <% end %>
           </ul>
