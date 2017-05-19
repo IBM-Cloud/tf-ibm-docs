@@ -84,11 +84,6 @@ The docs are manually built and deployed from a local workstation by executing t
   - You cannot use `bundle exec middleman server` from the parent directory; it will not be inclusive of a number of actions take by the `build.sh` script
 - Point a browser at `http://localhost:$PORT/` where `$PORT` is whatever your web server is configured for.
 
-### CAVEATS
-
-Certain links will NOT work locally. They are prefixed with `tf-ibm-docs` for deployment on GitHub pages. To work around this, you can the contents of the `build` directory and place everything inside a new directory `tf-ibm-docs` inside of the `build` directory and then run your web server from `build`. If you do this you will need to point your browser at `http://localhost:$PORT/tf-ibm-docs/` where `$PORT` is whatever your web server is configured for. **DO NOT DO THIS AND THEN RUN `./publish.sh` IT WILL BREAK THE SITE**
-
-**This is known for local dev and simply must be worked around for now** _We will work on fixing this for the future_
 
 ## Building static site
 

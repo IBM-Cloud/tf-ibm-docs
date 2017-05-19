@@ -188,4 +188,8 @@ bundle exec middleman build --clean --verbose
 
 cleanup
 
+# Small hack to make docs work locally
+cd build
+ln -s . tf-ibm-docs
+
 exit 0
