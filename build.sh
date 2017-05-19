@@ -157,6 +157,9 @@ function cleanup() {
   if [ -d "./source/d" ]; then
     rm -r ./source/d
   fi
+  if [ -f "./source/index.htmk.markdown" ]; then
+    rm ./source/index.htmk.markdown
+  fi
   cleaninject
 }
 
