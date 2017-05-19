@@ -53,6 +53,8 @@ From https://github.com/IBM-Bluemix/terraform/releases (external):
 
 The side navigation contains "categories" or "headings" which group together resources. Items such as "Cloud Foundry Resources" and "Container Data Sources". These categories **ARE NOT** dynamic and must be manually created, updated, or deleted. The code for doing this is contained in [`./source/layouts/sidenav.erb`](./source/layouts/sidenav.erb). Both the inline code block at the top and the array loops inside the HTML will need to be updated.
 
+If a resource doesn't match a defined category, then it will simply be placed under an "Other" heading until one is added.
+
 # Injected Content
 
 For the landing page of each version (including the default as seen at `/index.html`) some content is injected.
