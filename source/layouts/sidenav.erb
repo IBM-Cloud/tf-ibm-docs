@@ -1,59 +1,210 @@
+<%
+  # Gather up all the resource files for placement
+  @cf_data_sources = []
+  @cs_data_sources = []
+  @infra_data_sources = []
+  @cf_resources = []
+  @cs_resources = []
+  @infra_resources = []
+  # Processes a given directory and populates arrays with resource html links
+  # Arguements:
+  # => target_dir, String, e.g. /tf-v0.9.3-ibm-provider-v0.2.1/r/
+  # => data_source, Boolean, true if we are building Data source links, false if
+  #        building resource links
+  # => version, String, e.g. tf-v0.9.3-ibm-provider-v0.2.1 - EXCEPT in the case
+  #        of processing the top level directory, in which case this should be
+  #        an empty string
+  def processDir(target_dir, data_source, version)
+    Dir.foreach(target_dir) do |doc|
+      # small hack to make version useable for building URLs
+      version_url = "" # for top level path
+      if version != ""
+        version_url = "/" + version_url
+      end
+      # directories can contain files other than what we are looking for
+      # valid docs will be something like "infra_ssh_key.html.markdown"
+      if doc.index(".html") != nil
+        # get doc html value, e.g. infra_ssh_key.html
+        doc_html = doc.sub(".markdown","")
+        # get doc name value, e.g. infra_ssh_key
+        doc_title = doc_html.sub(".html","")
+        if(data_source)
+          # if it is a cloud foundry data source
+          if doc_title.index("cf_") != nil
+            @cf_data_sources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          # if it is a container service data source
+          elsif doc_title.index("cs_") != nil
+            @cs_data_sources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          # if it is an infra data source
+          elsif doc_title.index("infra_") != nil
+            @infra_data_sources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          end
+        else
+          # if it is a cloud foundry resource
+          if doc_title.index("cf_") != nil
+            @cf_resources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          # if it is a container service resource
+          elsif doc_title.index("cs_") != nil
+            @cs_resources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          # if it is an infra resource
+          elsif doc_title.index("infra_") != nil
+            @infra_resources.push(
+              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
+              doc_title + '</a>'
+            )
+          end
+        end
+      end
+    end
+  end
+  # current_page.url will resolve to something like:
+  # "tf-v0.9.3-ibm-provider-v0.2.1/r/"
+  # we want to capture the last directory to determine where this erb file
+  # is being applied so we can build the sidebar from there
+  directory = current_page.url[0, current_page.url.rindex("/")]
+  # get the directory to target based on where erb is executing from
+  data_target_dir = nil
+  resource_target_dir = nil
+  version = nil
+  # we're in a /d directory
+  if directory.index("\/d") != nil
+    # current_page.url will be similar to:
+    # tf-v0.9.3-ibm-provider-v0.2.1/d/
+    version = current_page.url.split('/')[0]
+    data_target_dir = "source" + directory
+    resource_target_dir = "source" + directory[0, directory.rindex("/")] + "/r"
+  # we're in a /r directory
+  elsif directory.index("\/r") != nil
+    # current_page.url will be similar to:
+    # tf-v0.9.3-ibm-provider-v0.2.1/r/
+    version = current_page.url.split('/')[0]
+    resource_target_dir = "source" + directory
+    data_target_dir = "source" + directory[0, directory.rindex("/")] + "/d"
+  # top level directory
+  elsif current_page.url == "/"
+    # /d and /r should exist at the topmost level for the targeted default ver
+    version = ""
+    data_target_dir = "source/d"
+    resource_target_dir = "source/r"
+  # we're in a /<version> directory
+  else
+    # current_page.url will be similar to:
+    # tf-v0.9.3-ibm-provider-v0.2.1/
+    version = current_page.url.split('/')[0]
+    data_target_dir = "source" + directory + "/d"
+    resource_target_dir = "source" + directory + "/r"
+  end
+  processDir(data_target_dir, true, version)
+  processDir(resource_target_dir, false, version)
+%>
 <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
   <div class="sidebar-content">
     <ul class="list-unstyled">
-      <li>
-        <label class="tree-toggle">
-          <i class="fa fa-caret-down"></i>Infrastructure Data Sources</label>
-        <ul class="list-unstyled tree">
-          <!-- Kelner: Ugly hax :( -->
-          <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") != nil %>
-            <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
-              <% if doc.index(".html") != nil %>
-                <li>
-                  <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                </li>
-              <% end %>
+      <%if @cf_data_sources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Cloud Foundry Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @cf_data_sources.each do |cf_link| %>
+              <li>
+                <%= cf_link %>
+              </li>
             <% end %>
-          <% else %>
-            <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") == nil %>
-              <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/d") do |doc| %>
-                <% if doc.index(".html") != nil %>
-                  <li>
-                    <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/d/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                  </li>
-                <% end %>
-              <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <%if @cs_data_sources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Container Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @cs_data_sources.each do |cs_link| %>
+              <li>
+                <%= cs_link %>
+              </li>
             <% end %>
-          <% end %>
-        </ul>
-      </li>
-
-      <li>
-        <label class="tree-toggle">
-          <i class="fa fa-caret-down"></i>Infrastructure Resources</label>
-        <ul class="list-unstyled tree">
-          <!-- Kelner: Ugly hax :( -->
-          <% if current_page.url[0, current_page.url.rindex("/")].index("\/r") != nil %>
-            <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")]) do |doc| %>
-              <% if doc.index(".html") != nil %>
-                <li>
-                  <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-2] %>/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                </li>
-              <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <%if @infra_data_sources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Infrastructure Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @infra_data_sources.each do |infra_link| %>
+              <li>
+                <%= infra_link %>
+              </li>
             <% end %>
-          <% else %>
-            <% if current_page.url[0, current_page.url.rindex("/")].index("\/d") == nil %>
-              <% Dir.foreach("source" + current_page.url[0, current_page.url.rindex("/")] + "/r") do |doc| %>
-                <% if doc.index(".html") != nil %>
-                  <li>
-                    <a href="/tf-ibm-docs/<%= current_page.url.split('/')[-1] %>/r/<%= doc.sub('.markdown','') %>"><%= doc.downcase.sub(".html","").sub(".markdown","") %></a>
-                  </li>
-                <% end %>
-              <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <%if @cf_resources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Cloud Foundry Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @cf_resources.each do |cf_link| %>
+              <li>
+                <%= cf_link %>
+              </li>
             <% end %>
-          <% end %>
-        </ul>
-      </li>
+          </ul>
+        </li>
+      <% end %>
+      <%if @cs_resources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Container Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @cs_resources.each do |cs_link| %>
+              <li>
+                <%= cs_link %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <%if @infra_resources.size > 0 %>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Infrastructure Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <% @infra_resources.each do |infra_link| %>
+              <li>
+                <%= infra_link %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
