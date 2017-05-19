@@ -18,8 +18,8 @@
     Dir.foreach(target_dir) do |doc|
       # small hack to make version useable for building URLs
       version_url = "" # for top level path
-      if version != ""
-        version_url = "/" + version_url
+      if !version.blank?
+        version_url = "/" + version
       end
       # directories can contain files other than what we are looking for
       # valid docs will be something like "infra_ssh_key.html.markdown"
@@ -85,14 +85,14 @@
   if directory.index("\/d") != nil
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/d/
-    version = current_page.url.split('/')[0]
+    version = current_page.url.split('/')[1]
     data_target_dir = "source" + directory
     resource_target_dir = "source" + directory[0, directory.rindex("/")] + "/r"
   # we're in a /r directory
   elsif directory.index("\/r") != nil
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/r/
-    version = current_page.url.split('/')[0]
+    version = current_page.url.split('/')[1]
     resource_target_dir = "source" + directory
     data_target_dir = "source" + directory[0, directory.rindex("/")] + "/d"
   # top level directory
@@ -105,7 +105,7 @@
   else
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/
-    version = current_page.url.split('/')[0]
+    version = current_page.url.split('/')[1]
     data_target_dir = "source" + directory + "/d"
     resource_target_dir = "source" + directory + "/r"
   end
