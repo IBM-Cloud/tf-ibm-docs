@@ -8,7 +8,9 @@ set -e
 PARENT_DIR=$(pwd)
 
 # remove hack for local docs
-rm ./build/tf-ibm-docs
+if [ -d "./build/tf-ibm-docs" ]; then
+  rm ./build/tf-ibm-docs
+fi
 
 # need to move to the gh-pages branch
 if [ ! -d "~/tmp" ]; then
