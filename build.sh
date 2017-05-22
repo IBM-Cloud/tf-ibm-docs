@@ -18,14 +18,14 @@ function addtoindex() {
   cat ../_inject-v1.md >> ../_inject-new.md
   # TODO: Kelner - this can be fraught with failure if the text changes, and
   # will fail to inject the extra content
-  sed '/${INJECT_STRING}./r./../_inject-new.md' index.html.markdown > tmp
+  sed "/$INJECT_STRING./r./../_inject-new.md" index.html.markdown > tmp
   mv tmp index.html.markdown
   rm ../_inject-new.md
 }
 
 function buildversionlist() {
   for release in "${RELEASES[@]}"; do
-    echo "- [$release]($release)" >> source/_inject-schematics.md
+    echo "- [$release](/tf-ibm-docs/$release)" >> source/_inject-schematics.md
   done
 }
 
@@ -72,7 +72,7 @@ function getschematicsdocs() {
   cp -R website/source/docs/providers/ibmcloud/* ../../source/
   cd ../../source
   # inject contents into index
-  sed '/${INJECT_STRING}./r./_inject-schematics.md' index.html.markdown > tmp
+  sed "/$INJECT_STRING./r./_inject-schematics.md" index.html.markdown > tmp
   mv tmp index.html.markdown
   cd $PARENT_DIR
 }
