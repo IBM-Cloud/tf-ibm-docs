@@ -92,4 +92,16 @@ The docs are manually built and deployed from a local workstation by executing t
 
 ## Publishing the static site
 
-- Execute the `/.publish.sh` script - this will push to GitHub automatically using your locally configured git credentials
+### Automatically
+
+Execute the `/.publish.sh` script - this will push everything in the `build` directory to the GitHub branch `gh-pages` on the root directory automatically using your locally configured git credentials.
+
+### Manually
+
+To stage changes or simply to publish manually follow these steps:
+
+- Remove the hack for local development from the build directory: `rm ./build/tf-ibm-docs`
+- Copy the `build` directory somewhere outside of the repo, e.g. `cp -R ./build/. ~/tmp/docs`
+- Switch to the `gh-pages` branch, or a branch you've started from `gh-pages`; `git checkout gh-pages`
+- Copy the copy of the build directory back into the repo at root, e.g. `cp -R ~/tmp/docs/. ./`
+- Commit and push your changes
