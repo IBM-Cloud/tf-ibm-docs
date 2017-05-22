@@ -1,5 +1,8 @@
 <%
-  langing_page_version = "tf-v0.9.3-ibm-provider-v0.2.1"
+  # Hax
+  module StringConstants
+    LANDING_PAGE_VERSION = "tf-v0.9.3-ibm-provider-v0.2.1"
+  end
   # current_page.url will resolve to something like:
   # "tf-v0.9.3-ibm-provider-v0.2.1/r/"
   # get the version to place in the header
@@ -9,16 +12,20 @@
   if directory.index("\/d") != nil or directory.index("\/r") != nil
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/d/
-    version = current_page.url.split('/')[1]
+    if directory.count("\/") == 1
+      version = StringConstants::LANDING_PAGE_VERSION
+    else
+      version = current_page.url.split('/')[1]
+    end
   # top level directory
   elsif current_page.url == "/"
     # /d and /r should exist at the topmost level for the targeted default ver
-    version = langing_page_version
+    version = StringConstants::LANDING_PAGE_VERSION
   # we're in a /<version> directory
   else
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/
-    version = current_page.url.split('/')[1]
+    version = directory.split('/')[1]
   end
 %>
 
