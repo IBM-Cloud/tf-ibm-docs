@@ -11,10 +11,14 @@ PARENT_DIR=$(pwd)
 source config.sh
 
 for release in "${RELEASES[@]}"; do
-  if [ -d "./source/$1" ]; then
-    rm -rf ./source/$1
+  if [ -d "./source/$release" ]; then
+    rm -rf ./source/$release
   fi
 done
+
+if [ -d "./terraform" ]; then
+  rm -rf ./terraform
+fi
 
 if [ -d "./build" ]; then
   rm -rf ./build
