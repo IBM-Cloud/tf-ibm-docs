@@ -41,7 +41,9 @@ From https://github.com/IBM-Bluemix/terraform/releases:
 - First, update the "[Current Release Targets](#current-release-targets)" section of this README.
 - Modify the [`config.sh`](./config.sh) script `RELEASES` array with the new values.
 - Update [`.gitignore`](.gitignore) with the `./source/$VERSION` directory, where `$VERSION` is the value you've added to `config.sh`
-- To change the landing page version (what version Schematics uses) update the `SCHEMATICS_VERSION` variable in [`config.sh`](./config.sh).
+- To change the landing page version (what version Schematics uses):
+  - Update the `SCHEMATICS_VERSION` variable in [`config.sh`](./config.sh)
+  - Update [./source/layouts/topnav.erb](./source/layouts/topnav.erb) update the variable `langing_page_version` at the top of the template.
 - Update `./source/_inject-schematics.md` to indicate which version Schematics is using and is being presented to the user on the landing page.
 
 # Resource Categories in Side Navigation

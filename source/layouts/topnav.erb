@@ -1,3 +1,27 @@
+<%
+  langing_page_version = "tf-v0.9.3-ibm-provider-v0.2.1"
+  # current_page.url will resolve to something like:
+  # "tf-v0.9.3-ibm-provider-v0.2.1/r/"
+  # get the version to place in the header
+  directory = current_page.url[0, current_page.url.rindex("/")]
+  version = nil
+  # we're in a /d or /r directory
+  if directory.index("\/d") != nil or directory.index("\/r") != nil
+    # current_page.url will be similar to:
+    # tf-v0.9.3-ibm-provider-v0.2.1/d/
+    version = current_page.url.split('/')[1]
+  # top level directory
+  elsif current_page.url == "/"
+    # /d and /r should exist at the topmost level for the targeted default ver
+    version = langing_page_version
+  # we're in a /<version> directory
+  else
+    # current_page.url will be similar to:
+    # tf-v0.9.3-ibm-provider-v0.2.1/
+    version = current_page.url.split('/')[1]
+  end
+%>
+
 <nav class="top-block navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -8,6 +32,9 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+      <i class="navbar-brand version-header">
+        VERSION: <%= version %>
+      </i>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
