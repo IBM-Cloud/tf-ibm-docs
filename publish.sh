@@ -6,6 +6,7 @@
 
 set -e
 PARENT_DIR=$(pwd)
+GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 # remove hack for local docs
 if [ -d "./build/tf-ibm-docs" ]; then
@@ -31,7 +32,7 @@ git push
 set -e
 
 # switch back branch
-git checkout master
+git checkout $GIT_BRANCH
 
 # cleanup
 rm -r ~/tmp/docs
