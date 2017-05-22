@@ -16,6 +16,7 @@
   # => version, String, e.g. tf-v0.9.3-ibm-provider-v0.2.1 - EXCEPT in the case
   #        of processing the top level directory, in which case this should be
   #        an empty string
+  # TODO: Make more DRY
   def processDir(target_dir, data_source, version)
     Dir.foreach(target_dir) do |doc|
       # small hack to make version useable for building URLs
