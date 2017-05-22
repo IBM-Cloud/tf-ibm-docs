@@ -24,6 +24,9 @@
       if !version.blank?
         version_url = "/" + version
       end
+      # build url for top level or not
+      d_doc_path = "/d/"
+      r_doc_path = "/r/"
       # directories can contain files other than what we are looking for
       # valid docs will be something like "infra_ssh_key.html.markdown"
       if doc.index(".html") != nil
@@ -31,54 +34,54 @@
         doc_html = doc.sub(".markdown","")
         # get doc name value, e.g. infra_ssh_key
         doc_title = doc_html.sub(".html","")
-        if(data_source)
+        if(data_source == true)
           # if it is a cloud foundry data source
           if doc_title.index("cf_") != nil
             @cf_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           # if it is a container service data source
           elsif doc_title.index("cs_") != nil
             @cs_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           # if it is an infra data source
           elsif doc_title.index("infra_") != nil
             @infra_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           else
             @other_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/d/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
+              '">' + doc_title + '</a>'
             )
           end
         else
           # if it is a cloud foundry resource
           if doc_title.index("cf_") != nil
             @cf_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           # if it is a container service resource
           elsif doc_title.index("cs_") != nil
             @cs_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           # if it is an infra resource
           elsif doc_title.index("infra_") != nil
             @infra_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           else
             @other_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + '/r/' + doc_html +'">' +
-              doc_title + '</a>'
+              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
+                '">' + doc_title + '</a>'
             )
           end
         end
@@ -98,14 +101,24 @@
   if directory.index("\/d") != nil
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/d/
-    version = current_page.url.split('/')[1]
+    # For special condition, such as /d/cf_account.html, do check
+    if directory.count("\/") == 1
+      version = ""
+    else
+      version = current_page.url.split('/')[1]
+    end
     data_target_dir = "source" + directory
     resource_target_dir = "source" + directory[0, directory.rindex("/")] + "/r"
   # we're in a /r directory
   elsif directory.index("\/r") != nil
     # current_page.url will be similar to:
     # tf-v0.9.3-ibm-provider-v0.2.1/r/
-    version = current_page.url.split('/')[1]
+    # For special condition, such as /d/cf_account.html, do check
+    if directory.count("\/") == 1
+      version = ""
+    else
+      version = current_page.url.split('/')[1]
+    end
     resource_target_dir = "source" + directory
     data_target_dir = "source" + directory[0, directory.rindex("/")] + "/d"
   # top level directory
@@ -135,9 +148,9 @@
             Cloud Foundry Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @cf_data_sources.each do |cf_link| %>
+            <% @cf_data_sources.each do |cf_d_link| %>
               <li>
-                <%= cf_link %>
+                <%= cf_d_link %>
               </li>
             <% end %>
           </ul>
@@ -150,9 +163,9 @@
             Container Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @cs_data_sources.each do |cs_link| %>
+            <% @cs_data_sources.each do |cs_d_link| %>
               <li>
-                <%= cs_link %>
+                <%= cs_d_link %>
               </li>
             <% end %>
           </ul>
@@ -165,9 +178,9 @@
             Infrastructure Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @infra_data_sources.each do |infra_link| %>
+            <% @infra_data_sources.each do |infra_d_link| %>
               <li>
-                <%= infra_link %>
+                <%= infra_d_link %>
               </li>
             <% end %>
           </ul>
@@ -180,9 +193,9 @@
             Other Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @other_data_sources.each do |other_link| %>
+            <% @other_data_sources.each do |other_d_link| %>
               <li>
-                <%= other_link %>
+                <%= other_d_link %>
               </li>
             <% end %>
           </ul>
