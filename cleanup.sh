@@ -36,8 +36,8 @@ if [ -d "./source/d" ]; then
   rm -r ./source/d
 fi
 
-if [ -f "./source/index.htmk.markdown" ]; then
-  rm ./source/index.htmk.markdown
+if [ -f "./source/index.html.markdown" ]; then
+  rm ./source/index.html.markdown
 fi
 
 sed '/<!-- REPLACEME -->/q' source/_inject-schematics.md > tmp
