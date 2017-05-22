@@ -17,6 +17,7 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
   - [Publishing the static site](#publishing-the-static-site)
     - [Automatically](#automatically)
     - [Manually](#manually)
+- [Cleanup](#cleanup)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,3 +106,7 @@ To stage changes or simply to publish manually follow these steps:
 - Switch to the `gh-pages` branch, or a branch you've started from `gh-pages`; `git checkout gh-pages`
 - Copy the copy of the build directory back into the repo at root, e.g. `cp -R ~/tmp/docs/. ./`
 - Commit and push your changes
+
+# Cleanup
+
+Each of the scripts cleans up after itself where necessary. However they do leave some artifacts in place for quicker execution on subsequent runs. To insure a fresh and clean build, execute [`cleanup.sh`](./cleanup.sh) prior to execution of `build.sh`.
