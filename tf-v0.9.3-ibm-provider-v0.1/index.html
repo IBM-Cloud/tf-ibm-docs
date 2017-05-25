@@ -283,22 +283,22 @@
 
 <p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
 <pre class="highlight plaintext"><code>    provider "ibmcloud" {
-      bluemix_api_key    = "${var.ibmcloud_bmx_api_key}"
+      bluemix_api_key    = "${var.ibmcloud_bx_api_key}"
       softlayer_username = "${var.ibmcloud_sl_username}"
       softlayer_api_key  = "${var.ibmcloud_sl_api_key}"
     }
 </code></pre>
 
 <p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibmcloud_bmx_api_key {}
+<pre class="highlight plaintext"><code>    variable ibmcloud_bx_api_key {}
     variable ibmcloud_sl_username {}
     variable ibmcloud_sl_api_key {}
 </code></pre>
 
 <p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_bmx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">ibmid_ibmcloud_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_bmcloud_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
 </code></pre></li>
 </ol>
 
