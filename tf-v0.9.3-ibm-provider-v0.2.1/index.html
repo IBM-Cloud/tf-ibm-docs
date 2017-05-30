@@ -24,7 +24,8 @@
   <!-- end _meta.erb -->
 
 <body>
-  <nav class="top-block navbar navbar-inverse">
+  
+<nav class="top-block navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -34,6 +35,9 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+      <i class="navbar-brand version-header">
+        VERSION: tf-v0.9.3-ibm-provider-v0.2.1
+      </i>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -248,27 +252,16 @@
 
 <h2 id="documentation">Documentation</h2>
 
-<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses IBM internal version <code class="prettyprint">ibmcloud-v0.3-beta</code>. Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
+<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses version <code class="prettyprint">tf-v0.9.3-ibm-provider-v0.2.1</code>. Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
 
 <h3 id="versions">Versions</h3>
 
 <!-- REPLACEME -->
 
-<h4 id="internal-schematic-releases">Internal Schematic Releases</h4>
-
 <ul>
-<li><a href="ibmcloud-v0.1-beta">ibmcloud-v0.1-beta</a></li>
-<li><a href="ibmcloud-v0.2-beta">ibmcloud-v0.2-beta</a></li>
-<li><a href="ibmcloud-v0.3-beta">ibmcloud-v0.3-beta</a></li>
-<li><a href="tf-0.9.3-bluemix-api-key">tf-0.9.3-bluemix-api-key</a></li>
-</ul>
-
-<h4 id="publics-releases">Publics Releases</h4>
-
-<ul>
-<li><a href="tf-v0.9.3-ibm-provider-v0.1">tf-v0.9.3-ibm-provider-v0.1</a></li>
-<li><a href="tf-v0.9.3-ibm-provider-v0.2">tf-v0.9.3-ibm-provider-v0.2</a></li>
-<li><a href="tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
+<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.1">tf-v0.9.3-ibm-provider-v0.1</a></li>
+<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2">tf-v0.9.3-ibm-provider-v0.2</a></li>
+<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
 </ul>
 
 <h2 id="developing-locally">Developing locally</h2>
@@ -290,22 +283,22 @@
 
 <p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
 <pre class="highlight plaintext"><code>    provider "ibmcloud" {
-      bluemix_api_key    = "${var.ibmcloud_bmx_api_key}"
+      bluemix_api_key    = "${var.ibmcloud_bx_api_key}"
       softlayer_username = "${var.ibmcloud_sl_username}"
       softlayer_api_key  = "${var.ibmcloud_sl_api_key}"
     }
 </code></pre>
 
 <p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibmcloud_bmx_api_key {}
+<pre class="highlight plaintext"><code>    variable ibmcloud_bx_api_key {}
     variable ibmcloud_sl_username {}
     variable ibmcloud_sl_api_key {}
 </code></pre>
 
 <p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_bmx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">ibmid_ibmcloud_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_bmcloud_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
 </code></pre></li>
 </ol>
 
