@@ -35,6 +35,7 @@ From https://github.com/IBM-Bluemix/terraform/releases:
 - ~~[`tf-v0.9.3-ibm-k8s-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-k8s-v0.1)~~ - This release is not included because it does not contain documentation in `website/source/docs/providers/ibmcloud/`
 - [`tf-v0.9.3-ibm-provider-v0.2`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2)
 - [`tf-v0.9.3-ibm-provider-v0.2.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2.1)
+- [`v0.3-tf-v0.9.3`](https://github.com/IBM-Bluemix/terraform/releases/tag/v0.3-tf-v0.9.3)
 
 # Adding Release Targets
 
@@ -43,8 +44,8 @@ From https://github.com/IBM-Bluemix/terraform/releases:
 - Update [`.gitignore`](.gitignore) with the `./source/$VERSION` directory, where `$VERSION` is the value you've added to `config.sh`
 - To change the landing page version (what version Schematics uses):
   - Update the `SCHEMATICS_VERSION` variable in [`config.sh`](./config.sh)
-  - Update [./source/layouts/topnav.erb](./source/layouts/topnav.erb) variable `LANDING_PAGE_VERSION` at the top of the template.
-- Update `./source/_inject-schematics.md` to indicate which version Schematics is using and is being presented to the user on the landing page.
+  - Update [`./source/layouts/topnav.erb`](./source/layouts/topnav.erb) variable `LANDING_PAGE_VERSION` at the top of the template.
+- Update [`./source/_inject-schematics.md`](./source/_inject-schematics.md) to indicate which version Schematics is using and is being presented to the user on the landing page.
 
 # Resource Categories in Side Navigation
 
