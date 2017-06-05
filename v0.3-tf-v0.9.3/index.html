@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Terraform Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <link href="../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -36,7 +36,7 @@
       </button>
       <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
       <i class="navbar-brand version-header">
-        VERSION: tf-v0.9.3-ibm-provider-v0.2.1
+        VERSION: v0.3-tf-v0.9.3
       </i>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
@@ -68,22 +68,34 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/d/cf_account.html">cf_account</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_account.html">cf_account</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cf_org.html">cf_org</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_app.html">cf_app</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cf_service_instance.html">cf_service_instance</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_org.html">cf_org</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cf_service_key.html">cf_service_key</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_private_domain.html">cf_private_domain</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cf_service_plan.html">cf_service_plan</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_route.html">cf_route</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cf_space.html">cf_space</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_service_instance.html">cf_service_instance</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_service_key.html">cf_service_key</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_service_plan.html">cf_service_plan</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_shared_domain.html">cf_shared_domain</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cf_space.html">cf_space</a>
               </li>
           </ul>
         </li>
@@ -94,13 +106,13 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/d/cs_cluster.html">cs_cluster</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cs_cluster.html">cs_cluster</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cs_cluster_config.html">cs_cluster_config</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cs_cluster_config.html">cs_cluster_config</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/cs_worker.html">cs_worker</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/cs_worker.html">cs_worker</a>
               </li>
           </ul>
         </li>
@@ -111,16 +123,19 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/d/infra_dns_domain.html">infra_dns_domain</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/infra_dns_domain.html">infra_dns_domain</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/infra_image_template.html">infra_image_template</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/infra_image_template.html">infra_image_template</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/infra_ssh_key.html">infra_ssh_key</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/infra_ssh_key.html">infra_ssh_key</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/d/infra_vlan.html">infra_vlan</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/infra_virtual_guest.html">infra_virtual_guest</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/d/infra_vlan.html">infra_vlan</a>
               </li>
           </ul>
         </li>
@@ -131,10 +146,25 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/r/cf_service_instance.html">cf_service_instance</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_app.html">cf_app</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/cf_service_key.html">cf_service_key</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_private_domain.html">cf_private_domain</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_route.html">cf_route</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_service_instance.html">cf_service_instance</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_service_key.html">cf_service_key</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_shared_domain.html">cf_shared_domain</a>
+              </li>
+              <li>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cf_space.html">cf_space</a>
               </li>
           </ul>
         </li>
@@ -145,10 +175,10 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/r/cs_cluster.html">cs_cluster</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cs_cluster.html">cs_cluster</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/cs_cluster_bind_service.html">cs_cluster_bind_service</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/cs_cluster_bind_service.html">cs_cluster_bind_service</a>
               </li>
           </ul>
         </li>
@@ -159,79 +189,79 @@
           </label>
           <ul class="list-unstyled tree">
               <li>
-                <a href="/tf-ibm-docs/r/infra_bare_metal.html">infra_bare_metal</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_bare_metal.html">infra_bare_metal</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_basic_monitor.html">infra_basic_monitor</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_basic_monitor.html">infra_basic_monitor</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_block_storage.html">infra_block_storage</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_block_storage.html">infra_block_storage</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_dns_domain.html">infra_dns_domain</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_dns_domain.html">infra_dns_domain</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_dns_domain_record.html">infra_dns_domain_record</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_dns_domain_record.html">infra_dns_domain_record</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_file_storage.html">infra_file_storage</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_file_storage.html">infra_file_storage</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated.html">infra_fw_hardware_dedicated</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_fw_hardware_dedicated.html">infra_fw_hardware_dedicated</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_fw_hardware_dedicated_rules.html">infra_fw_hardware_dedicated_rules</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_fw_hardware_dedicated_rules.html">infra_fw_hardware_dedicated_rules</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_global_ip.html">infra_global_ip</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_global_ip.html">infra_global_ip</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_local.html">infra_lb_local</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_local.html">infra_lb_local</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_local_service.html">infra_lb_local_service</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_local_service.html">infra_lb_local_service</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_local_service_group.html">infra_lb_local_service_group</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_local_service_group.html">infra_lb_local_service_group</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_vpx.html">infra_lb_vpx</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_vpx.html">infra_lb_vpx</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_vpx_ha.html">infra_lb_vpx_ha</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_vpx_ha.html">infra_lb_vpx_ha</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_vpx_service.html">infra_lb_vpx_service</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_vpx_service.html">infra_lb_vpx_service</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_lb_vpx_vip.html">infra_lb_vpx_vip</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_lb_vpx_vip.html">infra_lb_vpx_vip</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_objectstorage_account.html">infra_objectstorage_account</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_objectstorage_account.html">infra_objectstorage_account</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_provisioning_hook.html">infra_provisioning_hook</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_provisioning_hook.html">infra_provisioning_hook</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_scale_group.html">infra_scale_group</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_scale_group.html">infra_scale_group</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_scale_policy.html">infra_scale_policy</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_scale_policy.html">infra_scale_policy</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_security_certificate.html">infra_security_certificate</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_security_certificate.html">infra_security_certificate</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_ssh_key.html">infra_ssh_key</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_ssh_key.html">infra_ssh_key</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_user.html">infra_user</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_user.html">infra_user</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_virtual_guest.html">infra_virtual_guest</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_virtual_guest.html">infra_virtual_guest</a>
               </li>
               <li>
-                <a href="/tf-ibm-docs/r/infra_vlan.html">infra_vlan</a>
+                <a href="/tf-ibm-docs/v0.3-tf-v0.9.3/r/infra_vlan.html">infra_vlan</a>
               </li>
           </ul>
         </li>
@@ -265,6 +295,44 @@
 <li><a href="/tf-ibm-docs/v0.3-tf-v0.9.3">v0.3-tf-v0.9.3</a></li>
 </ul>
 
+<h2 id="developing-locally">Developing locally</h2>
+
+<p>If you want to develop locally on your system, complete the following steps:</p>
+
+<ol>
+<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p><a href="https://github.com/IBM-Bluemix/terraform/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the Terraform binary.</p>
+
+<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibmcloud</code> is the route to the directory.</p>
+<pre class="highlight plaintext"><code>    # ~/.terraformrc
+    providers {
+        ibmcloud = "/opt/provider/terraform-provider-ibmcloud"
+    }
+</code></pre></li>
+<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
+
+<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
+<pre class="highlight plaintext"><code>    provider "ibmcloud" {
+      bluemix_api_key    = "${var.ibmcloud_bx_api_key}"
+      softlayer_username = "${var.ibmcloud_sl_username}"
+      softlayer_api_key  = "${var.ibmcloud_sl_api_key}"
+    }
+</code></pre>
+
+<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
+<pre class="highlight plaintext"><code>    variable ibmcloud_bx_api_key {}
+    variable ibmcloud_sl_username {}
+    variable ibmcloud_sl_api_key {}
+</code></pre>
+
+<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
+<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibmcloud_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+</code></pre></li>
+</ol>
+
 <h2 id="example-usage">Example Usage</h2>
 <pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
 provider "ibmcloud" {
@@ -282,7 +350,7 @@ resource "ibmcloud_infra_ssh_key" "test_key_1" {
   # public_key = "${file(\"C:\ssh\keys\path\id_rsa_test_key_1.pub\")}"
 }
 
-# Virtual server created with above ssh key
+# Create a virtual server with the SSH key.
 resource "ibmcloud_infra_virtual_guest" "my_server_2" {
   hostname          = "host-b.example.com"
   domain            = "example.com"
@@ -300,7 +368,7 @@ data "ibmcloud_cf_space" "space" {
   org   = "${var.org}"
 }
 
-# Create Cloud Foundry Service Instance
+# Create an instance of a Cloud Foundry service.
 resource "ibmcloud_cf_service_instance" "service" {
   name       = "${var.instance_name}"
   space_guid = "${data.ibmcloud_cf_space.space.id}"
@@ -321,7 +389,7 @@ resource "ibmcloud_cf_service_instance" "service" {
 
 <h3 id="static-credentials">Static credentials</h3>
 
-<p>Static credentials can be provided by adding an <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, <code class="prettyprint">softlayer_api_key</code> in-line in the IBM Cloud provider block:</p>
+<p>Static credentials can be provided by adding an <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, <code class="prettyprint">softlayer_api_key</code> in the IBM Cloud provider block.</p>
 
 <p>Usage:</p>
 <pre class="highlight plaintext"><code>provider "ibmcloud" {
@@ -334,7 +402,7 @@ resource "ibmcloud_cf_service_instance" "service" {
 
 <h3 id="environment-variables">Environment variables</h3>
 
-<p>You can provide your credentials via the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code> and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API Key, SoftLayer Username and SoftLayer API Key respectively.  </p>
+<p>You can provide your credentials with the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
 <pre class="highlight plaintext"><code>provider "ibmcloud" {}
 </code></pre>
 
@@ -345,29 +413,17 @@ $ export SL_API_KEY="sl_api_key"
 $ terraform plan
 </code></pre>
 
-<h3 id="skip-service-configuration">Skip Service Configuration</h3>
-
-<p>See <code class="prettyprint">skip_service_configuration</code> in the Argument Reference below.</p>
-
-<p>The below configuration will direct the provider to not configure the softlayer client and hence
-not complain if softlayer_username and softlayer_api_key are missing in the provider.</p>
-<pre class="highlight plaintext"><code>provider "ibmcloud" {
-    skip_service_configuration = ["softlayer"]
-}
-</code></pre>
-
 <h2 id="argument-reference">Argument Reference</h2>
 
 <p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (Optional) The Bluemix API Key. It must be provided, but it can also be sourced from the <code class="prettyprint">BM_API_KEY</code> or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The former variable has higher precedence. </p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">BM_TIMEOUT</code>  or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
+<li><p><code class="prettyprint">bluemix_api_key</code> - (Optional) The Bluemix API key. It must be provided, but it can also be sourced from the <code class="prettyprint">BM_API_KEY</code> or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibmcloud_cf</code> or <code class="prettyprint">ibmcloud_cs</code>.</p></li>
+<li><p><code class="prettyprint">bluemix_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">BM_TIMEOUT</code> or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
 <li><p><code class="prettyprint">softlayer_username</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_USERNAME</code> or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable. The former variable has higher precedence. </p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_API_KEY</code> or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The former variable has higher precedence. </p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">SL_TIMEOUT</code>  or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
+<li><p><code class="prettyprint">softlayer_api_key</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_API_KEY</code> or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibmcloud_infra</code>.</p></li>
+<li><p><code class="prettyprint">softlayer_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">SL_TIMEOUT</code> or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
 <li><p><code class="prettyprint">region</code> - (Optional) The Bluemix region. It can also be sourced from the <code class="prettyprint">BM_REGION</code> or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">us-south</code>.</p></li>
-<li><p><code class="prettyprint">skip_service_configuration</code> - (Optional, Set) The options allows one to skip configuring the provider for IBM Cloud services which the user may not create. Supported values are - <code class="prettyprint">bluemix</code>, <code class="prettyprint">softlayer</code> and <code class="prettyprint">cluster</code>. This is useful  when a user has credentials for only a particular service for example SoftLayer. In that case provider will not complain about the absence of <code class="prettyprint">bluemix_api_key</code>.</p></li>
 </ul>
 
       </div>
@@ -395,6 +451,6 @@ not complain if softlayer_username and softlayer_api_key are missing in the prov
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../javascript/sidemenu.js"></script>
 </body>
 </html>
