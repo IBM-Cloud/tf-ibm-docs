@@ -10,6 +10,12 @@ PARENT_DIR=$(pwd)
 # Gets configuration for scripts; versions, repo, search strings, etc
 source config.sh
 
+for release in "${LEGACYRELEASES[@]}"; do
+  if [ -d "./source/$release" ]; then
+    rm -rf ./source/$release
+  fi
+done
+
 for release in "${RELEASES[@]}"; do
   if [ -d "./source/$release" ]; then
     rm -rf ./source/$release

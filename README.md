@@ -29,6 +29,13 @@ To provide an alternative theme for the [IBM Terraform fork](https://github.com/
 
 The documentation landing page (what is shown when you https://ibm-bluemix.github.io/tf-ibm-docs/) presents the documentation for whatever version that Schematics is currently using. This is controlled in the [`.config.sh`](./config.sh) file via `SCHEMATICS_VERSION`.
 
+*NB: With the `0.4.0` release of the IBM Cloud Provider development is being done in a different GitHub repository.*
+
+From https://github.com/IBM-Bluemix/terraform-provider-ibm
+
+- [`v0.4.0`]
+(https://github.com/IBM-Bluemix/terraform-provider-ibm/releases/tag/v0.4.0)
+
 From https://github.com/IBM-Bluemix/terraform/releases:
 
 - [`tf-v0.9.3-ibm-provider-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.1)
