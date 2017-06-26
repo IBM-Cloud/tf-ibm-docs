@@ -9,12 +9,12 @@ If you want to develop locally on your system, complete the following steps:
 
 3. Create a `.terraformrc` file that points to the Terraform binary.
 
-    In the following example, `/opt/provider/terraform-provider-ibmcloud` is the route to the directory.
+    In the following example, `/opt/provider/terraform-provider-ibm` is the route to the directory.
 
       ```
         # ~/.terraformrc
         providers {
-            ibmcloud = "/opt/provider/terraform-provider-ibmcloud"
+            ibm = "/opt/provider/terraform-provider-ibm"
         }
       ```
 
@@ -23,25 +23,25 @@ If you want to develop locally on your system, complete the following steps:
     To provide your credentials as environment variables, you can use the following code in your `.tf` file.
 
       ```hcl
-        provider "ibmcloud" {
-          bluemix_api_key    = "${var.ibmcloud_bx_api_key}"
-          softlayer_username = "${var.ibmcloud_sl_username}"
-          softlayer_api_key  = "${var.ibmcloud_sl_api_key}"
+        provider "ibm" {
+          bluemix_api_key    = "${var.ibm_bx_api_key}"
+          softlayer_username = "${var.ibm_sl_username}"
+          softlayer_api_key  = "${var.ibm_sl_api_key}"
         }
       ```
 
     Be sure to also define these variables in your `.tf` files:
 
       ```hcl
-        variable ibmcloud_bx_api_key {}
-        variable ibmcloud_sl_username {}
-        variable ibmcloud_sl_api_key {}
+        variable ibm_bx_api_key {}
+        variable ibm_sl_username {}
+        variable ibm_sl_api_key {}
       ```
 
     You can then export your credentials in your terminal, where `$VALUE` is your credential.
 
       ```bash
-        export TF_VAR_ibmcloud_bx_api_key="$VALUE"
-        export TF_VAR_ibmcloud_sl_username="$VALUE"
-        export TF_VAR_ibmcloud_sl_api_key="$VALUE"
+        export TF_VAR_ibm_bx_api_key="$VALUE"
+        export TF_VAR_ibm_sl_username="$VALUE"
+        export TF_VAR_ibm_sl_api_key="$VALUE"
       ```
