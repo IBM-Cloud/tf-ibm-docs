@@ -149,7 +149,7 @@ for release in "${RELEASES[@]}"; do
 done
 
 # 3. get the version of the docs that the schematic service is using
-getschematicsdocs $LEGACYREPO "website/source/docs/providers/ibmcloud/*"
+getschematicsdocs $REPO "website/docs/*"
 
 # build with middleman
 bundle install
