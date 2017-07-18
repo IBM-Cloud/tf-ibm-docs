@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <link href="../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -281,118 +281,61 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_lb_vpx_ha">ibm_lb_vpx_ha</h1>
 
-<p>The IBM Cloud provider is used to manage IBM Cloud resources. The provider needs to be configured with the proper credentials before it can be used.</p>
+<p>Configure a high availability pair with two NetScaler VPX devices. The two NetScaler VPXs need to have a version 10.5 and be located in the same subnet. A primary NetScaler VPX provides load balancing services in active mode and a secondary NetScaler VPX provides the services when the primary NetScaler VPX fails. For additional details, please refer to  <a href="https://support.citrix.com/article/CTX116748">Citrix support docs</a> and <a href="http://knowledgelayer.softlayer.com/articles/netscaler-vpx-10-high-availability-setup">the KnowledgeLayer NetScaler docs</a>. </p>
 
-<p>Use the navigation menu on the left to read about the available resources.</p>
+<p><strong>NOTE</strong>: This resource only supports NetScaler VPX 10.5. The <a href="https://docs.citrix.com/en-us/netscaler/11/nitro-api.html">NITRO API</a> is used to configure HA. The NITRO API is only accessible in the Bluemix Infrastructure (SoftLayer) private network, so you need to be connected to the private network when running Terraform. You can also use the <a href="http://www.softlayer.com/VPN-Access">SSL VPN</a> to access a private network connection. </p>
 
-<h2 id="documentation">Documentation</h2>
-
-<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses version <code class="prettyprint">v0.4.0</code>. Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
-
-<h3 id="versions">Versions</h3>
-
-<!-- REPLACEME -->
-
-<ul>
-<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2">tf-v0.9.3-ibm-provider-v0.2</a></li>
-<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
-<li><a href="/tf-ibm-docs/v0.3-tf-v0.9.3">v0.3-tf-v0.9.3</a></li>
-<li><a href="/tf-ibm-docs/v0.4.0">v0.4.0</a></li>
-</ul>
+<p>The two NetScaler VPXs use the same password in high availability mode. Once this resource is created, Terraform changes the password of the secondary NetScaler VPX to the password of the primary NetScaler VPX. If this resource is destroyed, Terraform will restore the password of the secondary NetScaler VPX. </p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+<pre class="highlight plaintext"><code># Create a primary NetScaler VPX.
+resource "ibm_lb_vpx" "test_pri" {
+    datacenter = "lon02"
+    speed = 10
+    version = "10.5"
+    plan = "Standard"
+    ip_count = 2
 }
 
-# Create an SSH key. The SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys.
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${file(\"~/.ssh/id_rsa_test_key_1.pub\")}"
-
-  # Windows example:
-  # public_key = "${file(\"C:\ssh\keys\path\id_rsa_test_key_1.pub\")}"
+# Create a secondary NetScaler VPX in the same subnets.
+resource "ibm_lb_vpx" "test_sec" {
+    datacenter = "lon02"
+    speed = 10
+    version = "10.5"
+    plan = "Standard"
+    ip_count = 2
+    public_vlan_id = "${ibm_lb_vpx.test_pri.public_vlan_id}"
+    private_vlan_id = "${ibm_lb_vpx.test_pri.private_vlan_id}"
+    public_subnet = "${ibm_lb_vpx.test_pri.public_subnet}"
+    private_subnet = "${ibm_lb_vpx.test_pri.private_subnet}"
 }
 
-# Create a virtual server with the SSH key.
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_keys          = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
+# Configure high availability with the primary and secondary NetScaler VPXs
+resource "ibm_lb_vpx_ha" "test_ha" {
+    primary_id = "${ibm_lb_vpx.test_pri.id}"
+    secondary_id = "${ibm_lb_vpx.test_sec.id}"
+    stay_secondary = false
 }
-
-# Read details of IBM Bluemix Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of a IBM service.
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-</code></pre>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>Static credentials can be provided by adding an <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, <code class="prettyprint">softlayer_api_key</code> in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials with the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (Optional) The Bluemix API key. It must be provided, but it can also be sourced from the <code class="prettyprint">BM_API_KEY</code> or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">BM_TIMEOUT</code> or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_USERNAME</code> or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable. The former variable has higher precedence. </p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_API_KEY</code> or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">SL_TIMEOUT</code> or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (Optional) The Bluemix region. It can also be sourced from the <code class="prettyprint">BM_REGION</code> or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">primary_id</code> - (Required, string) The unique identifier of the primary NetScaler VPX.</li>
+<li><code class="prettyprint">secondary_id</code> - (Required, string) The unique identifier of the secondary NetScaler VPX.</li>
+<li><code class="prettyprint">stay_secondary</code> - (Optional, boolean) If this argument is set to <code class="prettyprint">true</code>, the secondary NetScaler VPX will not take over the service, even if the primary NetScaler VPX fails. For additional details, see the <a href="https://docs.citrix.com/en-us/netscaler/10-5/ns-system-wrapper-10-con/ns-nw-ha-intro-wrppr-con/ns-nw-ha-frcng-scndry-nd-sty-scndry-tsk.html">Citrix NetScaler docs</a> and the <a href="https://support.citrix.com/article/CTX116748">Citrix support docs</a>. Default value: <code class="prettyprint">false</code>.</li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the high availability NetScale VPX pair.</li>
 </ul>
 
       </div>
@@ -420,6 +363,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../javascript/sidemenu.js"></script>
 </body>
 </html>

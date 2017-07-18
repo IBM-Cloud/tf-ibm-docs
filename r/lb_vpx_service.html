@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <link href="../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -281,118 +281,48 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_lb_vpx_service">ibm_lb_vpx_service</h1>
 
-<p>The IBM Cloud provider is used to manage IBM Cloud resources. The provider needs to be configured with the proper credentials before it can be used.</p>
+<p>Create, update, and delete VPX load balancer services. For additional details, see the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">Bluemix Infrastructure (SoftLayer) API docs</a>.</p>
 
-<p>Use the navigation menu on the left to read about the available resources.</p>
-
-<h2 id="documentation">Documentation</h2>
-
-<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses version <code class="prettyprint">v0.4.0</code>. Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
-
-<h3 id="versions">Versions</h3>
-
-<!-- REPLACEME -->
-
-<ul>
-<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2">tf-v0.9.3-ibm-provider-v0.2</a></li>
-<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
-<li><a href="/tf-ibm-docs/v0.3-tf-v0.9.3">v0.3-tf-v0.9.3</a></li>
-<li><a href="/tf-ibm-docs/v0.4.0">v0.4.0</a></li>
-</ul>
+<p><strong>NOTE</strong>: If NetScaler VPX 10.5 is used, Terraform uses NetScaler&rsquo;s <a href="https://docs.citrix.com/en-us/netscaler/11/nitro-api.html">NITRO REST API</a>) to manage the resource. The NITRO API is only accessible in the Bluemix Infrastructure (SoftLayer) private network, so you need to be connected to the private network when running Terraform. You can also use the <a href="http://www.softlayer.com/VPN-Access">SSL VPN</a> to access a private network connection.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+
+<p>Create a VPX load balancer:</p>
+<pre class="highlight plaintext"><code>resource "ibm_lb_vpx_service" "test_service" {
+  name = "test_load_balancer_service"
+  vip_id = "${ibm_lb_vpx_vip.testacc_vip.id}"
+  destination_ip_address = "${ibm_compute_vm_instance.test_server.ipv4_address}"
+  destination_port = 80
+  weight = 55
+  connection_limit = 5000
+  health_check = "HTTP"
 }
-
-# Create an SSH key. The SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys.
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${file(\"~/.ssh/id_rsa_test_key_1.pub\")}"
-
-  # Windows example:
-  # public_key = "${file(\"C:\ssh\keys\path\id_rsa_test_key_1.pub\")}"
-}
-
-# Create a virtual server with the SSH key.
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_keys          = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Read details of IBM Bluemix Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of a IBM service.
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-</code></pre>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>Static credentials can be provided by adding an <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, <code class="prettyprint">softlayer_api_key</code> in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials with the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (Optional) The Bluemix API key. It must be provided, but it can also be sourced from the <code class="prettyprint">BM_API_KEY</code> or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">BM_TIMEOUT</code> or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_USERNAME</code> or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable. The former variable has higher precedence. </p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (Optional) The SoftLayer user name. It must be provided, but it can also be sourced from the <code class="prettyprint">SL_API_KEY</code> or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The former variable has higher precedence. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (Optional) The timeout, expressed in seconds, for the SoftLayer API key. It can also be sourced from the <code class="prettyprint">SL_TIMEOUT</code> or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (Optional) The Bluemix region. It can also be sourced from the <code class="prettyprint">BM_REGION</code> or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The former variable has higher precedence. Default value: <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">name</code> - (Required, string) The unique identifier for the VPX load balancer service.</li>
+<li><code class="prettyprint">vip_id</code> - (Required, string) The ID of the VPX load balancer virtual IP address that the service is assigned to.</li>
+<li><code class="prettyprint">destination_ip_address</code> - (Required, string) The IP address of the server that traffic is directed to. If NetScaler VPX 10.1 is used, you need to indicate a public IP address in a Bluemix Infrastructure (SoftLayer) account. If NetScaler VPX 10.5 is used, you can use any IP address.</li>
+<li><code class="prettyprint">destination_port</code> - (Required, integer) The destination port of the server that traffic is be directed to.</li>
+<li><p><code class="prettyprint">weight</code> - (Required, integer) The percentage of the total connection limit allocated to the load balancer between all your services. See the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">Bluemix Infrastructure (SoftLayer) API docs</a> for details. </p>
+
+<p><strong>NOTE</strong>: In VPX 10.5, the weight value is ignored. </p></li>
+<li><p><code class="prettyprint">connection_limit</code> - (Required, integer) The connection limit for this service. Acceptable values are <code class="prettyprint">0</code> ~ <code class="prettyprint">4294967294</code>. See the <a href="https://docs.citrix.com/en-us/netscaler/11/reference/netscaler-command-reference/basic/service.html">Citrix NetScaler docs</a> for details.</p></li>
+<li><p><code class="prettyprint">health_check</code> - (Required, string) Set the health check type. See the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_LoadBalancer_Service">Bluemix Infrastructure (SoftLayer) API docs</a> for details.</p></li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the VPX load balancer service.</li>
 </ul>
 
       </div>
@@ -420,6 +350,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../javascript/sidemenu.js"></script>
 </body>
 </html>
