@@ -2,7 +2,7 @@
 LEGACYRELEASES=( \
   #"tf-v0.9.3-ibm-provider-v0.1" \
   #"tf-v0.9.3-ibm-k8s-v0.1" \
-  "tf-v0.9.3-ibm-provider-v0.2" \
+  #"tf-v0.9.3-ibm-provider-v0.2" \
   "tf-v0.9.3-ibm-provider-v0.2.1" \
   "v0.3-tf-v0.9.3" \
 )
