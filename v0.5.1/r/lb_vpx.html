@@ -1,0 +1,370 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Provider for Terraform(tm) documentation">
+    <title>
+      IBM Cloud Provider for Terraform(tm) Documentation
+    </title>
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <!-- these were in footer_scripts.html but need to load early or refactor -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <!-- end _meta.erb -->
+
+<body>
+  
+<nav class="top-block navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+      <i class="navbar-brand version-header">
+        VERSION: v0.5.1
+      </i>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+  <div class="sidebar-content">
+    <ul class="list-unstyled">
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Cloud Foundry Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+            <a href="/tf-ibm-docs/v0.5.1/d/account.html">account</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/app.html">app</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/app_domain_private.html">app_domain_private</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/app_domain_shared.html">app_domain_shared</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/app_route.html">app_route</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/org.html">org</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/service_instance.html">service_instance</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/service_key.html">service_key</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/service_plan.html">service_plan</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/space.html">space</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Container Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/container_cluster.html">container_cluster</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/container_cluster_config.html">container_cluster_config</a>
+          </li>
+          <li>
+            <a href="/tf-ibm-docs/v0.5.1/d/container_cluster_worker.html">container_cluster_worker</a>
+          </li>
+      </ul>
+        </li>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Infrastructure Data Sources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/compute_image_template.html">compute_image_template</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/compute_ssh_key.html">compute_ssh_key</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/compute_vm_instance.html">compute_vm_instance</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/dns_domain.html">dns_domain</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/lbaas.html">lbaas</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/d/network_vlan.html">network_vlan</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Cloud Foundry Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/app.html">app</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/app_domain_private.html">app_domain_private</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/app_domain_shared.html">app_domain_shared</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/app_route.html">app_route</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/service_instance.html">service_instance</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/service_key.html">service_key</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/space.html">space</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Container Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/container_bind_service.html">container_bind_service</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/container_cluster.html">container_cluster</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            Infrastructure Resources
+          </label>
+          <ul class="list-unstyled tree">
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_autoscale_group.html">compute_autoscale_group</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_bare_metal.html">compute_bare_metal</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_monitor.html">compute_monitor</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_ssh_key.html">compute_ssh_key</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_user.html">compute_user</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/compute_vm_instance.html">compute_vm_instance</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/dns_domain.html">dns_domain</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/dns_record.html">dns_record</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/firewall.html">firewall</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/firewall_policy.html">firewall_policy</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb.html">lb</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lbaas.html">lbaas</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_service.html">lb_service</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_service_group.html">lb_service_group</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_vpx.html">lb_vpx</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_vpx_ha.html">lb_vpx_ha</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_vpx_service.html">lb_vpx_service</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/lb_vpx_vip.html">lb_vpx_vip</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/network_public_ip.html">network_public_ip</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/network_vlan.html">network_vlan</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/object_storage_account.html">object_storage_account</a>
+            </li>    
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/storage_block.html">storage_block</a>
+            </li>                        
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/storage_file.html">storage_file</a>
+            </li>
+            <li>
+              <a href="/tf-ibm-docs/v0.5.1/r/subnet.html">subnet</a>
+            </li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+</div>
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+  <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
+
+
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <h1 id="ibm_lb_vpx">ibm_lb_vpx</h1>
+
+<p>Provides a resource for VPX load balancers. This allows VPX load balancers to be created, updated, and deleted.</p>
+
+<p><strong>NOTE</strong>: IBM VPX load balancers consist of Citrix NetScaler VPX devices (virtual), which are currently priced on a per-month basis. Use caution when creating the resource because the cost for an entire month is incurred immediately upon creation. For more information about pricing, see the <a href="http://www.softlayer.com/network-appliances">network appliance docs</a>. Under the Citrix log, click <strong>See more pricing</strong> for a current price matrix.</p>
+
+<p>You can also use the following REST URL to get a listing of VPX choices along with version numbers, speed, and plan type:</p>
+<pre class="highlight plaintext"><code>https://&lt;userName&gt;:&lt;apiKey&gt;@api.softlayer.com/rest/v3/SoftLayer_Product_Package/192/getItems.json?objectMask=id;capacity;description;units;keyName;prices.id;prices.categories.id;prices.categories.name
+</code></pre>
+
+<h2 id="example-usage">Example Usage</h2>
+
+<p>Review the [Bluemix Infrastructure (SoftLayer) docs]((<a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_Application_Delivery_Controller">http://sldn.softlayer.com/reference/datatypes/SoftLayer_Network_Application_Delivery_Controller</a>) for more information.</p>
+<pre class="highlight plaintext"><code>resource "ibm_lb_vpx" "test_vpx" {
+    datacenter = "dal06"
+    speed = 10
+    version = "10.1"
+    plan = "Standard"
+    ip_count = 2
+    public_vlan_id = 1251234
+    private_vlan_id = 1540786
+    public_subnet = "23.246.226.248/29"
+    private_subnet = "10.107.180.0/26"
+}
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<p>The following arguments are supported:</p>
+
+<ul>
+<li><code class="prettyprint">datacenter</code> - (Required, string) The data center in which you want to provision the VPX load balancer. You can find accepted values in the <a href="http://www.softlayer.com/data-centers">data center docs</a>.</li>
+<li><code class="prettyprint">speed</code> - (Required, integer) The speed, expressed in Mbps. Accepted values are <code class="prettyprint">10</code>, <code class="prettyprint">200</code>, and <code class="prettyprint">1000</code>.</li>
+<li><code class="prettyprint">version</code> - (Required, string) The VPX load balancer version. Accepted values are <code class="prettyprint">10.1</code> and <code class="prettyprint">10.5</code>.</li>
+<li><code class="prettyprint">plan</code> - (Required, string) The VPX load balancer plan. Accepted values are <code class="prettyprint">Standard</code> and <code class="prettyprint">Platinum</code>.</li>
+<li><code class="prettyprint">ip_count</code> - (Required, integer) The number of static public IP addresses assigned to the VPX load balancer. Accepted values are <code class="prettyprint">2</code>, <code class="prettyprint">4</code>, <code class="prettyprint">8</code>, and <code class="prettyprint">16</code>.</li>
+<li><code class="prettyprint">public_vlan_id</code> - (Optional, integer) The public VLAN ID that is used for the public network interface of the VPX load balancer. You can find accepted values in the <a href="https://control.softlayer.com/network/vlans">VLAN docs</a> by clicking the desired VLAN and noting the ID in the resulting URL. You can also <a href="/v0.5.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.</li>
+<li><code class="prettyprint">private_vlan_id</code> - (Optional, integer) The private VLAN ID that is used for the private network interface of the VPX load balancer. You can find accepted values in the <a href="https://control.softlayer.com/network/vlans">VLAN docs</a> by clicking the desired VLAN and noting the ID in the resulting URL. You can also <a href="/v0.5.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.</li>
+<li><code class="prettyprint">public_subnet</code> - (Optional, string) The public subnet that is used for the public network interface of the VPX load balancer. Accepted values are primary public networks. You can find accepted values in the <a href="https://control.softlayer.com/network/subnets">subnet docs</a>.</li>
+<li><code class="prettyprint">private_subnet</code> - (Optional, string) Public subnet that is used for the private network interface of the VPX load balancer. Accepted values are primary private networks. You can find accepted values in the <a href="https://control.softlayer.com/network/subnets">subnet docs</a>.</li>
+<li><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the VPX load balancer instance.
+<strong>NOTE</strong>: <code class="prettyprint">Tags</code> are managed locally and not stored on the IBM Cloud service endpoint at this moment.</li>
+</ul>
+
+<h2 id="attribute-reference">Attribute Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The internal identifier of a VPX load balancer</li>
+<li><code class="prettyprint">name</code> - The internal name of a VPX load balancer.</li>
+<li><code class="prettyprint">vip_pool</code> - A list of virtual IP addresses for the VPX load balancer.</li>
+<li><code class="prettyprint">management_ip_address</code> - The private address of the VPX UI.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="col-md-9">
+      <ul class="list-inline social-list">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>
+            GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      IBM Cloud Provider for Terraform&trade;
+    </div>
+  </div>
+</footer>
+
+  <script src="../../javascript/sidemenu.js"></script>
+</body>
+</html>

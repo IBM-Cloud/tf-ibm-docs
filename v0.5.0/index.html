@@ -298,7 +298,7 @@
 
 <h2 id="example-usage">Example Usage</h2>
 <pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
+provider "ibm5" {
   bluemix_api_key    = "${var.ibm_bmx_api_key}"
   softlayer_username = "${var.ibm_sl_username}"
   softlayer_api_key  = "${var.ibm_sl_api_key}"
@@ -352,7 +352,7 @@ resource "ibm_service_instance" "service" {
 <p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
 
 <p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
+<pre class="highlight plaintext"><code>provider "ibm5" {
     bluemix_api_key = ""
     softlayer_username = ""
     softlayer_api_key = ""
@@ -363,7 +363,7 @@ resource "ibm_service_instance" "service" {
 <h3 id="environment-variables">Environment variables</h3>
 
 <p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
+<pre class="highlight plaintext"><code>provider "ibm5" {}
 </code></pre>
 
 <p>Usage:</p>
