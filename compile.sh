@@ -19,9 +19,9 @@ function addtoindex() {
   cat ../$INJECT >> ../_inject-new.md
   # TODO: Kelner - this can be fraught with failure if the text changes, and
   # will fail to inject the extra content
-  sed "/$INJECT_STRING./r./../_inject-new.md" index.html.markdown > tmp
+  sed "/$INJECT_STRING./r./../_inject-new.md/" index.html.markdown > tmp
   mv tmp index.html.markdown
-  rm ../_inject-new.md
+  #rm ../_inject-new.md
 }
 
 function buildversionlist_legacy() {
@@ -143,7 +143,7 @@ for release in "${LEGACYRELEASES[@]}"; do
 done
 
 # process the current releases
-INJECT="_inject-v0.4.md"
+INJECT="_inject-runlocally.md"
 for release in "${RELEASES[@]}"; do
   getdocs $release $REPO "website/docs/*"
 done
@@ -151,8 +151,20 @@ done
 # 3. get the version of the docs that the schematic service is using
 getschematicsdocs $REPO "website/docs/*"
 
-echo ">>>>"
-echo ">>>> Source files pulled. TODO - patch releases after 0.40 with correct sidebar"
-echo "You might need to run `find . -name "*.markdown" -exec sed -i '' -e 's/\"ibm\"/"ibm5"/g' {} \; ` to clean up all the data and resource file layout specs"
-echo ">>>>"
+cd $PARENT_DIR
+cd ./source/v0.5.1
+find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm5"/layout: "ibm5.1"/g' {} \;
+
+cd $PARENT_DIR
+cd ./source/v0.4.0
+find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm5"/layout: "ibm"/g' {} \;
+
+cd $PARENT_DIR
+cd ./source/d
+find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm"/layout: "ibm5"/g' {} \;
+
+cd $PARENT_DIR
+cd ./source/r
+find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm"/layout: "ibm5"/g' {} \;
+
 exit 0

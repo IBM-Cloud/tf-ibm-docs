@@ -1,7 +1,7 @@
 
-## Developing locally using the IBM Cloud Provider v0.4.x
+## Using Terraform with the IBM Cloud Provider
 
-If you want to develop locally on your system, complete the following steps:
+If you want to run terraform locally on your system, complete the following steps:
 
 1. <a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a>
 
