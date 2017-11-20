@@ -24,8 +24,7 @@
   <!-- end _meta.erb -->
 
 <body>
-  
-<nav class="top-block navbar navbar-inverse">
+  <nav class="top-block navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -296,61 +295,22 @@
 
 <p>Use the navigation menu on the left to read about the available data sources and resources.</p>
 
-<h2 id="documentation">Documentation</h2>
+<h2 id="ibm-cloud-schematics">IBM Cloud Schematics</h2>
 
-<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses version <code class="prettyprint">v0.5.0</code>. Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
+<p>The documentation presented here is the latest for the <a href="https://console.ng.bluemix.net/docs/services/schematics/index.html">IBM Cloud Schematics</a> service. At this time Schematics uses version <code class="prettyprint">v0.5.0</code> of the IBM Cloud Provider. </p>
 
-<p>If you are interested in using the provider with base Terraform see the &ldquo;Using Terraform with the IBM Cloud Provider&rdquo; section below.</p>
+<p>Newer versions may be available for use locally. Please see the available versions of the documentation below.</p>
+
+<p>If you are interested in using the provider with base Terraform see the <a href="#Using_Terraform_with_the_IBM_Cloud_Provider">Using Terraform with the IBM Cloud Provider</a> section below.</p>
 
 <h3 id="versions">Versions</h3>
 
-<!-- REPLACEME -->
-
 <ul>
-<li><a href="/tf-ibm-docs/v0.3-tf-v0.9.3">v0.3-tf-v0.9.3</a></li>
-<li><a href="/tf-ibm-docs/tf-v0.9.3-ibm-provider-v0.2.1">tf-v0.9.3-ibm-provider-v0.2.1</a></li>
 <li><a href="/tf-ibm-docs/v0.4.0">v0.4.0</a></li>
 <li><a href="/tf-ibm-docs/v0.5.0">v0.5.0</a></li>
 <li><a href="/tf-ibm-docs/v0.5.1">v0.5.1</a></li>
+<li><a href="/tf-ibm-docs/v0.6.0">v0.6.0</a></li>
 </ul>
-
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
-
-<p>If you want to run terraform locally on your system, complete the following steps:</p>
-
-<ol>
-<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p><a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the Terraform binary.</p>
-
-<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibm</code> is the route to the directory.</p>
-<pre class="highlight plaintext"><code>    # ~/.terraformrc
-    providers {
-        ibm = "/opt/provider/terraform-provider-ibm"
-    }
-</code></pre></li>
-<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
-
-<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
-<pre class="highlight plaintext"><code>    provider "ibm" {
-      bluemix_api_key    = "${var.ibm_bx_api_key}"
-      softlayer_username = "${var.ibm_sl_username}"
-      softlayer_api_key  = "${var.ibm_sl_api_key}"
-    }
-</code></pre>
-
-<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibm_bx_api_key {}
-    variable ibm_sl_username {}
-    variable ibm_sl_api_key {}
-</code></pre>
-
-<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibm_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-</code></pre></li>
-</ol>
 
 <h2 id="example-usage">Example Usage</h2>
 <pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
@@ -378,7 +338,7 @@ resource "ibm_compute_vm_instance" "my_server_2" {
   memory            = 1024
 }
 
-# Reference details of the IBM Bluemix Space
+# Reference details of the IBM Cloud Space
 data "ibm_space" "space" {
   space = "${var.space}"
   org   = "${var.org}"
@@ -418,7 +378,7 @@ resource "ibm_service_instance" "service" {
 
 <h3 id="environment-variables">Environment variables</h3>
 
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your Bluemix API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
+<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
 <pre class="highlight plaintext"><code>provider "ibm" {}
 </code></pre>
 
@@ -434,13 +394,51 @@ $ terraform plan
 <p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The Bluemix API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with Bluemix APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
+<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
+<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
 <li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
 <li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
 <li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The Bluemix region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
 </ul>
+
+<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+
+<p>If you want to run terraform locally on your system, complete the following steps:</p>
+
+<ol>
+<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p><a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
+<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the Terraform binary.</p>
+
+<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibm</code> is the route to the directory.</p>
+<pre class="highlight plaintext"><code>    # ~/.terraformrc
+    providers {
+        ibm = "/opt/provider/terraform-provider-ibm"
+    }
+</code></pre></li>
+<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
+
+<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
+<pre class="highlight plaintext"><code>    provider "ibm" {
+      bluemix_api_key    = "${var.ibm_bx_api_key}"
+      softlayer_username = "${var.ibm_sl_username}"
+      softlayer_api_key  = "${var.ibm_sl_api_key}"
+    }
+</code></pre>
+
+<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
+<pre class="highlight plaintext"><code>    variable ibm_bx_api_key {}
+    variable ibm_sl_username {}
+    variable ibm_sl_api_key {}
+</code></pre>
+
+<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
+<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibm_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
+</code></pre></li>
+</ol>
 
       </div>
     </div>
