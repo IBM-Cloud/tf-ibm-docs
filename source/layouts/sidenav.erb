@@ -1,266 +1,231 @@
 <%
-  # Gather up all the resource files for placement
-  @cf_data_sources = []
-  @cs_data_sources = []
-  @infra_data_sources = []
-  @other_data_sources = []
-  @cf_resources = []
-  @cs_resources = []
-  @infra_resources = []
-  @other_resources = []
-  # Processes a given directory and populates arrays with resource html links
-  # Arguements:
-  # => target_dir, String, e.g. /tf-v0.9.3-ibm-provider-v0.2.1/r/
-  # => data_source, Boolean, true if we are building Data source links, false if
-  #        building resource links
-  # => version, String, e.g. tf-v0.9.3-ibm-provider-v0.2.1 - EXCEPT in the case
-  #        of processing the top level directory, in which case this should be
-  #        an empty string
-  # TODO: Make more DRY
-  def processDir(target_dir, data_source, version)
-    Dir.foreach(target_dir) do |doc|
-      # small hack to make version useable for building URLs
-      version_url = "" # for top level path
-      if !version.blank?
-        version_url = "/" + version
-      end
-      # build url for top level or not
-      d_doc_path = "/d/"
-      r_doc_path = "/r/"
-      # directories can contain files other than what we are looking for
-      # valid docs will be something like "infra_ssh_key.html.markdown"
-      if doc.index(".html") != nil
-        # get doc html value, e.g. infra_ssh_key.html
-        doc_html = doc.sub(".markdown","")
-        # get doc name value, e.g. infra_ssh_key
-        doc_title = doc_html.sub(".html","")
-        if(data_source == true)
-          # if it is a cloud foundry data source
-          if doc_title.index("cf_") != nil
-            @cf_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          # if it is a container service data source
-          elsif doc_title.index("cs_") != nil
-            @cs_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          # if it is an infra data source
-          elsif doc_title.index("infra_") != nil
-            @infra_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          else
-            @other_data_sources.push(
-              '<a href="/tf-ibm-docs' + version_url + d_doc_path + doc_html +
-              '">' + doc_title + '</a>'
-            )
-          end
-        else
-          # if it is a cloud foundry resource
-          if doc_title.index("cf_") != nil
-            @cf_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          # if it is a container service resource
-          elsif doc_title.index("cs_") != nil
-            @cs_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          # if it is an infra resource
-          elsif doc_title.index("infra_") != nil
-            @infra_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          else
-            @other_resources.push(
-              '<a href="/tf-ibm-docs' + version_url + r_doc_path + doc_html +
-                '">' + doc_title + '</a>'
-            )
-          end
-        end
-      end
-    end
-  end
-  # current_page.url will resolve to something like:
-  # "tf-v0.9.3-ibm-provider-v0.2.1/r/"
-  # we want to capture the last directory to determine where this erb file
-  # is being applied so we can build the sidebar from there
-  directory = current_page.url[0, current_page.url.rindex("/")]
-  # get the directory to target based on where erb is executing from
-  data_target_dir = nil
-  resource_target_dir = nil
-  version = nil
-  # we're in a /d directory
-  if directory.index("\/d") != nil
-    # current_page.url will be similar to:
-    # tf-v0.9.3-ibm-provider-v0.2.1/d/
-    # For special condition, such as /d/cf_account.html, do check
-    if directory.count("\/") == 1
-      version = ""
-    else
-      version = current_page.url.split('/')[1]
-    end
-    data_target_dir = "source" + directory
-    resource_target_dir = "source" + directory[0, directory.rindex("/")] + "/r"
-  # we're in a /r directory
-  elsif directory.index("\/r") != nil
-    # current_page.url will be similar to:
-    # tf-v0.9.3-ibm-provider-v0.2.1/r/
-    # For special condition, such as /d/cf_account.html, do check
-    if directory.count("\/") == 1
-      version = ""
-    else
-      version = current_page.url.split('/')[1]
-    end
-    resource_target_dir = "source" + directory
-    data_target_dir = "source" + directory[0, directory.rindex("/")] + "/d"
-  # top level directory
-  elsif current_page.url == "/"
-    # /d and /r should exist at the topmost level for the targeted default ver
-    version = ""
-    data_target_dir = "source/d"
-    resource_target_dir = "source/r"
-  # we're in a /<version> directory
-  else
-    # current_page.url will be similar to:
-    # tf-v0.9.3-ibm-provider-v0.2.1/
-    version = current_page.url.split('/')[1]
-    data_target_dir = "source" + directory + "/d"
-    resource_target_dir = "source" + directory + "/r"
-  end
-  processDir(data_target_dir, true, version)
-  processDir(resource_target_dir, false, version)
+def sidebar_current(name)
+  return ""
+end
 %>
+
 <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
   <div class="sidebar-content">
     <ul class="list-unstyled">
-      <%if @cf_data_sources.size > 0 %>
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Cloud Foundry Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @cf_data_sources.each do |cf_d_link| %>
-              <li>
-                <%= cf_d_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-datasource-account") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/account.html">account</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-app") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/app.html">app</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-app-domain-private") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/app_domain_private.html">app_domain_private</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-app-domain-shared") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/app_domain_shared.html">app_domain_shared</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-app-route") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/app_route.html">app_route</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-org") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/org.html">org</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-service-instance") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/service_instance.html">service_instance</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-service-key") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/service_key.html">service_key</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-service-plan") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/service_plan.html">service_plan</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-space") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/space.html">space</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @cs_data_sources.size > 0 %>
+
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Container Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @cs_data_sources.each do |cs_d_link| %>
-              <li>
-                <%= cs_d_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-datasource-container-cluster") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster.html">container_cluster</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-container-cluster-config") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster_config.html">container_cluster_config</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-container-cluster-worker") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster_worker.html">container_cluster_worker</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @infra_data_sources.size > 0 %>
+
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Infrastructure Data Sources
           </label>
           <ul class="list-unstyled tree">
-            <% @infra_data_sources.each do |infra_d_link| %>
-              <li>
-                <%= infra_d_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-datasource-compute-image-template") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/compute_image_template.html">compute_image_template</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-compute-ssh-key") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/compute_ssh_key.html">compute_ssh_key</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-compute-vm-instance") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/compute_vm_instance.html">compute_vm_instance</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-dns-domain") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/dns_domain.html">dns_domain</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-lbaas") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/lbaas.html">lbaas</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-network-vlan") %>>
+            <a href="/tf-ibm-docs/v0.5.0/d/network_vlan.html">network_vlan</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @other_data_sources.size > 0 %>
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Other Data Sources
-          </label>
-          <ul class="list-unstyled tree">
-            <% @other_data_sources.each do |other_d_link| %>
-              <li>
-                <%= other_d_link %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-      <%if @cf_resources.size > 0 %>
+
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Cloud Foundry Resources
           </label>
           <ul class="list-unstyled tree">
-            <% @cf_resources.each do |cf_link| %>
-              <li>
-                <%= cf_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-resource-app") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/app.html">app</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-app-domain-private") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/app_domain_private.html">app_domain_private</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-app-domain-shared") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/app_domain_shared.html">app_domain_shared</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-app-route") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/app_route.html">app_route</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-service-instance") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/service_instance.html">service_instance</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-service-key") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/service_key.html">service_key</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-space") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/space.html">space</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @cs_resources.size > 0 %>
+
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Container Resources
           </label>
           <ul class="list-unstyled tree">
-            <% @cs_resources.each do |cs_link| %>
-              <li>
-                <%= cs_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-resource-container-bind-service") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/container_bind_service.html">container_bind_service</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-container-cluster") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/container_cluster.html">container_cluster</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @infra_resources.size > 0 %>
+
         <li>
           <label class="tree-toggle">
             <i class="fa fa-caret-down"></i>
             Infrastructure Resources
           </label>
           <ul class="list-unstyled tree">
-            <% @infra_resources.each do |infra_link| %>
-              <li>
-                <%= infra_link %>
-              </li>
-            <% end %>
+            <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-group") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_autoscale_group.html">compute_autoscale_group</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-policy") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-bare-metal") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_bare_metal.html">compute_bare_metal</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-monitor") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_monitor.html">compute_monitor</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-provisioning-hook") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-ssh-key") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_ssh_key.html">compute_ssh_key</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-ssl-certificate") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-user") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_user.html">compute_user</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-compute-vm-instance") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/compute_vm_instance.html">compute_vm_instance</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-dns-domain") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/dns_domain.html">dns_domain</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-dns-record") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/dns_record.html">dns_record</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-firewall") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/firewall.html">firewall</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-firewall-policy") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/firewall_policy.html">firewall_policy</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb.html">lb</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lbaas") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lbaas.html">lbaas</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-service") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_service.html">lb_service</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-service-group") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_service_group.html">lb_service_group</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-vpx") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx.html">lb_vpx</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-ha") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_ha.html">lb_vpx_ha</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-service") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_service.html">lb_vpx_service</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-vip") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_vip.html">lb_vpx_vip</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-network-public-ip") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/network_public_ip.html">network_public_ip</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-network-vlan") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/network_vlan.html">network_vlan</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-object-storage-account") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/object_storage_account.html">object_storage_account</a>
+            </li>    
+            <li<%= sidebar_current("docs-ibm-resource-storage-block") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/storage_block.html">storage_block</a>
+            </li>                        
+            <li<%= sidebar_current("docs-ibm-resource-storage-file") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/storage_file.html">storage_file</a>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-subnet") %>>
+            <a href="/tf-ibm-docs/v0.5.0/r/subnet.html">subnet</a>
+            </li>
           </ul>
         </li>
-      <% end %>
-      <%if @other_resources.size > 0 %>
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Other Resources
-          </label>
-          <ul class="list-unstyled tree">
-            <% @other_resources.each do |other_link| %>
-              <li>
-                <%= other_link %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
+
     </ul>
   </div>
 </div>

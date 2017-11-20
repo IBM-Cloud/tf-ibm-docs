@@ -24,6 +24,7 @@ source/v0.4.0
 # should always be built from source and pushed to gh-pages
 build/
 docs/
+deploy/
 
 tmp
 

@@ -3,7 +3,6 @@
 # Pulls IBM Terraform documentation from the IBM fork of terraform:
 # https://github.com/IBM-Bluemix/terraform - gets the relevant IBM Cloud
 # provider documentation from the repo, and builds a new static site from it
-# @Author: Chris Kelner
 # Copyright (c) 2017 IBM under MIT License
 
 set -ex
@@ -12,33 +11,9 @@ PARENT_DIR=$(pwd)
 # Gets configuration for scripts; versions, repo, search strings, etc
 source config.sh
 
-# Adds arbitrary material to index
-# Assumes $INJECT is set to reference the proper page snippet for that version of the docs
-function addtoindex() {
-  cp ../_inject-schematics.md ../_inject-new.md
-  cat ../$INJECT >> ../_inject-new.md
-  # TODO: Kelner - this can be fraught with failure if the text changes, and
-  # will fail to inject the extra content
-  sed "/$INJECT_STRING./r./../_inject-new.md/" index.html.markdown > tmp
-  mv tmp index.html.markdown
-  #rm ../_inject-new.md
-}
-
-function buildversionlist_legacy() {
-  for release in "${LEGACYRELEASES[@]}"; do
-    echo "- [$release](/tf-ibm-docs/$release)" >> source/_inject-schematics.md
-  done
-}
-
-function buildversionlist() {
-  for release in "${RELEASES[@]}"; do
-    echo "- [$release](/tf-ibm-docs/$release)" >> source/_inject-schematics.md
-  done
-}
-
-function cleaninject() {
-  sed '/<!-- REPLACEME -->/q' source/_inject-schematics.md > tmp
-  mv tmp source/_inject-schematics.md
+# $1 is release version
+function addtoversionlist() {
+    echo "- [$1](/tf-ibm-docs/$1)" >> tmp_version_list.md
 }
 
 # Expects three arguements:
@@ -46,9 +21,6 @@ function cleaninject() {
 # $2 is the git repo to target, should come from REPO
 # $3 is the source path to the documentation for that version of the provider
 function getdocs() {
-  if [ ! -d "./source/$1" ]; then
-    mkdir ./source/$1
-  fi
   if [ ! -d "./terraform" ]; then
     mkdir ./terraform
   fi
@@ -60,111 +32,26 @@ function getdocs() {
     cd ./terraform/$1
     git pull
   fi
+
+  if [ ! -d "../../source/$1" ]; then
+    mkdir ../../source/$1
+  fi
   cp -R $3 ../../source/$1
-  cd ../../source/$1
-  # inject contents into index
-  addtoindex
-  cd $PARENT_DIR
-}
-
-# slightly special function to get the correct documentation for schematics
-# Arguments: 
-#     $1 is the path to the git repo, either $REPO or $LEGACYREPO
-#     $2 is the source path to the documentation for that version of the provider
-function getschematicsdocs() {
-  if [ ! -d "./terraform" ]; then
-    mkdir ./terraform
-  fi
-  if [ -d "./terraform/schematics" ]; then
-    rm -rf ./terraform/schematics
-  fi
-  git clone --branch $SCHEMATICS_VERSION $1 --depth=1 ./terraform/schematics
-  cd ./terraform/schematics
-  cp -R $2 ../../source/
   cd ../../source
-  # inject contents into index
-  sed "/$INJECT_STRING./r./_inject-schematics.md" index.html.markdown > tmp
-  mv tmp index.html.markdown
+
+  # inject sidenav
+  cp ../_resources/layouts/sidenav-$1.erb ./layouts/sidenav.erb
+
   cd $PARENT_DIR
 }
 
-function cleanuprelease() {
-  if [ -d "./source/$1" ]; then
-    rm -rf ./source/$1
-  fi
+#
+# ----------------------
+# MAIN ROUTINE
+# $1 is the release version
+# ----------------------
+#
+function compile() {
+  addtoversionlist $1
+  getdocs $1 $REPO "website/docs/*"
 }
-
-function preclean() {
-  if [ -d "./build" ]; then
-    rm -rf ./build
-  fi
-  if [ -d "./docs" ]; then
-    rm -rf ./docs
-  fi
-  cleanup
-  cleaninject
-}
-
-function cleanup() {
-  cd $PARENT_DIR
-  for release in "${LEGACYRELEASES[@]}"; do
-    cleanuprelease $release
-  done
-
-  for release in "${RELEASES[@]}"; do
-    cleanuprelease $release
-  done
-
-  if [ -d "./source/r" ]; then
-    rm -r ./source/r
-  fi
-  if [ -d "./source/d" ]; then
-    rm -r ./source/d
-  fi
-  if [ -f "./source/index.html.markdown" ]; then
-    rm ./source/index.html.markdown
-  fi
-  cleaninject
-}
-
-# ensure clean start
-preclean
-
-# 1. put all version in index
-buildversionlist_legacy
-buildversionlist
-
-# 2. pull all releases from IBM GitHub
-
-# process the legacy releases
-INJECT="_inject-legacy.md"
-for release in "${LEGACYRELEASES[@]}"; do
-  getdocs $release $LEGACYREPO "website/source/docs/providers/ibmcloud/*"
-done
-
-# process the current releases
-INJECT="_inject-runlocally.md"
-for release in "${RELEASES[@]}"; do
-  getdocs $release $REPO "website/docs/*"
-done
-
-# 3. get the version of the docs that the schematic service is using
-getschematicsdocs $REPO "website/docs/*"
-
-cd $PARENT_DIR
-cd ./source/v0.5.1
-find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm5"/layout: "ibm5.1"/g' {} \;
-
-cd $PARENT_DIR
-cd ./source/v0.4.0
-find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm5"/layout: "ibm"/g' {} \;
-
-cd $PARENT_DIR
-cd ./source/d
-find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm"/layout: "ibm5"/g' {} \;
-
-cd $PARENT_DIR
-cd ./source/r
-find . -name "*.markdown" -exec sed -i '' -e 's/layout: "ibm"/layout: "ibm5"/g' {} \;
-
-exit 0

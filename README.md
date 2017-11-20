@@ -29,24 +29,10 @@ To provide an alternative theme for the [IBM Terraform fork](https://github.com/
 
 The documentation landing page (what is shown when you https://ibm-bluemix.github.io/tf-ibm-docs/) presents the documentation for whatever version that Schematics is currently using. This is controlled in the [`.config.sh`](./config.sh) file via `SCHEMATICS_VERSION`.
 
-*NB: With the `0.4.0` release of the IBM Cloud Provider development is being done in a different GitHub repository.*
-
 From https://github.com/IBM-Bluemix/terraform-provider-ibm
-
-- [`v0.4.0`]
-(https://github.com/IBM-Bluemix/terraform-provider-ibm/releases/tag/v0.4.0)
-
-From https://github.com/IBM-Bluemix/terraform/releases:
-
-- [`tf-v0.9.3-ibm-provider-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.1)
-- ~~[`tf-v0.9.3-ibm-k8s-v0.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-k8s-v0.1)~~ - This release is not included because it does not contain documentation in `website/source/docs/providers/ibmcloud/`
-- [`tf-v0.9.3-ibm-provider-v0.2`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2)
-- [`tf-v0.9.3-ibm-provider-v0.2.1`](https://github.com/IBM-Bluemix/terraform/releases/tag/tf-v0.9.3-ibm-provider-v0.2.1)
-- [`v0.3-tf-v0.9.3`](https://github.com/IBM-Bluemix/terraform/releases/tag/v0.3-tf-v0.9.3)
 
 # Adding Release Targets
 
-- First, update the "[Current Release Targets](#current-release-targets)" section of this README.
 - Modify the [`config.sh`](./config.sh) script `RELEASES` array with the new values.
 - Update [`.gitignore`](.gitignore) with the `./source/$VERSION` directory, where `$VERSION` is the value you've added to `config.sh`
 - To change the landing page version (what version Schematics uses):

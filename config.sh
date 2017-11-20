@@ -1,13 +1,12 @@
 # Array of releases on https://github.com/IBM-Bluemix/terraform/releases
 LEGACYRELEASES=( \
-  "v0.3-tf-v0.9.3" \
-  "tf-v0.9.3-ibm-provider-v0.2.1" \
 )
 
 RELEASES=( \
   "v0.4.0" \
   "v0.5.0" \
   "v0.5.1" \
+  "v0.6.0"
 )
 
 # The version of the provider that schematics is using
