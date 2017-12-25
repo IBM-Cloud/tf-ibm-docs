@@ -10,7 +10,7 @@ RELEASES=( \
 )
 
 # The version of the provider that schematics is using
-SCHEMATICS_VERSION="v0.5.0"
+SCHEMATICS_VERSION="v0.6.0"
 
 # The repos that contains the terraform docs
 LEGACYREPO="https://github.com/IBM-Bluemix/terraform"

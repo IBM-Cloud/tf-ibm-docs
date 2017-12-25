@@ -5,231 +5,243 @@ end
 %>
 
 <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
-  <div class="sidebar-content">
-    <ul class="list-unstyled">
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Cloud Foundry Data Sources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-datasource-account") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/account.html">account</a>
+    <div class="sidebar-content">
+        <ul class="list-unstyled">
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li<%= sidebar_current("docs-ibm-datasource-account") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/account.html">account</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-app") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/app.html">app</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-app-domain-private") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-app-domain-shared") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-app-route") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/app_route.html">app_route</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-org") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/org.html">org</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-org-quota") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/org_quota.html">org_quota</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-service-instance") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/service_instance.html">service_instance</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-service-key") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/service_key.html">service_key</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-service-plan") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/service_plan.html">service_plan</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-space") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/space.html">space</a>
+                    </li>
+                </ul>
+            </li>        
+            <li<%= sidebar_current("docs-ibm-datasource-cs") %>>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                        <li<%= sidebar_current("docs-ibm-datasource-container-cluster") %>>
+                        <a href="/tf-ibm-docs/v0.6.0/d/container_cluster.html">container_cluster</a>
+                        </li>
+                        <li<%= sidebar_current("docs-ibm-datasource-container-cluster-config") %>>
+                            <a href="/tf-ibm-docs/v0.6.0/d/container_cluster_config.html">container_cluster_config</a>
+                        </li>                
+                        <li<%= sidebar_current("docs-ibm-datasource-container-cluster") %>>
+                        <a href="/tf-ibm-docs/v0.6.0/d/container_cluster_worker.html">container_cluster_worker</a>
+                        </li>
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-app") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/app.html">app</a>
+            <li<%= sidebar_current("docs-ibm-datasource-infra") %>>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li<%= sidebar_current("docs-ibm-datasource-compute-image-template") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/compute_image_template.html">compute_image_template</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-compute-ssh-key") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-compute-vm-instance") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-dns-domain") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-lbaas") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/lbaas.html">lbaas</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-network-vlan") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-datasource-security-group") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/d/security_group.html">security_group</a>
+                    </li>      
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-app-domain-private") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/app_domain_private.html">app_domain_private</a>
+            <li<%= sidebar_current("docs-ibm-resource-cf") %>>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li<%= sidebar_current("docs-ibm-resource-app") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/app.html">app</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-app-domain-private") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-app-domain-shared") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-app-route") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/app_route.html">app_route</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-org") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/org.html">org</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-service-instance") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/service_instance.html">service_instance</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-service-key") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/service_key.html">service_key</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-space") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/space.html">space</a>
+                    </li>
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-app-domain-shared") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/app_domain_shared.html">app_domain_shared</a>
+            <li<%= sidebar_current("docs-ibm-resource-cs") %>>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li<%= sidebar_current("docs-ibm-resource-container-bind-service") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/container_bind_service.html">container_bind_service</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-container-cluster") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/container_cluster.html">container_cluster</a>
+                    </li>
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-app-route") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/app_route.html">app_route</a>
+            <li<%= sidebar_current("docs-ibm-resource-infra") %>>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-group") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_autoscale_group.html">compute_autoscale_group</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-policy") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-bare-metal") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_bare_metal.html">compute_bare_metal</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-monitor") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_monitor.html">compute_monitor</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-provisioning-hook") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-ssh-key") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-ssl-certificate") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-user") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_user.html">compute_user</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-compute-vm-instance") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-dns-domain") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-dns-record") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/dns_record.html">dns_record</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-firewall") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/firewall.html">firewall</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-firewall-policy") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/firewall_policy.html">firewall_policy</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb.html">lb</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lbaas") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lbaas.html">lbaas</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-service") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_service.html">lb_service</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-service-group") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_service_group.html">lb_service_group</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_vpx.html">lb_vpx</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-ha") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_vpx_ha.html">lb_vpx_ha</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-service") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_vpx_service.html">lb_vpx_service</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-vip") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/lb_vpx_vip.html">lb_vpx_vip</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-network-interface-sg-attachment") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/network_interface_sg_attachment.html">network_interface_sg_attachment</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-network-public-ip") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/network_public_ip.html">network_public_ip</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-network-vlan") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-object-storage-account") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/object_storage_account.html">object_storage_account</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-security-group") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/security_group.html">security_group</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-security-group-rule") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/security_group_rule.html">security_group_rule</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-storage-block") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/storage_block.html">storage_block</a>
+                    </li>                        
+                    <li<%= sidebar_current("docs-ibm-resource-storage-file") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/storage_file.html">storage_file</a>
+                    </li>
+                    <li<%= sidebar_current("docs-ibm-resource-subnet") %>>
+                    <a href="/tf-ibm-docs/v0.6.0/r/subnet.html">subnet</a>
+                    </li>
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-org") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/org.html">org</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-service-instance") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/service_instance.html">service_instance</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-service-key") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/service_key.html">service_key</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-service-plan") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/service_plan.html">service_plan</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-space") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/space.html">space</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Container Data Sources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-datasource-container-cluster") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster.html">container_cluster</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-container-cluster-config") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster_config.html">container_cluster_config</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-container-cluster-worker") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/container_cluster_worker.html">container_cluster_worker</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Infrastructure Data Sources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-datasource-compute-image-template") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/compute_image_template.html">compute_image_template</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-compute-ssh-key") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/compute_ssh_key.html">compute_ssh_key</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-compute-vm-instance") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/compute_vm_instance.html">compute_vm_instance</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-dns-domain") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/dns_domain.html">dns_domain</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-lbaas") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/lbaas.html">lbaas</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-datasource-network-vlan") %>>
-            <a href="/tf-ibm-docs/v0.5.0/d/network_vlan.html">network_vlan</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Cloud Foundry Resources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-resource-app") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/app.html">app</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-app-domain-private") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/app_domain_private.html">app_domain_private</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-app-domain-shared") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/app_domain_shared.html">app_domain_shared</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-app-route") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/app_route.html">app_route</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-service-instance") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/service_instance.html">service_instance</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-service-key") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/service_key.html">service_key</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-space") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/space.html">space</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Container Resources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-resource-container-bind-service") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/container_bind_service.html">container_bind_service</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-container-cluster") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/container_cluster.html">container_cluster</a>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Infrastructure Resources
-          </label>
-          <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-group") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_autoscale_group.html">compute_autoscale_group</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-policy") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-bare-metal") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_bare_metal.html">compute_bare_metal</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-monitor") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_monitor.html">compute_monitor</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-provisioning-hook") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-ssh-key") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_ssh_key.html">compute_ssh_key</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-ssl-certificate") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-user") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_user.html">compute_user</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-compute-vm-instance") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/compute_vm_instance.html">compute_vm_instance</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-dns-domain") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/dns_domain.html">dns_domain</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-dns-record") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/dns_record.html">dns_record</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-firewall") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/firewall.html">firewall</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-firewall-policy") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/firewall_policy.html">firewall_policy</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb.html">lb</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lbaas") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lbaas.html">lbaas</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-service") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_service.html">lb_service</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-service-group") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_service_group.html">lb_service_group</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-vpx") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx.html">lb_vpx</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-ha") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_ha.html">lb_vpx_ha</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-service") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_service.html">lb_vpx_service</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-lb-vpx-vip") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/lb_vpx_vip.html">lb_vpx_vip</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-network-public-ip") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/network_public_ip.html">network_public_ip</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-network-vlan") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/network_vlan.html">network_vlan</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-object-storage-account") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/object_storage_account.html">object_storage_account</a>
-            </li>    
-            <li<%= sidebar_current("docs-ibm-resource-storage-block") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/storage_block.html">storage_block</a>
-            </li>                        
-            <li<%= sidebar_current("docs-ibm-resource-storage-file") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/storage_file.html">storage_file</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-subnet") %>>
-            <a href="/tf-ibm-docs/v0.5.0/r/subnet.html">subnet</a>
-            </li>
-          </ul>
-        </li>
-
-    </ul>
-  </div>
+        </ul>
+    </div>
 </div>
 
 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-  <span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+<span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
 </div>
