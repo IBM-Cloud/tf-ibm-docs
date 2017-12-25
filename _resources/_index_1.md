@@ -14,7 +14,7 @@ Use the navigation menu on the left to read about the available data sources and
 
 ## IBM Cloud Schematics
 
-The documentation presented here is the latest for the [IBM Cloud Schematics](https://console.ng.bluemix.net/docs/services/schematics/index.html) service. At this time Schematics uses version `v0.5.0` of the IBM Cloud Provider. 
+The documentation presented here is the latest for the [IBM Cloud Schematics](https://console.ng.bluemix.net/docs/services/schematics/index.html) service. At this time Schematics uses version `v0.6.0` of the IBM Cloud Provider. 
 
 Newer versions may be available for use locally. Please see the available versions of the documentation below.
 
