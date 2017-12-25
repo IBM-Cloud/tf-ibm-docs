@@ -12,9 +12,11 @@ source compile.sh
 source build.sh
 
 function cleanbuild() {
-  cd build
-  rm tf-ibm-docs
-  cd ..
+  if [ -d "./build"]; then
+    cd build
+    rm tf-ibm-docs
+    cd ..
+  fi
   
   if [ -d "./terraform" ]; then
     rm -rf ./terraform
