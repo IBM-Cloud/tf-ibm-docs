@@ -1,5 +1,5 @@
 # Terraform IBM Docs
-IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.io/tf-ibm-docs/
+IBM Cloud Terraform (tm) Provider documentation. See https://ibm-cloud.github.io/tf-ibm-docs/
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -23,13 +23,13 @@ IBM Cloud Terraform (tm) Provider documentation. See https://ibm-bluemix.github.
 
 # Objective
 
-To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Bluemix/terraform) static site and to automatically generate multiple static sites for all release targets.
+To provide an alternative theme for the [IBM Terraform fork](https://github.com/IBM-Cloud/terraform) static site and to automatically generate multiple static sites for all release targets.
 
 # Current Release Targets
 
-The documentation landing page (what is shown when you https://ibm-bluemix.github.io/tf-ibm-docs/) presents the documentation for whatever version that Schematics is currently using. This is controlled in the [`.config.sh`](./config.sh) file via `SCHEMATICS_VERSION`.
+The documentation landing page (what is shown when you https://ibm-cloud.github.io/tf-ibm-docs/) presents the documentation for whatever version that Schematics is currently using. This is controlled in the [`.config.sh`](./config.sh) file via `SCHEMATICS_VERSION`.
 
-From https://github.com/IBM-Bluemix/terraform-provider-ibm
+From https://github.com/IBM-Cloud/terraform-provider-ibm
 
 # Adding Release Targets
 
@@ -64,7 +64,7 @@ The docs are manually built and deployed from a local workstation by executing t
 
 - `git` must be available on the workstation running the script
 - `git` must be configured to checkout from both github.com and github.ibm.com (for older documentation)
-- `git` must be able to push to https://github.com/IBM-Bluemix/tf-ibm-docs
+- `git` must be able to push to https://ibm-cloud.github.io/tf-ibm-docs/
 - For OSX XCode command line tools should be available, on OSX run `xcode-select --install`
 - Ruby `2.3.3` or higher is required, I recommend using https://rvm.io/ to manage ruby versions & installation
 - `bundler` must be available, on OSX run `gem install bundler` after installing Ruby
