@@ -101,15 +101,15 @@ The following arguments are supported in the `provider` block:
 
 ## Using Terraform with the IBM Cloud Provider
 
-If you want to run terraform locally on your system, complete the following steps:
+If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps:
 
 1. <a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a>
 
 2. <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a>
 
-3. Create a `.terraformrc` file that points to the Terraform binary.
+3. Create a `.terraformrc` file that points to the IBM Cloud Provider binary. _NOTE: the `.terraformrc` file *must be created in your home directory*_
 
-    In the following example, `/opt/provider/terraform-provider-ibm` is the route to the directory.
+    In the following example, `/opt/provider/terraform-provider-ibm` is where the IBM Cloud Provider binary is downloaded to from step #2 above.
 
       ```
         # ~/.terraformrc

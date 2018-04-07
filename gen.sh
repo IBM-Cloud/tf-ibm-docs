@@ -61,9 +61,7 @@ done
 cp _resources/_index_1.md source/index.html.markdown
 cat tmp_version_list.md >> source/index.html.markdown
 cat _resources/_index_2.md >> source/index.html.markdown
-
-cp _resources/layouts/sidenav-$SCHEMATICS_VERSION.erb source/layouts/sidenav.erb
-build $SCHEMATICS_VERSION
+build "${LATEST_VERSION}"
 
 for release in "${RELEASES[@]}"; do
     mv deploy/$release build
