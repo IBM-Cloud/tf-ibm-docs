@@ -1,0 +1,428 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Provider for Terraform(tm) documentation">
+    <title>
+      IBM Cloud Provider for Terraform(tm) Documentation
+    </title>
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <!-- these were in footer_scripts.html but need to load early or refactor -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <!-- end _meta.erb -->
+
+<body>
+  <nav class="top-block navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+      <i class="navbar-brand version-header">
+        VERSION: v0.9.0
+      </i>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+    <div class="sidebar-content">
+        <ul class="list-unstyled">
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/d/account.html">account</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/app.html">app</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/app_route.html">app_route</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/org.html">org</a>
+                    </li>
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/d/org_quota.html">org_quota</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/service_instance.html">service_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/service_key.html">service_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/service_plan.html">service_plan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/space.html">space</a>
+                    </li>
+                  </ul>
+            </li>        
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/d/container_cluster.html">container_cluster</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/container_cluster_config.html">container_cluster_config</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/container_cluster_worker.html">container_cluster_worker</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/container_cluster_versions.html">container_cluster_versions</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/d/compute_bare_metal.html">compute_bare_metal</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/compute_image_template.html">compute_image_template</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/lbaas.html">lbaas</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/security_group.html">security_group</a>
+                    </li>      
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Functions Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/d/function_action.html">function_action</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/function_package.html">function_package</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/function_rule.html">function_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/d/function_trigger.html">function_trigger</a>
+                    </li>
+                </ul>
+            </li>            
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/r/app.html">app</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/app_route.html">app_route</a>
+                    </li>
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/r/org.html">org</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/service_instance.html">service_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/service_key.html">service_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/space.html">space</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/r/container_bind_service.html">container_bind_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/container_cluster.html">container_cluster</a>
+                    </li>                
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Function Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/r/function_action.html">function_action</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/function_package.html">function_package</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/function_rule.html">function_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/function_trigger.html">function_trigger</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.9.0/r/compute_autoscale_group.html">compute_autoscale_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_bare_metal.html">compute_bare_metal</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_dedicated_host.html">compute_dedicated_host</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_monitor.html">compute_monitor</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_user.html">compute_user</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/dns_record.html">dns_record</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/firewall.html">firewall</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/firewall_policy.html">firewall_policy</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb.html">lb</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lbaas.html">lbaas</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_service.html">lb_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_service_group.html">lb_service_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_vpx.html">lb_vpx</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_vpx_ha.html">lb_vpx_ha</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_vpx_service.html">lb_vpx_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/lb_vpx_vip.html">lb_vpx_vip</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/network_gateway.html">network_gateway</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/network_gateway_vlan_association.html">network_gateway_vlan_association</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/network_interface_sg_attachment.html">network_interface_sg_attachment</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/network_public_ip.html">network_public_ip</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/object_storage_account.html">object_storage_account</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/security_group.html">security_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/security_group_rule.html">security_group_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/storage_block.html">storage_block</a>
+                    </li>                        
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/storage_file.html">storage_file</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.9.0/r/subnet.html">subnet</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
+
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <h1 id="ibm_space">ibm_space</h1>
+
+<p>Import the details of an existing IBM Cloud space as a read-only data source. You can then reference the fields of the data source in other resources within the same configuration by using interpolation syntax.</p>
+
+<h2 id="example-usage">Example Usage</h2>
+<pre class="highlight plaintext"><code>data "ibm_space" "spaceData" {
+  space = "prod"
+  org   = "someexample.com"
+}
+</code></pre>
+
+<p>The following example shows how you can use the data source to reference the space ID in the <code class="prettyprint">ibm_service_instance</code> resource.</p>
+<pre class="highlight plaintext"><code>resource "ibm_service_instance" "service_instance" {
+  name              = "test"
+  space_guid        = "${data.ibm_space.spaceData.id}"
+  service           = "cloudantNOSQLDB"
+  plan              = "Lite"
+  tags              = ["cluster-service", "cluster-bind"]
+}
+
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<p>The following arguments are supported:</p>
+
+<ul>
+<li><code class="prettyprint">org</code> - (Required) The name of your IBM Cloud organization. You can retrieve the value by running the <code class="prettyprint">bx iam orgs</code> command in the <a href="https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started">IBM Cloud CLI</a>.</li>
+<li><code class="prettyprint">space</code> - (Required) The name of your space. You can retrieve the value by running the <code class="prettyprint">bx iam spaces</code> command in the IBM Cloud CLI.</li>
+</ul>
+
+<h2 id="attribute-reference">Attribute Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the space.<br></li>
+<li><code class="prettyprint">managers</code> - The email addresses (associated with IBMid) of the users who have a manager role in this space.</li>
+<li><code class="prettyprint">auditors</code> - The email addresses (associated with IBMid) of the users who have an auditor role in this space.</li>
+<li><code class="prettyprint">developers</code> - The email addresses (associated with IBMid) of the users who have a developer role in this space.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="col-md-9">
+      <ul class="list-inline social-list">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>
+            GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      IBM Cloud Provider for Terraform&trade;
+    </div>
+  </div>
+</footer>
+
+  <script src="../../javascript/sidemenu.js"></script>
+</body>
+</html>
