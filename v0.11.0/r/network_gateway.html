@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -424,150 +424,163 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_network_gateway">ibm_network_gateway</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>Provides a resource for an IBM Cloud network gateway appliance. This resource allows a network gateway to be created, updated, and deleted.  </p>
 
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
+<p>A network gateway can be created in standalone mode and HA mode with both members, with either the same or different configurations.</p>
 
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
+<p>For additional details, see the <a href="http://sldn.softlayer.com/reference/services/SoftLayer_Network_Gateway">IBM Cloud infrastructure (SoftLayer) API docs</a>.</p>
 
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.9.0">v0.9.0</a></li>
-<li><a href="/tf-ibm-docs/v0.9.1">v0.9.1</a></li>
-<li><a href="/tf-ibm-docs/v0.10.0">v0.10.0</a></li>
-<li><a href="/tf-ibm-docs/v0.11.0">v0.11.0</a></li>
-</ul>
+<p>For more information about getting started, see the <a href="https://console.bluemix.net/docs/infrastructure/virtual-router-appliance/getting-started.html#getting-started">IBM Virtual Router Appliance docs</a>.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
-}
 
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
+<h3 id="standalone-configuration">Standalone configuration</h3>
+<pre class="highlight plaintext"><code>resource "ibm_network_gateway" "gateway" {
+  name = "my-gateway"
 
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
+  members = [{
+    hostname             = "host-name"
+    domain               = "ibm.com"
+    datacenter           = "ams01"
+    network_speed        = 100
+    private_network_only = false
+    tcp_monitoring       = true
+    process_key_name     = "INTEL_SINGLE_XEON_1270_3_50"
+    os_key_name          = "OS_VYATTA_5600_5_X_UP_TO_1GBPS_SUBSCRIPTION_EDITION_64_BIT"
+    redundant_network    = false
+    disk_key_names       = ["HARD_DRIVE_2_00TB_SATA_II"]
+    public_bandwidth     = 20000
+    memory               = 8
+    tags                 = ["gateway tags 1", "terraform test tags 1"]
+    notes                = "gateway notes 1"
+    ipv6_enabled         = true
+  },
+  ]
 }
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
+<h3 id="ha-configuration">HA configuration</h3>
+<pre class="highlight plaintext"><code>resource "ibm_network_gateway" "gateway" {
+  name = "my-ha-gateway"
 
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
+  members = [{
+    hostname             = "host-name-1"
+    domain               = "ibm.com"
+    datacenter           = "ams01"
+    network_speed        = 100
+    private_network_only = false
+    tcp_monitoring       = true
+    process_key_name     = "INTEL_SINGLE_XEON_1270_3_50"
+    os_key_name          = "OS_VYATTA_5600_5_X_UP_TO_1GBPS_SUBSCRIPTION_EDITION_64_BIT"
+    redundant_network    = false
+    disk_key_names       = ["HARD_DRIVE_2_00TB_SATA_II"]
+    public_bandwidth     = 20000
+    memory               = 8
+    tags                 = ["gateway tags", "terraform test tags 1"]
+    notes                = "gateway notes"
+    ipv6_enabled         = true
+  },
+    {
+      hostname             = "host-name-2"
+      domain               = "ibm.com"
+      datacenter           = "ams01"
+      network_speed        = 100
+      private_network_only = false
+      tcp_monitoring       = true
+      process_key_name     = "INTEL_SINGLE_XEON_1270_3_50"
+      os_key_name          = "OS_VYATTA_5600_5_X_UP_TO_1GBPS_SUBSCRIPTION_EDITION_64_BIT"
+      redundant_network    = false
+      disk_key_names       = ["HARD_DRIVE_2_00TB_SATA_II"]
+      public_bandwidth     = 20000
+      memory               = 8
+      tags                 = ["gateway tags 1", "terraform test tags 1"]
+      notes                = "my ha mode gateway"
+      ipv6_enabled         = true
+    },
+  ]
 }
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">name</code> - (Required, string) The name of the gateway.</li>
+<li><code class="prettyprint">ssh_key_ids</code> - (Optional, list) The SSH key IDs to install on the gateway when the gateway gets created.</li>
+<li><code class="prettyprint">post_install_script_uri</code> - (Optional, string) The URI of the script to be downloaded and executed after the gateway installation is complete. Default value: <code class="prettyprint">nil</code>. </li>
+<li><p><code class="prettyprint">members</code> - (Required, list) A nested block describing the hardware members of this network gateway.
+Nested <code class="prettyprint">members</code> blocks have the following structure:</p>
+
+<ul>
+<li><code class="prettyprint">hostname</code> - (Optional, string) Hostname of the member.</li>
+<li><code class="prettyprint">domain</code> - (Required, string) The domain of the member</li>
+<li><code class="prettyprint">notes</code> - (Optional, string) Descriptive text of up to 1000 characters about the member.</li>
+<li><code class="prettyprint">datacenter</code> - (Required, string) The data center in which you want to provision the member.</li>
+<li><code class="prettyprint">network_speed</code> - (Optional, integer) The connection speed (in Mbps) for the member network components. Default value: <code class="prettyprint">100</code>.</li>
+<li><code class="prettyprint">redundant_power_supply</code> - (Optional, boolean) When the value is <code class="prettyprint">true</code>, an additional power supply is provided. Default value: <code class="prettyprint">false</code></li>
+<li><code class="prettyprint">tcp_monitoring</code> - (Optional, boolean) Whether to enable TCP monitoring for the member. Default value: <code class="prettyprint">false</code>.</li>
+<li><code class="prettyprint">process_key_name</code> - (Optional, string) The process key name for the member. Default value:  <code class="prettyprint">INTEL_SINGLE_XEON_1270_3_40_2</code>. Refer to the same attribute on the <code class="prettyprint">ibm_compute_bare_metal</code> resource.</li>
+<li><code class="prettyprint">package_key_name</code> - (Optional, string) The key name for the network gateway package. You can find available package key names in the <a href="https://api.softlayer.com/rest/v3/SoftLayer_Product_Package/getAllObjects?objectFilter={&quot;type&quot;:{&quot;keyName&quot;:{&quot;operation&quot;:&quot;BARE_METAL_GATEWAY&quot;}}}">Softlayer API</a>, using your API key as the password. Default value: <code class="prettyprint">NETWORK_GATEWAY_APPLIANCE</code>. The default will allow to order Single Processor Multi-Core Servers. Use <code class="prettyprint">2U_NETWORK_GATEWAY_APPLIANCE_1O_GBPS</code> for ordering Dual Processor Multi-Core Servers.</li>
+<li><code class="prettyprint">os_key_name</code> - (Optional, string) The os key name for member. Default value:  <code class="prettyprint">OS_VYATTA_5600_5_X_UP_TO_1GBPS_SUBSCRIPTION_EDITION_64_BIT</code>. Refer to the same attribute on the <code class="prettyprint">ibm_compute_bare_metal</code> resource.</li>
+<li><code class="prettyprint">redundant_network</code> - (Optional, boolean) When the value is <code class="prettyprint">true</code>, two physical network interfaces are provided with a bonding configuration. Default value: <code class="prettyprint">false</code>. </li>
+<li><code class="prettyprint">unbonded_network</code> - (Optional, boolean) When the value is <code class="prettyprint">true</code>, two physical network interfaces are provided without a bonding configuration. Default value: <code class="prettyprint">false</code>. </li>
+<li><code class="prettyprint">tags</code> - (Optional, set) Tags associated with the VM instance. Permitted characters include: A-Z, 0-9, whitespace, _ (underscore), - (hyphen), . (period), and : (colon). All other characters are removed.</li>
+<li><code class="prettyprint">public_bandwidth</code> - (Optional, integer) Allowed public network traffic (in GB) per month. Default value: <code class="prettyprint">20000</code>.</li>
+<li><code class="prettyprint">memory</code> - (Required, integer) The amount of memory, expressed in megabytes, that you want to allocate.</li>
+<li><code class="prettyprint">storage_groups</code> - (Optional, list) A nested block describing the storage group for the member of the network gateway. Nested <code class="prettyprint">storage_groups</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">array_type_id</code> - (Required, integer) The ID of the array type.</li>
+<li><code class="prettyprint">hard_drives</code> - (Required, list) The list of hard drive associated with the gateway member.</li>
+<li><code class="prettyprint">array_size</code> - (Optional, integer) The size of the array.</li>
+<li><code class="prettyprint">partition_template_id</code> - (Optional, integer) The partition template ID for the member.</li>
+</ul></li>
+<li><code class="prettyprint">ssh_key_ids</code> - (Optional, list) The SSH key IDs to install on the member.</li>
+<li><code class="prettyprint">post_install_script_uri</code> - (Optional, string) The URI of the script to be downloaded and executed on the member. Default value: <code class="prettyprint">nil</code>.</li>
+<li><code class="prettyprint">user_metadata</code> - (Optional, string) Arbitrary data to be made available to the member.</li>
+<li><code class="prettyprint">disk_key_names</code> - (Optional, list) Provide the disk key name. Refer to the same attribute in the <code class="prettyprint">ibm_compute_bare_metal</code> resource.</li>
+<li><code class="prettyprint">public_vlan_id</code> - (Optional, integer) ID of the public VLAN.</li>
+<li><code class="prettyprint">private_vlan_id</code> - (Optional, integer) ID of the private VLAN.<br>
+<strong>NOTE</strong>: If there are two members in this gateway, then both should have same value for <code class="prettyprint">public_vlan_id</code> and <code class="prettyprint">private_vlan_id</code>.</li>
+<li><code class="prettyprint">ipv6_enabled</code> - (Optional, boolean) Whether to enable IPv6. Default value: <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">private_network_only</code> - (Optional, boolean) Whether to enable a private network only. Default value: <code class="prettyprint">false</code>.</li>
+</ul></li>
 </ul>
 
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+<h2 id="attribute-reference">Attribute Reference</h2>
 
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps:</p>
+<p>The following attributes are exported:</p>
 
-<ol>
-<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p><a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the IBM Cloud Provider binary. <em>NOTE: the <code class="prettyprint">.terraformrc</code> file <em>must be created in your home directory</em></em></p>
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the network gateway.</li>
+<li><code class="prettyprint">public_ipv4_address</code> - The public IP address of the network gateway.</li>
+<li><code class="prettyprint">private_ipv4_address</code> - The private IP address of the network gateway.</li>
+<li><code class="prettyprint">private_ip_address_id</code> - The private IP address ID of the network gateway.</li>
+<li><code class="prettyprint">private_vlan_id</code> - The private VLAN ID of the network gateway.</li>
+<li><code class="prettyprint">public_ip_address_id</code> - The public IP address ID of the network gateway.</li>
+<li><code class="prettyprint">public_ipv6_address_id</code> - The public IPv6 address ID for the network gateway.</li>
+<li><code class="prettyprint">public_vlan_id</code> - The public VLAN ID for the network gateway.</li>
+<li><code class="prettyprint">status</code> - Status of the network gateway.</li>
+<li><code class="prettyprint">associated_vlans</code> - A nested block describing the associated VLANs for the member of the network gateway. Nested <code class="prettyprint">associated_vlans</code> blocks export the following attributes:
 
-<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibm</code> is where the IBM Cloud Provider binary is downloaded to from step #2 above.</p>
-<pre class="highlight plaintext"><code>    # ~/.terraformrc
-    providers {
-        ibm = "/opt/provider/terraform-provider-ibm"
-    }
-</code></pre></li>
-<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
+<ul>
+<li><code class="prettyprint">vlan_id</code> - The VLAN ID.</li>
+<li><code class="prettyprint">network_vlan_id</code> - The ID of the VLAN that is associated.</li>
+<li><code class="prettyprint">bypass</code> -  Indicates if the VLAN is in bypass or routed mode.</li>
+</ul></li>
+<li><code class="prettyprint">members</code> - A nested block describing the hardware members of this network gateway.
+Nested <code class="prettyprint">members</code> blocks export the following attributes:
 
-<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
-<pre class="highlight plaintext"><code>    provider "ibm" {
-      bluemix_api_key    = "${var.ibm_bx_api_key}"
-      softlayer_username = "${var.ibm_sl_username}"
-      softlayer_api_key  = "${var.ibm_sl_api_key}"
-    }
-</code></pre>
-
-<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibm_bx_api_key {}
-    variable ibm_sl_username {}
-    variable ibm_sl_api_key {}
-</code></pre>
-
-<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibm_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-</code></pre></li>
-</ol>
+<ul>
+<li><code class="prettyprint">member_id</code> -  ID of the member.</li>
+<li><code class="prettyprint">public_ipv4_address</code> - Public IPv4 address associated with the member.</li>
+<li><code class="prettyprint">private_ipv4_address</code> - Private IPv4 address associated with the member.</li>
+<li><code class="prettyprint">ipv6_address</code> -  IPv6 address associated with the member.</li>
+</ul></li>
+</ul>
 
       </div>
     </div>
@@ -594,6 +607,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
