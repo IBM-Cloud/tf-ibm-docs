@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -424,150 +424,174 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_dns_record">ibm_dns_record</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>Provides a single-resource record entry in <code class="prettyprint">ibm_dns_domain</code>. Each resource record contains a <code class="prettyprint">host</code> and a <code class="prettyprint">data</code> property to define the name and target data of a resource.</p>
 
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
+<p>The IBM Cloud Infrastructure (SoftLayer) object  <a href="https://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord">SoftLayer_Dns_Domain_ResourceRecord</a> is used for most CRUD operations. The IBM Cloud Infrastructure (SoftLayer) object <a href="https://sldn.softlayer.com/reference/services/SoftLayer_Dns_Domain_ResourceRecord_SrvType">SoftLayer_Dns_Domain_ResourceRecord_SrvType</a> is used for SRV record types.</p>
 
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.9.0">v0.9.0</a></li>
-<li><a href="/tf-ibm-docs/v0.9.1">v0.9.1</a></li>
-<li><a href="/tf-ibm-docs/v0.10.0">v0.10.0</a></li>
-<li><a href="/tf-ibm-docs/v0.11.1">v0.11.1</a></li>
-</ul>
+<p>You cannot create SOA or NS record types because these are automatically created by IBM Cloud Infrastructure (SoftLayer) when the domain is created.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+
+<h3 id="a-record"><code class="prettyprint">A</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_AType">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">A</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_domain" "main" {
+    name = "main.example.com"
 }
 
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
-
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
+resource "ibm_dns_record" "www" {
+    data = "123.123.123.123"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "www.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "a"
 }
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
+<h3 id="aaaa-record"><code class="prettyprint">AAAA</code> Record</h3>
 
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_AaaaType">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">AAAA</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "aaaa" {
+    data = "fe80:0000:0000:0000:0202:b3ff:fe1e:8329"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "www.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 1000
+    type = "aaaa"
 }
 </code></pre>
 
-<h3 id="environment-variables">Environment variables</h3>
+<h3 id="cname-record"><code class="prettyprint">CNAME</code> Record</h3>
 
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
+<p>Review the [IBM Cloud Infrastructure (SoftLayer) docs] to properly implement the <code class="prettyprint">CNAME</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "cname" {
+    data = "real-host.example.com."
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "alias.example.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "cname"
+}
 </code></pre>
 
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
+<h3 id="mx-record"><code class="prettyprint">MX</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_MxType">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">MX</code> record.</p>
+<pre class="highlight plaintext"><code>resource "sibm_dns_record" "recordMX-1" {
+    data = "mail-1"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "@"
+    mx_priority = "10"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "mx"
+}
+</code></pre>
+
+<h3 id="spf-record"><code class="prettyprint">SPF</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_SpfType">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">SPF</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "recordSPF" {
+    data = "v=spf1 mx:mail.example.org ~all"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "mail-1"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "spf"
+}
+</code></pre>
+
+<h3 id="txt-record"><code class="prettyprint">TXT</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_TxtType/">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">TXT</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "recordTXT" {
+    data = "host"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "A SPF test host"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "txt"
+}
+</code></pre>
+
+<h3 id="srv-record"><code class="prettyprint">SRV</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_SrvType">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">SRV</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "recordSRV" {
+    data = "ns1.example.org"
+    domain_id = "${ibm_dns_domain.main.id}"
+    host = "hosta-srv.com"
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "srv"
+    port = 8080
+    priority = 3
+    protocol = "_tcp"
+    weight = 3
+    service = "_mail"
+}
+</code></pre>
+
+<h3 id="ptr-record"><code class="prettyprint">PTR</code> Record</h3>
+
+<p>Review the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Dns_Domain_ResourceRecord_PtrType/">IBM Cloud Infrastructure (SoftLayer) docs</a> to properly implement the <code class="prettyprint">PTR</code> record.</p>
+<pre class="highlight plaintext"><code>resource "ibm_dns_record" "recordPTR" {
+    data = "ptr.example.com"
+    domain_id = "${ibm_dns_domain.main.id}"
+# The host is the last octet of IP address in the range of the subnet
+    host = "45"  
+    responsible_person = "user@softlayer.com"
+    ttl = 900
+    type = "ptr"
+}
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">data</code> - (Required, string) The IP address or a hostname of a domain&rsquo;s resource record. Fully qualified host and domain name data must end with the <code class="prettyprint">.</code> character.</li>
+<li><code class="prettyprint">domain_id</code> - (Required, integer) The ID for the domain associated with the resource record.</li>
+<li><code class="prettyprint">expire</code> - (Optional, integer) The duration, expressed in seconds, that a secondary name server (or servers) holds a zone before it is no longer considered authoritative.</li>
+<li><code class="prettyprint">host</code> - (Required, string) The host defined by a resource record. The <code class="prettyprint">@</code> symbol denotes a wildcard.</li>
+<li><code class="prettyprint">minimum_ttl</code> - (Optional, integer) The duration, expressed in seconds, that a domain&rsquo;s resource records are valid. This is also known as a minimum time to live (TTL), and can be overridden by an individual resource record&rsquo;s TTL.</li>
+<li><code class="prettyprint">mx_priority</code> - (Optional, integer) The priority of the mail exchanger that delivers mail for a domain. This is useful in cases where a domain has more than one mail exchanger. A lower number denotes a higher priority, and mail will attempt to deliver through the highest priority exchanger before moving to lower priority exchangers. The default value is <code class="prettyprint">0</code>.</li>
+<li><code class="prettyprint">refresh</code> - (Optional, integer) The duration, expressed in seconds, that a secondary name server waits to check the domain&rsquo;s primary name server for a new copy of a DNS zone. If a zone file has changed, the secondary DNS server updates its copy of the zone to match the primary DNS server&rsquo;s zone.</li>
+<li><code class="prettyprint">responsible_person</code> - (Required, string) The email address of the person responsible for a domain. Replace the <code class="prettyprint">@</code> symbol in the address with a <code class="prettyprint">.</code>. For example: <a href="mailto:root@example.org">root@example.org</a> would be expressed as <code class="prettyprint">root.example.org.</code>.</li>
+<li><code class="prettyprint">retry</code> - (Optional, integer) The duration, expressed in seconds, that the domain&rsquo;s primary name server (or servers) waits before attempting to refresh the domain&rsquo;s zone with the secondary name server. A failed attempt to refresh by a secondary name server triggers the retry action.</li>
+<li><code class="prettyprint">ttl</code> - (Required, integer) The time to live (TTL) duration, expressed in seconds, of a resource record. A name server uses TTL to determine how long to cache a resource record. An SOA record&rsquo;s TTL value defines the domain&rsquo;s overall TTL.</li>
+<li><code class="prettyprint">type</code> - (Required, string) The type of domain resource record. Accepted values are as follows:
+
+<ul>
+<li><code class="prettyprint">a</code> for address records</li>
+<li><code class="prettyprint">aaaa</code> for address records</li>
+<li><code class="prettyprint">cname</code> for canonical name records</li>
+<li><code class="prettyprint">mx</code> for mail exchanger records</li>
+<li><code class="prettyprint">ptr</code> for pointer records in reverse domains</li>
+<li><code class="prettyprint">spf</code> for sender policy framework records</li>
+<li><code class="prettyprint">srv</code> for service records</li>
+</ul></li>
+<li><code class="prettyprint">txt</code> - (Optional, string) Used for text records.</li>
+<li><code class="prettyprint">service</code> - (<code class="prettyprint">SRV</code> records only, required, string) The symbolic name of the desired service.</li>
+<li><code class="prettyprint">protocol</code> - (<code class="prettyprint">SRV</code> records only, required, string) The protocol of the desired service. This is usually TCP or UDP.</li>
+<li><code class="prettyprint">port</code> - (<code class="prettyprint">SRV</code> records only, required, integer) The TCP or UDP port on which the service will be found.</li>
+<li><code class="prettyprint">priority</code> - (<code class="prettyprint">SRV</code> records only, required, integer) The priority of the target host. The lowest numerical value is given the highest priority. The default value is <code class="prettyprint">0</code>.</li>
+<li><code class="prettyprint">weight</code> - (<code class="prettyprint">SRV</code> records only, required, integer) A relative weight for records that have the same priority. The default value is <code class="prettyprint">0</code>.</li>
+<li><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the DNS domain record instance.
+<strong>NOTE</strong>: <code class="prettyprint">Tags</code> are managed locally and not stored on the IBM Cloud service endpoint at this moment.</li>
 </ul>
 
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+<h2 id="attribute-reference">Attribute Reference</h2>
 
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps:</p>
+<p>The following attributes are exported:</p>
 
-<ol>
-<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p><a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the IBM Cloud Provider binary. <em>NOTE: the <code class="prettyprint">.terraformrc</code> file <em>must be created in your home directory</em></em></p>
-
-<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibm</code> is where the IBM Cloud Provider binary is downloaded to from step #2 above.</p>
-<pre class="highlight plaintext"><code>    # ~/.terraformrc
-    providers {
-        ibm = "/opt/provider/terraform-provider-ibm"
-    }
-</code></pre></li>
-<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
-
-<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
-<pre class="highlight plaintext"><code>    provider "ibm" {
-      bluemix_api_key    = "${var.ibm_bx_api_key}"
-      softlayer_username = "${var.ibm_sl_username}"
-      softlayer_api_key  = "${var.ibm_sl_api_key}"
-    }
-</code></pre>
-
-<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibm_bx_api_key {}
-    variable ibm_sl_username {}
-    variable ibm_sl_api_key {}
-</code></pre>
-
-<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibm_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-</code></pre></li>
-</ol>
+<ul>
+<li><code class="prettyprint">id</code> - The internal identifier of the domain resource record.</li>
+</ul>
 
       </div>
     </div>
@@ -594,6 +618,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
