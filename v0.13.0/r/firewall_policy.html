@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -454,149 +454,70 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_firewall_policy">ibm_firewall_policy</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>Provides rules for firewall resources in IBM. One rule resource is allowed per firewall. However, a rule resource can contain multiple firewall rules within it.</p>
 
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
+<p>For more details about how to configure a firewall, see the <a href="https://knowledgelayer.softlayer.com/procedure/configure-hardware-firewall-dedicated">docs</a>.  </p>
 
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
+<p><strong>NOTE</strong>: The target VLAN should have at least one subnet for rule configuration. To express any IP addresses externally, configure <code class="prettyprint">src_ip_address</code> as <code class="prettyprint">0.0.0.0</code> and <code class="prettyprint">src_ip_cidr</code> as <code class="prettyprint">0</code>. To express API IP addresses internally, configure <code class="prettyprint">dst_ip_address</code> as <code class="prettyprint">any</code> and <code class="prettyprint">src_ip_cidr</code> as <code class="prettyprint">32</code>.</p>
 
-<h3 id="versions">Versions</h3>
+<p>When a rules resource is created, it cannot be deleted. IBM does not allow entire rule deletion.</p>
 
-<ul>
-<li><a href="/tf-ibm-docs/v0.11.3">v0.11.3</a></li>
-<li><a href="/tf-ibm-docs/v0.12.0">v0.12.0</a></li>
-<li><a href="/tf-ibm-docs/v0.13.0">v0.13.0</a></li>
-</ul>
+<p>Firewalls should have at least one rule. If Terraform destroys the rules resources, <em>permit from any to any with TCP, UDP, ICMP, GRE, PPTP, ESP, and HA</em> rules will be configured.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+<pre class="highlight plaintext"><code>resource "ibm_firewall" "demofw" {
+  ha_enabled = false
+  public_vlan_id = 1234567
 }
 
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
+resource "ibm_firewall_policy" "rules" {
+ firewall_id = "${ibm_firewall.demofw.id}"
+ rules = {
+      "action" = "permit"
+      "src_ip_address"= "10.1.1.0"
+      "src_ip_cidr"= 24
+      "dst_ip_address"= "any"
+      "dst_ip_cidr"= 32
+      "dst_port_range_start"= 80
+      "dst_port_range_end"= 80
+      "notes"= "Permit from 10.1.1.0"
+      "protocol"= "udp"
+ }
+  rules = {
+       "action" = "deny"
+       "src_ip_address"= "10.1.1.0"
+       "src_ip_cidr"= 24
+       "dst_ip_address"= "any"
+       "dst_ip_cidr"= 32
+       "dst_port_range_start"= 81
+       "dst_port_range_end"= 81
+       "notes"= "Permit from 10.1.1.0"
+       "protocol"= "udp"
+  }
 }
-
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-</code></pre>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">firewall_id</code> - (Required, integer) The device ID for the target hardware firewall.</li>
+<li><code class="prettyprint">rules</code> - (Required, array) The firewall rules. At least one rule is required.</li>
+<li><code class="prettyprint">rules.action</code> - (Required, string) Specifies whether traffic is allowed when rules are matched. Accepted values are <code class="prettyprint">permit</code> or <code class="prettyprint">deny</code>.</li>
+<li><code class="prettyprint">rules.src_ip_address</code> - (Required, string) Specifies either a specific IP address or the network address for a specific subnet.</li>
+<li><code class="prettyprint">rules.src_ip_cidr</code> - (Required, string) Specifies the standard CIDR notation for the selected source. <code class="prettyprint">32</code> implements the rule for a single IP while, for example, <code class="prettyprint">24</code> implements the rule for 256 IPs.</li>
+<li><code class="prettyprint">rules.dst_ip_address</code> - (Required, string) Accepted values are <code class="prettyprint">any</code>, a specific IP address, or the network address for a specific subnet.</li>
+<li><code class="prettyprint">rules.dst_ip_cidr</code> - (Required, string) Specifies the standard CIDR notation for the selected destination.</li>
+<li><code class="prettyprint">rules.dst_port_range_start</code> - (Optional, string) The start of the range of ports for TCP and UDP. Accepted values are <code class="prettyprint">1</code> - <code class="prettyprint">65535</code>.</li>
+<li><code class="prettyprint">rules.dst_port_range_end</code> - (Optional, string) The end of the range of ports for TCP and UDP. Accepted values are <code class="prettyprint">1</code> - <code class="prettyprint">65535</code>.</li>
+<li><code class="prettyprint">rules.notes</code> - (Optional, string) Descriptive text about the rule.</li>
+<li><code class="prettyprint">rules.protocol</code> - (Required, string) The protocol for the rule. Accepted values are <code class="prettyprint">tcp</code>,<code class="prettyprint">udp</code>,<code class="prettyprint">icmp</code>,<code class="prettyprint">gre</code>,<code class="prettyprint">pptp</code>,<code class="prettyprint">ah</code>, or <code class="prettyprint">esp</code>.</li>
+<li><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the firewall policy instance.<br>
+<strong>NOTE</strong>: <code class="prettyprint">Tags</code> are managed locally and not stored on the IBM Cloud service endpoint at this moment.</li>
 </ul>
-
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
-
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps:</p>
-
-<ol>
-<li><p><a href="https://www.terraform.io/intro/getting-started/install.html">Download and install Terraform for your system. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p><a href="https://github.com/IBM-Bluemix/terraform-provider-ibm/releases">Download the Terraform binary for the IBM Cloud provider. <i class="fa fa-external-link" alt="External link icon"></i></a></p></li>
-<li><p>Create a <code class="prettyprint">.terraformrc</code> file that points to the IBM Cloud Provider binary. <em>NOTE: the <code class="prettyprint">.terraformrc</code> file <em>must be created in your home directory</em></em></p>
-
-<p>In the following example, <code class="prettyprint">/opt/provider/terraform-provider-ibm</code> is where the IBM Cloud Provider binary is downloaded to from step #2 above.</p>
-<pre class="highlight plaintext"><code>    # ~/.terraformrc
-    providers {
-        ibm = "/opt/provider/terraform-provider-ibm"
-    }
-</code></pre></li>
-<li><p>Configure the plug-in provider and your IBM credentials to work with Terraform.</p>
-
-<p>To provide your credentials as environment variables, you can use the following code in your <code class="prettyprint">.tf</code> file.</p>
-<pre class="highlight plaintext"><code>    provider "ibm" {
-      bluemix_api_key    = "${var.ibm_bx_api_key}"
-      softlayer_username = "${var.ibm_sl_username}"
-      softlayer_api_key  = "${var.ibm_sl_api_key}"
-    }
-</code></pre>
-
-<p>Be sure to also define these variables in your <code class="prettyprint">.tf</code> files:</p>
-<pre class="highlight plaintext"><code>    variable ibm_bx_api_key {}
-    variable ibm_sl_username {}
-    variable ibm_sl_api_key {}
-</code></pre>
-
-<p>You can then export your credentials in your terminal, where <code class="prettyprint">$VALUE</code> is your credential.</p>
-<pre class="highlight shell"><code>    <span class="nb">export </span><span class="nv">TF_VAR_ibm_bx_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_username</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-    <span class="nb">export </span><span class="nv">TF_VAR_ibm_sl_api_key</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VALUE</span><span class="s2">"</span>
-</code></pre></li>
-</ol>
 
       </div>
     </div>
@@ -623,6 +544,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
