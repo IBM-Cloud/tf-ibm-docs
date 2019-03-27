@@ -1,0 +1,780 @@
+<!-- begin _meta.erb -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="IBM Cloud Provider for Terraform(tm) documentation">
+    <title>
+      IBM Cloud Provider for Terraform(tm) Documentation
+    </title>
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <!-- these were in footer_scripts.html but need to load early or refactor -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <!-- end _meta.erb -->
+
+<body>
+  <nav class="top-block navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/tf-ibm-docs/index.html">IBM Cloud Provider for Terraform&trade;</a>
+      <i class="navbar-brand version-header">
+        VERSION: v0.15.1
+      </i>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      
+<div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+    <div class="sidebar-content">
+        <ul class="list-unstyled">
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/account.html">account</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/app.html">app</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/app_route.html">app_route</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/org.html">org</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/org_quota.html">org_quota</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/resource_group.html">resource_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/resource_quota.html">resource_quota</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/resource_instance.html">resource_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/resource_key.html">resource_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/service_instance.html">service_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/service_key.html">service_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/service_plan.html">service_plan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/space.html">space</a>
+                    </li>
+                  </ul>
+            </li>        
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/container_cluster.html">container_cluster</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/container_cluster_config.html">container_cluster_config</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/container_cluster_worker.html">container_cluster_worker</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/container_cluster_versions.html">container_cluster_versions</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/cis.html">cis</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/cis_domain.html">cis_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/cis_ip_addresses.html">cis_ip_addresses</a>
+                    </li>
+
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/compute_bare_metal.html">compute_bare_metal</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/compute_image_template.html">compute_image_template</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/compute_placement_group.html">compute_placement_group</a>
+                    </li>    
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/database.html">database</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/dns_domain_registration.html">dns_domain_registration</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/dns_secondary.html">dns_secondary</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/lbaas.html">lbaas</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/security_group.html">security_group</a>
+                    </li>      
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Functions Data Sources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/function_action.html">function_action</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/function_package.html">function_package</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/function_rule.html">function_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/d/function_trigger.html">function_trigger</a>
+                    </li>
+                </ul>
+            </li>            
+            <li>
+            <label class="tree-toggle">
+            <i class="fa fa-caret-down"></i>
+            IAM Data Sources
+            </label>
+            <ul class="list-unstyled tree">
+                <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/iam_service_id.html">iam_service_id</a>
+                </li>
+                <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/iam_service_policy.html">iam_service_policy</a>
+                </li>
+                <li>
+                    <a href="/tf-ibm-docs/v0.15.1/d/iam_user_policy.html">iam_user_policy</a>
+                </li>
+            </ul>
+            </li>            
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Cloud Foundry Resources
+                </label>
+                <ul class="list-unstyled tree">              
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/r/app.html">app</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/app_domain_private.html">app_domain_private</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/app_domain_shared.html">app_domain_shared</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/app_route.html">app_route</a>
+                    </li>
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/r/org.html">org</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/resource_group.html">resource_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/resource_instance.html">resource_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/resource_key.html">resource_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/service_instance.html">service_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/service_key.html">service_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/space.html">space</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Container Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/r/container_bind_service.html">container_bind_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/container_cluster.html">container_cluster</a>
+                    </li>                
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/container_worker_pool.html">container_worker_pool</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/container_worker_pool_zone_attachment.html">container_worker_pool_zone_attachment</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Function Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/r/function_action.html">function_action</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/function_package.html">function_package</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/function_rule.html">function_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/function_trigger.html">function_trigger</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                IAM Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_access_group.html">iam_access_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_access_group_members.html">iam_access_group_members</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_access_group_policy.html">iam_access_group_policy</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_service_id.html">iam_service_id</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_service_policy.html">iam_service_policy</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/iam_user_policy.html">iam_user_policy</a>
+                    </li>
+                </ul>
+            </li>
+        
+            <li>
+                <label class="tree-toggle">
+                <i class="fa fa-caret-down"></i>
+                Infrastructure Resources
+                </label>
+                <ul class="list-unstyled tree">
+                    <li>
+                    <a href="/tf-ibm-docs/v0.15.1/r/cis.html">cis</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_domain.html">cis_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_domain_settings.html">cis_domain_settings</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_dns_record.html">cis_dns_record</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_global_load_balancer.html">cis_global_load_balancer</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_healthcheck.html">cis_healthcheck</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/cis_origin_pool.html">cis_origin_pool</a>
+                    </li>
+
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_autoscale_group.html">compute_autoscale_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_bare_metal.html">compute_bare_metal</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_dedicated_host.html">compute_dedicated_host</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_monitor.html">compute_monitor</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_placement_group.html">compute_placement_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_ssh_key.html">compute_ssh_key</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_user.html">compute_user</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/compute_vm_instance.html">compute_vm_instance</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/database.html">database</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/dns_domain.html">dns_domain</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/dns_domain_registration_nameservers.html">dns_domain_registration_nameservers</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/dns_secondary.html">dns_secondary</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/dns_record.html">dns_record</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/firewall.html">firewall</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/multivlan_firewall.html">multivlan-firewall</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/firewall_policy.html">firewall_policy</a>
+                    </li>                                       
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb.html">lb</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lbaas.html">lbaas</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lbaas_health_monitor.html">lbaas_health_monitor</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lbaas_server_instance_attachment.html">lbaas_server_instance_attachment</a>
+                    </li>                                      
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_service.html">lb_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_service_group.html">lb_service_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_vpx.html">lb_vpx</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_vpx_ha.html">lb_vpx_ha</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_vpx_service.html">lb_vpx_service</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/lb_vpx_vip.html">lb_vpx_vip</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_gateway.html">network_gateway</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_gateway_vlan_association.html">network_gateway_vlan_association</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_interface_sg_attachment.html">network_interface_sg_attachment</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_public_ip.html">network_public_ip</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_vlan.html">network_vlan</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/network_vlan_spanning.html">network_vlan_spanning</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/object_storage_account.html">object_storage_account</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/security_group.html">security_group</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/security_group_rule.html">security_group_rule</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/storage_block.html">storage_block</a>
+                    </li>                        
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/storage_evault.html">storage_evault</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/storage_file.html">storage_file</a>
+                    </li>
+                    <li>
+                        <a href="/tf-ibm-docs/v0.15.1/r/subnet.html">subnet</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+<span id="sidebar-tab" class="pull-left glyphicon glyphicon-chevron-left"></span>
+</div>
+
+      <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <h1 id="ibm_compute_vm_instance">ibm_compute_vm_instance</h1>
+
+<p>Provides a resource for VM instances. This allows VM instances to be created, updated, and deleted.</p>
+
+<p>For additional details, see the <a href="http://sldn.softlayer.com/reference/services/SoftLayer_Virtual_Guest">IBM Cloud Infrastructure (SoftLayer) API docs</a>.</p>
+
+<p><strong>NOTE</strong>: Update is not supported when the <code class="prettyprint">bulk_vms</code> parameter is used.</p>
+
+<h2 id="example-usage">Example Usage</h2>
+
+<p>In the following example, you can create a VM instance using a Debian image:</p>
+<pre class="highlight plaintext"><code>resource "ibm_compute_vm_instance" "twc_terraform_sample" {
+    hostname = "twc-terraform-sample-name"
+    domain = "bar.example.com"
+    os_reference_code = "DEBIAN_8_64"
+    datacenter = "wdc01"
+    network_speed = 10
+    hourly_billing = true
+    private_network_only = false
+    cores = 1
+    memory = 1024
+    disks = [25, 10, 20]
+    user_metadata = "{\"value\":\"newvalue\"}"
+    dedicated_acct_host_only = true
+    local_disk = false
+    public_vlan_id = 1391277
+    private_vlan_id = 7721931
+    private_security_group_ids = [576973]
+}
+</code></pre>
+
+<p>In the following example, you can create a VM instance using a block device template:</p>
+<pre class="highlight plaintext"><code>resource "ibm_compute_vm_instance" "terraform-sample-BDTGroup" {
+   hostname = "terraform-sample-blockDeviceTemplateGroup"
+   domain = "bar.example.com"
+   datacenter = "ams01"
+   public_network_speed = 10
+   hourly_billing = false
+   cores = 1
+   memory = 1024
+   local_disk = false
+   image_id = 12345
+   tags = [
+     "collectd",
+     "mesos-master"
+   ]
+   public_subnet = "50.97.46.160/28"
+   private_subnet = "10.56.109.128/26"
+}
+</code></pre>
+
+<p>In the following example, you can create a VM instance using a flavor:</p>
+<pre class="highlight plaintext"><code>resource "ibm_compute_vm_instance" "terraform-sample-flavor" {
+    hostname = "terraform-sample-flavor"
+    domain = "bar.example.com"
+    os_reference_code = "DEBIAN_8_64"
+    datacenter = "dal06"
+    network_speed = 10
+    hourly_billing = true
+    local_disk = false
+    private_network_only = false
+    flavor_key_name = "B1_2X8X25"
+    user_metadata = "{\\\"value\\\":\\\"newvalue\\\"}"
+    // provide disk 3, 4, 5 and so on
+    disks = [10, 20, 30]
+    tags = ["collectd"]
+    // It should be false
+    dedicated_acct_host_only = false
+    ipv6_enabled = true
+    secondary_ip_count = 4
+    notes = "VM notes"
+}
+</code></pre>
+
+<p>In the following example, you can create multiple vm&rsquo;s</p>
+<pre class="highlight plaintext"><code>resource "ibm_compute_vm_instance" "terraform-bulk-vms" {
+  bulk_vms = [{
+    hostname = "vm1"
+
+    domain = "bar.example.com"
+  },
+    {
+      hostname = "vm2"
+
+      domain = "bar.example.com"
+    },
+  ]
+
+  os_reference_code    = "CENTOS_7_64"
+  datacenter           = "dal09"
+  network_speed        = 100
+  hourly_billing       = true
+  private_network_only = true
+  cores                = 1
+  memory               = 1024
+  disks                = [25]
+  local_disk           = false
+}
+</code></pre>
+
+<p>In the following example, you can retry to create a VM instance using a datacenter_choice. If VM fails to place order on first datacenter or vlans it retries to place order on subsequent datacenters and vlans untill place order is successfull:</p>
+<pre class="highlight plaintext"><code>resource "ibm_compute_vm_instance" "terraform-retry" {
+  hostname          = "vmretry"
+  domain            = "example.com"
+  network_speed     = 100
+  hourly_billing    = true
+  cores             = 1
+  memory            = 1024
+  local_disk        = false
+  os_reference_code = "DEBIAN_7_64"
+  disks             = [25]
+
+  datacenter_choice = [
+    {
+      datacenter      = "dal09"
+      public_vlan_id  = 123245
+      private_vlan_id = 123255
+    },
+    {
+      datacenter = "wdc54"
+    },
+    {
+      datacenter      = "dal09"
+      public_vlan_id  = 153345
+      private_vlan_id = 123255
+    },
+    {
+      datacenter = "dal06"
+    },
+    {
+      datacenter      = "dal09"
+      public_vlan_id  = 123245
+      private_vlan_id = 123255
+    },
+    {
+      datacenter      = "dal09"
+      public_vlan_id  = 1232454
+      private_vlan_id = 1234567
+    },
+  ]
+}
+
+</code></pre>
+
+<h2 id="argument-reference">Argument Reference</h2>
+
+<p>The following arguments are supported:</p>
+
+<ul>
+<li><code class="prettyprint">hostname</code> - (Optional, string) The hostname for the computing instance.</br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">bulk_vms</code>.</li>
+<li><code class="prettyprint">domain</code> - (Optional, string)  The domain for the computing instance.</br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">bulk_vms</code>.</li>
+<li><code class="prettyprint">bulk_vms</code> - (Optional, list) List of hostname and domain of the computing instance. The minimum number of vm&rsquo;s to be defined is 2. Nested <code class="prettyprint">bulk_vms</code> blocks must have the following structure:
+
+<ul>
+<li><code class="prettyprint">hostname</code> - (Required, string) The hostname for the computing instance.</li>
+<li><code class="prettyprint">domain</code> - (Required, string) The domain for the computing instance.</br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">hostname</code> and <code class="prettyprint">domain</code>.</li>
+</ul></li>
+<li><code class="prettyprint">cores</code> - (Optional, integer) The number of CPU cores that you want to allocate.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">flavor_key_name</code>.</li>
+<li><code class="prettyprint">memory</code> - (Optional, integer) The amount of memory, expressed in megabytes, that you want to allocate.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">flavor_key_name</code>.</li>
+<li><code class="prettyprint">flavor_key_name</code> - (Optional, string) The flavor key name that you want to use to provision the instance. To see available Flavor key name, log in to the <a href="https://api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/getCreateObjectOptions.json">IBM Cloud Infrastructure (SoftLayer) API</a>, using your API key as the password.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">cores</code> and <code class="prettyprint">memory</code>.</li>
+<li><code class="prettyprint">datacenter</code> - (Optional, string) The datacenter in which you want to provision the instance.<br>
+<strong>NOTE</strong>: If <code class="prettyprint">dedicated_host_name</code> or <code class="prettyprint">dedicated_host_id</code>
+is provided then the datacenter should be same as the dedicated host datacenter. 
+If <code class="prettyprint">placement_group_name</code> or <code class="prettyprint">placement_group_id</code>
+is provided then the datacenter should be same as the placement group datacenter.
+Conflicts with <code class="prettyprint">datacenter_choice</code>. </li>
+<li><code class="prettyprint">hourly_billing</code> - (Optional, boolean) The billing type for the instance. When set to <code class="prettyprint">true</code>, the computing instance is billed on hourly usage. Otherwise, the instance is billed on a monthly basis. The default value is <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">local_disk</code>- (Optional, boolean) The disk type for the instance. When set to <code class="prettyprint">true</code>, the disks for the computing instance are provisioned on the host that the instance runs. Otherwise, SAN disks are provisioned. The default value is <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">dedicated_acct_host_only</code> - (Optional, boolean) Specifies whether the instance must only run on hosts with instances from the same account. The default value is <code class="prettyprint">false</code>. If VM is provisioned using flavorKeyName, value should be set to <code class="prettyprint">false</code>.<br>
+ <strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_host_name</code>, <code class="prettyprint">dedicated_host_id</code>, <code class="prettyprint">placement_group_name</code> and <code class="prettyprint">placement_group_id</code>.</li>
+<li><code class="prettyprint">dedicated_host_id</code> - (Optional, integer) Specifies <a href="https://console.bluemix.net/docs/vsi/vsi_dedicated.html">dedicated host</a> for the instance by its id.<br>
+ <strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_acct_host_only</code>, <code class="prettyprint">dedicated_host_name</code>, <code class="prettyprint">placement_group_name</code> and <code class="prettyprint">placement_group_id</code>.</li>
+<li><code class="prettyprint">dedicated_host_name</code> - (Optional, string) Specifies <a href="https://console.bluemix.net/docs/vsi/vsi_dedicated.html">dedicated host</a> for the instance by its name.<br>
+ <strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_acct_host_only</code>, <code class="prettyprint">dedicated_host_id</code>, <code class="prettyprint">placement_group_name</code> and <code class="prettyprint">placement_group_id</code>.</li>
+<li><code class="prettyprint">placement_group_id</code> - (Optional, integer) Specifies <a href="https://console.bluemix.net/docs/vsi/vsi_dedicated.html">placement group</a> for the instance by its id.<br>
+ <strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_acct_host_only</code>, <code class="prettyprint">dedicated_host_name</code>, <code class="prettyprint">dedicated_host_id</code> and <code class="prettyprint">placement_group_name</code>.</li>
+<li><code class="prettyprint">placement_group_name</code> - (Optional, string) Specifies <a href="https://console.bluemix.net/docs/vsi/vsi_dedicated.html">placement group</a> for the instance by its name.<br>
+ <strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_acct_host_only</code>, <code class="prettyprint">dedicated_host_id</code>, <code class="prettyprint">dedicated_host_name</code> and <code class="prettyprint">placement_group_id</code></li>
+<li><code class="prettyprint">transient</code> - (Optional, boolean) Specifies whether to provision a transient virtual server. The default value is <code class="prettyprint">false</code>. Transient instances cannot be upgraded or downgraded. Transient instances cannot use local storage.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">dedicated_acct_host_only</code>, <code class="prettyprint">dedicated_host_id</code>, <code class="prettyprint">dedicated_host_name</code>, <code class="prettyprint">cores</code>, <code class="prettyprint">memory</code>, <code class="prettyprint">public_bandwidth_limited</code> and <code class="prettyprint">public_bandwidth_unlimited</code></li>
+<li><code class="prettyprint">os_reference_code</code> - (Optional, string) The operating system reference code that is used to provision the computing instance. To see available OS reference codes, log in to the <a href="https://api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest_Block_Device_Template_Group/getVhdImportSoftwareDescriptions.json?objectMask=referenceCode">IBM Cloud Infrastructure (SoftLayer) API</a>, using your API key as the password.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">image_id</code>.</li>
+<li><p><code class="prettyprint">image_id</code> - (Optional, integer) The image template ID you want to use to provision the computing instance. This is not the global identifier (UUID), but the image template group ID that should point to a valid global identifier. To retrieve the image template ID from the IBM Cloud infrastructure customer portal, navigate to <strong>Devices &gt; Manage &gt; Images</strong>, click the desired image, and note the ID number in the resulting URL.  </p>
+
+<p><strong>NOTE</strong>: Conflicts with <code class="prettyprint">os_reference_code</code>. If you don&rsquo;t know the ID(s) of your image templates, you can <a href="/v0.15.1/d/compute_image_template.html">refer to an image template ID by name using a data source</a>.</p></li>
+<li><p><code class="prettyprint">network_speed</code> - (Optional, integer) The connection speed (in Mbps) for the instance&rsquo;s network components. The default value is <code class="prettyprint">100</code>.</p></li>
+<li><p><code class="prettyprint">private_network_only</code> - (Optional, boolean) When set to <code class="prettyprint">true</code>, a compute instance only has access to the private network. The default value is <code class="prettyprint">false</code>.</p></li>
+<li><p><code class="prettyprint">private_security_group_ids</code> - (Optional, array of integers) The ids of security groups to apply on the private interface.
+This attribute can&rsquo;t be updated. This is provided so that you can apply security groups to  your VSI right from the beginning, the first time it comes up. If you would like to add or remove security groups in the future to this VSI then you should consider using <code class="prettyprint">ibm_network_interface_sg_attachment</code> resource. If you use this attribute in addition to <code class="prettyprint">ibm_network_interface_sg_attachment</code> resource you might get some spurious diffs. So use one of these consistently for a particular VSI.</p></li>
+<li><p><code class="prettyprint">public_vlan_id</code> - (Optional, integer) The public VLAN ID for the public network interface of the instance. Accepted values are in the <a href="https://control.softlayer.com/network/vlans">VLAN doc</a>. Click the desired VLAN and note the ID number in the browser URL. You can also <a href="/v0.15.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">datacenter_choice</code>.</p></li>
+<li><p><code class="prettyprint">private_vlan_id</code> - (Optional, integer) The private VLAN ID for the private network interface of the instance. You can find accepted values in the <a href="https://control.softlayer.com/network/vlans">VLAN doc</a>. Click the desired VLAN and note the ID number in the browser URL. You can also <a href="/v0.15.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">datacenter_choice</code>.</p></li>
+<li><p><code class="prettyprint">public_security_group_ids</code> - (Optional, array of integers) The ids of security groups to apply on the public interface.
+This attribute can&rsquo;t be updated. This is provided so that you can apply security groups to  your VSI right from the beginning, the first time it comes up. If you would like to add or remove security groups in the future to this VSI then you should consider using <code class="prettyprint">ibm_network_interface_sg_attachment</code> resource. If you use this attribute in addition to <code class="prettyprint">ibm_network_interface_sg_attachment</code> resource you might get some spurious diffs. So use one of these consistently for a particular VSI.</p></li>
+<li><p><code class="prettyprint">public_subnet</code> - (Optional, string) The public subnet for the public network interface of the instance. Accepted values are primary public networks. You can find accepted values in the <a href="https://control.softlayer.com/network/subnets">subnets doc</a>.</p></li>
+<li><p><code class="prettyprint">private_subnet</code> - (Optional, string) The private subnet for the private network interface of the instance. Accepted values are primary private networks. You can find accepted values in the <a href="https://control.softlayer.com/network/subnets">subnets doc</a>.</p></li>
+<li><p><code class="prettyprint">disks</code> - (Optional, array of integers) The numeric disk sizes (in GBs) for the instance&rsquo;s block device and disk image settings. The default value is the smallest available capacity for the primary disk. If you specify an image template, the template provides the disk capacity. If you specify the flavorKeyName, first disk is provided by the flavor.</p></li>
+<li><p><code class="prettyprint">user_metadata</code> - (Optional, string) Arbitrary data to be made available to the computing instance.</p></li>
+<li><p><code class="prettyprint">notes</code> - (Optional, string) Descriptive text of up to 1000 characters about the VM instance.</p></li>
+<li><p><code class="prettyprint">ssh_key_ids</code> - (Optional, array of numbers) The SSH key IDs to install on the computing instance when the instance provisions.<br>
+<strong>NOTE:</strong> If you don&rsquo;t know the ID(s) for your SSH keys, you can <a href="/v0.15.1/d/compute_ssh_key.html">reference your SSH keys by their labels</a>.</p></li>
+<li><p><code class="prettyprint">file_storage_ids</code> - (Optional, array of numbers) File storage to which this computing instance should have access. File storage must be in the same data center as the bare metal server. If you use this argument to authorize access to file storage, then do not use the <code class="prettyprint">allowed_virtual_guest_ids</code> argument in the <code class="prettyprint">ibm_storage_file</code> resource in order to prevent the same storage being added twice.</p></li>
+<li><p><code class="prettyprint">block_storage_ids</code> - (Optional, array of numbers) File storage to which this computing instance should have access. File storage must be in the same data center as the bare metal server. If you use this argument to authorize access to file storage, then do not use the <code class="prettyprint">allowed_virtual_guest_ids</code> argument in the <code class="prettyprint">ibm_storage_block</code> resource in order to prevent the same storage being added twice.</p></li>
+<li><p><code class="prettyprint">post_install_script_uri</code> - (Optional, string) The URI of the script to be downloaded and executed after installation is complete.</p></li>
+<li><p><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the VM instance. Permitted characters include: A-Z, 0-9, whitespace, _ (underscore), - (hyphen), . (period), and : (colon). All other characters are removed.</p></li>
+<li><p><code class="prettyprint">ipv6_enabled</code> - (Optional, boolean) The primary public IPv6 address. The default value is <code class="prettyprint">false</code>.</p></li>
+<li><p><code class="prettyprint">ipv6_static_enabled</code> - (Optional, boolean) The public static IPv6 address block of <code class="prettyprint">/64</code>. The default value is <code class="prettyprint">false</code>.</p></li>
+<li><p><code class="prettyprint">secondary_ip_count</code> - (Optional, integer) Specifies secondary public IPv4 addresses. Accepted values are <code class="prettyprint">4</code> and <code class="prettyprint">8</code>.</p></li>
+<li><p><code class="prettyprint">wait_time_minutes</code> - (Optional, integer) The duration, expressed in minutes, to wait for the VM instance to become available before declaring it as created. It is also the same amount of time waited for no active transactions before proceeding with an update or deletion. The default value is <code class="prettyprint">90</code>.</p></li>
+<li><p><code class="prettyprint">public_bandwidth_limited</code> - (Optional, int). Allowed public network traffic(GB) per month. It can be greater than 0 when the server is a monthly based server. Defaults to the smallest available capacity for the public bandwidth are used.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">private_network_only</code> and <code class="prettyprint">public_bandwidth_unlimited</code>.</p></li>
+<li><p><code class="prettyprint">public_bandwidth_unlimited</code> - (Optional, boolean). Allowed unlimited public network traffic(GB) per month for a monthly based server. The <code class="prettyprint">network_speed</code> should be 100 Mbps. Default value: <code class="prettyprint">false</code>.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">private_network_only</code> and <code class="prettyprint">public_bandwidth_limited</code>.</p></li>
+<li><p><code class="prettyprint">evault</code> - (Optional, int). Allowed evault(GB) per month for monthly based servers.</p></li>
+<li><p><code class="prettyprint">datacenter_choice</code> - (Optional, list) A nested block to describe datacenter choice options to retry on different datacenters and vlans. Nested <code class="prettyprint">datacenter_choice</code> blocks must have the following structure:</p>
+
+<ul>
+<li><code class="prettyprint">datacenter</code> - (Required, string) The datacenter in which you want to provision the instance.</li>
+<li><code class="prettyprint">public_vlan_id</code> - (Optional, string) The public VLAN ID for the public network interface of the instance. Accepted values are in the <a href="https://control.softlayer.com/network/vlans">VLAN doc</a>. Click the desired VLAN and note the ID number in the browser URL. You can also <a href="/v0.15.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.</li>
+<li><code class="prettyprint">private_vlan_id</code> - (Optional, string) The private VLAN ID for the private network interface of the instance. You can find accepted values in the <a href="https://control.softlayer.com/network/vlans">VLAN doc</a>. Click the desired VLAN and note the ID number in the browser URL. You can also <a href="/v0.15.1/d/network_vlan.html">refer to a VLAN by name using a data source</a>.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">datacenter</code>, <code class="prettyprint">private_vlan_id</code>, <code class="prettyprint">public_vlan_id</code>, <code class="prettyprint">placement_group_name</code> and <code class="prettyprint">placement_group_id</code>.</li>
+</ul></li>
+</ul>
+
+<h2 id="attribute-reference">Attribute Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the VM instance.</li>
+<li><code class="prettyprint">ipv4_address</code> - The public IPv4 address of the VM instance.</li>
+<li><code class="prettyprint">ip_address_id_private</code> - The unique identifier for the private IPv4 address assigned to the VM instance.</li>
+<li><code class="prettyprint">ipv4_address_private</code> - The private IPv4 address of the VM instance.</li>
+<li><code class="prettyprint">ip_address_id</code> - The unique identifier for the public IPv4 address assigned to the VM instance.</li>
+<li><code class="prettyprint">ipv6_address</code> - The public IPv6 address of the VM instance provided when <code class="prettyprint">ipv6_enabled</code> is set to <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">ipv6_address_id</code> - The unique identifier for the public IPv6 address assigned to the VM instance provided when <code class="prettyprint">ipv6_enabled</code> is set to <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">private_subnet_id</code> - The unique identifier of the subnet <code class="prettyprint">ipv4_address_private</code> belongs to.</li>
+<li><code class="prettyprint">public_ipv6_subnet</code> - The public IPv6 subnet provided when <code class="prettyprint">ipv6_enabled</code> is set to <code class="prettyprint">true</code>.</li>
+<li><code class="prettyprint">public_ipv6_subnet_id</code> - The unique identifier of the subnet <code class="prettyprint">ipv6_address</code> belongs to.</li>
+<li><code class="prettyprint">public_subnet_id</code> - The unique identifier of the subnet <code class="prettyprint">ipv4_address</code> belongs to.</li>
+<li><code class="prettyprint">secondary_ip_addresses</code> - The public secondary IPv4 addresses of the VM instance.</li>
+<li><code class="prettyprint">public_interface_id</code> - The ID of the primary public interface.</li>
+<li><code class="prettyprint">private_interface_id</code> - The ID of the primary private interface.</li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="col-md-9">
+      <ul class="list-inline social-list">
+        <li>
+          <a href="https://github.com/IBM-Bluemix/terraform-provider-ibm">
+            <i class="fa fa-lg fa-github"></i>
+            GitHub</a>
+        </li>
+        <li>
+          <a href="https://ibm-cloud-schematics.slack.com/signup">
+            <i class="fa fa-lg fa-slack"></i>
+            Slack</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      IBM Cloud Provider for Terraform&trade;
+    </div>
+  </div>
+</footer>
+
+  <script src="../../javascript/sidemenu.js"></script>
+</body>
+</html>
