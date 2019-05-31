@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -620,115 +620,78 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_cis_origin_pool">ibm_cis_origin_pool</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
-
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
-
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.16.0">v0.16.0</a></li>
-<li><a href="/tf-ibm-docs/v0.16.1">v0.16.1</a></li>
-<li><a href="/tf-ibm-docs/v0.17.0">v0.17.0</a></li>
-</ul>
+<p>Provides a IBM Cloud Internet Services origin pool resource. This provides a pool of origins that can be used by a IBM CIS Global Load Balancer. This resource is associated with an IBM Cloud Internet Services instance and optionally a CIS Healthcheck monitor resource. </p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+<pre class="highlight plaintext"><code>resource "ibm_cis_origin_pool" "example" {
+  cis_id = "${ibm_cis.instance.id}"
+  name = "example-pool"
+  origins {
+    name = "example-1"
+    address = "192.0.2.1"
+    enabled = false
+  }
+  origins {
+    name = "example-2"
+    address = "192.0.2.2"
+  }
+  description = "example load balancer pool"
+  enabled = false
+  minimum_origins = 1
+  notification_email = "someone@example.com"
 }
-
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
-
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-</code></pre>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">cis_id</code> - (Required) The ID of the CIS service instance</li>
+<li><code class="prettyprint">name</code> - (Required) A short name (tag) for the pool. Only alphanumeric characters, hyphens, and underscores are allowed.</li>
+<li><code class="prettyprint">origins</code> - (Required) The list of origins within this pool. Traffic directed at this pool is balanced across all currently healthy origins, provided the pool itself is healthy. It&rsquo;s a complex value. See description below.</li>
+<li><code class="prettyprint">check_regions</code> - (Optional) A list of regions (specified by region code) from which to run health checks. Empty means every region (the default), but requires an Enterprise plan. Region codes can be found on our partner Cloudflare&rsquo;s website <a href="https://support.cloudflare.com/hc/en-us/articles/115000540888-Load-Balancing-Geographic-Regions">here</a>.</li>
+<li><code class="prettyprint">description</code> - (Optional) Free text description.</li>
+<li><code class="prettyprint">enabled</code> - (Optional) Whether to enable (the default) this pool. Disabled pools will not receive traffic and are excluded from health checks. Disabling a pool will cause any load balancers using it to failover to the next pool (if any).</li>
+<li><code class="prettyprint">minimum_origins</code> - (Optional) The minimum number of origins that must be healthy for this pool to serve traffic. If the number of healthy origins falls below this number, the pool will be marked unhealthy and we will failover to the next available pool. Default: 1.</li>
+<li><code class="prettyprint">monitor</code> - (Optional) The ID of the Monitor to use for health checking origins within this pool.</li>
+<li><code class="prettyprint">notification_email</code> - (Optional) The email address to send health status notifications to. This can be an individual mailbox or a mailing list.</li>
 </ul>
 
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+<p>The <strong>origins</strong> block supports:</p>
 
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps in the IBM Cloud docs for terraform here: <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install" alt="installing IBM terraform provider">Installing the Terraform CLI and IBM Cloud Provide (IBM docs)</a></p>
+<ul>
+<li><code class="prettyprint">name</code> - (Required) A human-identifiable name for the origin.</li>
+<li><code class="prettyprint">address</code> - (Required) The IP address (IPv4 or IPv6) of the origin, or the publicly addressable hostname. Hostnames entered here should resolve directly to the origin, and not be a hostname proxied by CIS.</li>
+<li><code class="prettyprint">enabled</code> - (Optional) Whether to enable (the default) this origin within the Pool. Disabled origins will not receive traffic and are excluded from health checks. The origin will only be disabled for the current pool.</li>
+</ul>
+
+<h2 id="attributes-reference">Attributes Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - ID for this load balancer pool.</li>
+<li><code class="prettyprint">created_on</code> - The RFC3339 timestamp of when the load balancer was created.</li>
+<li><code class="prettyprint">modified_on</code> - The RFC3339 timestamp of when the load balancer was last modified.</li>
+</ul>
+
+<h2 id="import">Import</h2>
+
+<p>The <code class="prettyprint">ibm_cis_origin_pool</code> resource can be imported using the <code class="prettyprint">id</code>. The ID is formed from the <code class="prettyprint">Origin Pool Id</code> and the <code class="prettyprint">CRN</code> (Cloud Resource Name) concatentated usinga <code class="prettyprint">:</code> character.  </p>
+
+<p>The CRN will be located on the <strong>Overview</strong> page of the Internet Services instance under the <strong>Domain</strong> heading. </p>
+
+<ul>
+<li><p><strong>CRN</strong> is a 120 digit character string of the form: <code class="prettyprint">crn:v1:bluemix:public:internet-svcs:global:a/4ea1882a2d3401ed1e459979941966ea:31fa970d-51d0-4b05-893e-251cba75a7b3::</code></p></li>
+<li><p><strong>Origin Pool ID</strong> is a 32 digit character string of the form: <code class="prettyprint">000f57b5c42bcff3c02d155c2d58aa97</code>. The id of an existing pool is not available via the UI. It can be retrieved programmatically via the CIS API or via the CLI using the CIS command to list the defined GLBs:  <code class="prettyprint">bx cis glb-pools</code> </p></li>
+</ul>
+<pre class="highlight plaintext"><code>$ terraform import ibm_cis_origin_pool.myorg &lt;origin_pool_id&gt;:&lt;crn&gt;
+
+$ terraform import origin_pool.myorg 000f57b5c42bcff3c02d155c2d58aa97:crn:v1:bluemix:public:internet-svcs:global:a/4ea1882a2d3401ed1e459979941966ea:31fa970d-51d0-4b05-893e-251cba75a7b3::
+</code></pre>
 
       </div>
     </div>
@@ -755,6 +718,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>

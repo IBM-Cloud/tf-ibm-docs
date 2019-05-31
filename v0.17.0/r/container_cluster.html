@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -620,115 +620,187 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_container_cluster">ibm_container_cluster</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>Create, update, or delete a Kubernetes cluster. An existing subnet can be attached to the cluster by passing the subnet ID. A webhook can be registered to a cluster. By default, your single zone cluster is set up with a worker pool that is named default.
+During the creation of cluster the workers are created with the kube version by default. </p>
 
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
+<p><strong>Before updating the version of cluster and workers via terraform get the list of available updates and their pre and post update instructions at <a href="https://console.bluemix.net/docs/containers/cs_versions.html#version_types">https://console.bluemix.net/docs/containers/cs_versions.html#version_types</a>. Also please go through the instructions at <a href="https://console.bluemix.net/docs/containers/cs_cluster_update.html#update">https://console.bluemix.net/docs/containers/cs_cluster_update.html#update</a>.
+<em>Users must read these docs carefully before updating the version via terraform</em>.</strong></p>
 
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.16.0">v0.16.0</a></li>
-<li><a href="/tf-ibm-docs/v0.16.1">v0.16.1</a></li>
-<li><a href="/tf-ibm-docs/v0.17.0">v0.17.0</a></li>
-</ul>
+<p>Note: The previous cluster setup of stand-alone worker nodes is supported, but deprecated. Clusters now have a feature called a worker pool, which is a collection of worker nodes with the same flavor, such as machine type, CPU, and memory. Use ibm_container_worker_pool and ibm_container_worker_pool_zone attachment resources to make changes to your cluster, such as adding zones, adding worker nodes, or updating worker nodes.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
-}
 
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
+<p>In the following example, you can create a Kubernetes cluster with a default worker pool with one worker:</p>
+<pre class="highlight plaintext"><code>resource "ibm_container_cluster" "testacc_cluster" {
+  name            = "test"
+  datacenter      = "dal10"
+  machine_type    = "free"
+  hardware        = "shared"
+  public_vlan_id  = "vlan"
+  private_vlan_id = "vlan"
+  subnet_id       = ["1154643"]
+  region          = "eu-de"
 
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
+  default_pool_size      = 1
 
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
+  webhook = [{
+    level = "Normal"
+    type = "slack"
+    url = "https://hooks.slack.com/services/yt7rebjhgh2r4rd44fjk"
+  }]
 
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
+  org_guid     = "test"
+  space_guid   = "test_space"
+  account_guid = "test_acc"
 }
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
+<p>Create the Kubernetes cluster with a default worker pool with 2 workers and one standalone worker as mentioned by worker_num:</p>
+<pre class="highlight plaintext"><code>resource "ibm_container_cluster" "testacc_cluster" {
+  name            = "test"
+  datacenter      = "dal10"
+  machine_type    = "free"
+  hardware        = "shared"
+  public_vlan_id  = "vlan"
+  private_vlan_id = "vlan"
+  subnet_id       = ["1154643"]
 
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
+  default_pool_size = 2
+  worker_num = 1
+  webhook = [{
+    level = "Normal"
+    type = "slack"
+    url = "https://hooks.slack.com/services/yt7rebjhgh2r4rd44fjk"
+  }]
 
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
+  account_guid = "test_acc"
+  region = "us-south"
 }
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">name</code> - (Required, string) The name of the cluster.</li>
+<li><code class="prettyprint">datacenter</code> - (Required, string)  The datacenter of the worker nodes. You can retrieve the value by running the <code class="prettyprint">bluemix cs locations</code> command in the <a href="https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started">IBM Cloud CLI</a>.</li>
+<li><code class="prettyprint">kube_version</code> - (Optional, string) The desired Kubernetes version of the created cluster. If present, at least major.minor must be specified.</li>
+<li><code class="prettyprint">update_all_workers</code> - (Optional, bool)  Set to <code class="prettyprint">true</code> if you want to update workers kube version along with the cluster kube_version</li>
+<li><code class="prettyprint">org_guid</code> - (Optional, string) The GUID for the IBM Cloud organization associated with the cluster. You can retrieve the value from data source <code class="prettyprint">ibm_org</code> or by running the <code class="prettyprint">ibmcloud iam orgs --guid</code> command in the IBM Cloud CLI.</li>
+<li><code class="prettyprint">space_guid</code> - (Optional, string) The GUID for the IBM Cloud space associated with the cluster. You can retrieve the value from data source <code class="prettyprint">ibm_space</code> or by running the <code class="prettyprint">ibmcloud iam space &lt;space-name&gt; --guid</code> command in the IBM Cloud CLI.</li>
+<li><code class="prettyprint">account_guid</code> - (Optional, string) The GUID for the IBM Cloud account associated with the cluster. You can retrieve the value from data source <code class="prettyprint">ibm_account</code> or by running the <code class="prettyprint">ibmcloud iam accounts</code> command in the IBM Cloud CLI.</li>
+<li><code class="prettyprint">region</code> - (Optional, string) The region where the cluster is provisioned. If the region is not specified it will be defaulted to provider region(BM_REGION/BLUEMIX_REGION). To get the list of supported regions please access this <a href="https://containers.bluemix.net/v1/regions">link</a> and use the alias.</li>
+<li><code class="prettyprint">resource_group_id</code> - (Optional, string) The ID of the resource group.  You can retrieve the value from data source <code class="prettyprint">ibm_resource_group</code>. If not provided defaults to default resource group.</li>
+<li><p><code class="prettyprint">workers</code> - (Deprecated) The worker nodes that you want to add to the cluster. Nested <code class="prettyprint">workers</code> blocks have the following structure:</p>
+
+<ul>
+<li><code class="prettyprint">action</code> - valid actions are add, reboot and reload.</li>
+<li><code class="prettyprint">name</code> - Name of the worker.</li>
+<li><code class="prettyprint">version</code> - worker version.</li>
 </ul>
 
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+<p><strong>NOTE</strong>: Conflicts with <code class="prettyprint">worker_num</code>. </p></li>
+<li><p><code class="prettyprint">worker_num</code> - (Optional, int)  The number of cluster worker nodes. This creates the stand-alone workers which are not associated to any pool.<br>
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">workers</code>. </p></li>
+<li><p><code class="prettyprint">workers_info</code> - (Optional, array) The worker nodes attached to this cluster. Use this attribute to update the worker version. Nested <code class="prettyprint">workers_info</code> blocks have the following structure:</p>
 
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps in the IBM Cloud docs for terraform here: <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install" alt="installing IBM terraform provider">Installing the Terraform CLI and IBM Cloud Provide (IBM docs)</a></p>
+<ul>
+<li><code class="prettyprint">id</code> - ID of the worker.</li>
+<li><code class="prettyprint">version</code> - worker version. </li>
+</ul></li>
+<li><p><code class="prettyprint">default_pool_size</code> - (Optional,int) The number of workers created under the default worker pool which support Multi-AZ. </p></li>
+<li><p><code class="prettyprint">machine_type</code> - (Optional, string) The machine type of the worker nodes. You can retrieve the value by running the <code class="prettyprint">ibmcloud ks machine-types &lt;data-center&gt;</code> command in the IBM Cloud CLI.</p></li>
+<li><p><code class="prettyprint">billing</code> - (Optional, string) The billing type for the instance. Accepted values are <code class="prettyprint">hourly</code> or <code class="prettyprint">monthly</code>.</p></li>
+<li><p><code class="prettyprint">isolation</code> - (Deprecated) Accepted values are <code class="prettyprint">public</code> or <code class="prettyprint">private</code>. Use <code class="prettyprint">private</code> if you want to have available physical resources dedicated to you only or <code class="prettyprint">public</code> to allow physical resources to be shared with other IBM customers. Use hardware instead.</p></li>
+<li><p><code class="prettyprint">hardware</code> - (Optional, string) The level of hardware isolation for your worker node. Use <code class="prettyprint">dedicated</code> to have available physical resources dedicated to you only, or <code class="prettyprint">shared</code> to allow physical resources to be shared with other IBM customers. For IBM Cloud Public accounts, it can be shared or dedicated. For IBM Cloud Dedicated accounts, dedicated is the only available option.</p></li>
+<li><p><code class="prettyprint">public_vlan_id</code>- (Optional, string) The public VLAN ID for the worker node. You can retrieve the value by running the ibmcloud ks vlans <data-center> command in the IBM Cloud CLI.</p>
+
+<ul>
+<li>Free clusters: You must not specify any public VLAN. Your free cluster is automatically connected to a public VLAN that is owned by IBM.</li>
+<li>Standard clusters:<br>
+(a) If you already have a public VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the public VLAN.<br/>
+(b) If you want to connect your worker nodes to a private VLAN only, do not specify this option.</li>
+</ul></li>
+<li><p><code class="prettyprint">private_vlan_id</code> - (Optional, string) The private VLAN of the worker node. You can retrieve the value by running the ibmcloud ks vlans <data-center> command in the IBM Cloud CLI.</p>
+
+<ul>
+<li>Free clusters: You must not specify any private VLAN. Your free cluster is automatically connected to a private VLAN that is owned by IBM.</li>
+<li>Standard clusters:<br/>
+(a) If you already have a private VLAN set up in your IBM Cloud infrastructure (SoftLayer) account for that zone, enter the ID of the private VLAN.<br/>
+(b) If you do not have a private VLAN in your account, do not specify this option. IBM Cloud Kubernetes Service will automatically create a private VLAN for you.</li>
+</ul></li>
+<li><p><code class="prettyprint">subnet_id</code> - (Optional, string) The existing subnet ID that you want to add to the cluster. You can retrieve the value by running the <code class="prettyprint">ibmcloud ks subnets</code> command in the IBM Cloud CLI.</p></li>
+<li><p><code class="prettyprint">no_subnet</code> - (Optional, boolean) Set to <code class="prettyprint">true</code> if you do not want to automatically create a portable subnet.</p></li>
+<li><p><code class="prettyprint">is_trusted</code> - (Optional, boolean) Set to <code class="prettyprint">true</code> to  enable trusted cluster feature. Default is false.</p></li>
+<li><p><code class="prettyprint">disk_encryption</code> - (Optional, boolean) Set to <code class="prettyprint">false</code> to disable encryption on a worker.</p></li>
+<li><p><code class="prettyprint">webhook</code> - (Optional, string) The webhook that you want to add to the cluster.</p></li>
+<li><p><code class="prettyprint">public_service_endpoint</code> - (Optional,bool) Enable the public service endpoint to make the master publicly accessible.</p></li>
+<li><p><code class="prettyprint">private_service_endpoint</code> - (Optional,bool) Enable the private service endpoint to make the master privately accessible. Once enabled this feature cannot be disabled later.
+<strong>NOTE</strong>: As a prerequisite for using Service Endpoints, Account must be enabled for Virtual Routing and Forwarding (VRF). Learn more about VRF on IBM Cloud <a href="https://console.bluemix.net/docs/infrastructure/direct-link/vrf-on-ibm-cloud.html#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud">here</a>. Account must be enabled for connectivity to Service Endpoints. Use the resource <code class="prettyprint">ibm_container_cluster_feature</code> to update the <code class="prettyprint">public_service_endpoint</code> and <code class="prettyprint">private_service_endpoint</code>. </p></li>
+<li><p><code class="prettyprint">wait_time_minutes</code> - (Optional, integer) The duration, expressed in minutes, to wait for the cluster to become available before declaring it as created. It is also the same amount of time waited for no active transactions before proceeding with an update or deletion. The default value is <code class="prettyprint">90</code>.</p></li>
+<li><p><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the container cluster instance.<br>
+<strong>NOTE</strong>: <code class="prettyprint">Tags</code> are managed locally and not stored on the IBM Cloud service endpoint at this moment.</p></li>
+</ul>
+
+<h2 id="attribute-reference">Attribute Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The unique identifier of the cluster.</li>
+<li><code class="prettyprint">name</code> - The name of the cluster.</li>
+<li><code class="prettyprint">server_url</code> - The server URL.</li>
+<li><code class="prettyprint">ingress_hostname</code> - The Ingress hostname.</li>
+<li><code class="prettyprint">ingress_secret</code> - The Ingress secret.</li>
+<li><code class="prettyprint">subnet_id</code> - The subnets attached to this cluster.</li>
+<li><code class="prettyprint">workers</code> -  Exported attributes are:
+
+<ul>
+<li><code class="prettyprint">id</code> - The id of the worker</li>
+</ul></li>
+<li><code class="prettyprint">worker_pools</code> - Worker pools attached to the cluster
+
+<ul>
+<li><code class="prettyprint">name</code> - The name of the worker pool.</li>
+<li><code class="prettyprint">machine_type</code> - The machine type of the worker node.</li>
+<li><code class="prettyprint">size_per_zone</code> - Number of workers per zone in this pool.</li>
+<li><code class="prettyprint">hardware</code> - The level of hardware isolation for your worker node.</li>
+<li><code class="prettyprint">id</code> - Worker pool id.</li>
+<li><code class="prettyprint">state</code> - Worker pool state.</li>
+<li><code class="prettyprint">labels</code> - Labels on all the workers in the worker pool.</li>
+<li><code class="prettyprint">zones</code> - List of zones attached to the worker_pool.
+
+<ul>
+<li><code class="prettyprint">zone</code> - Zone name.</li>
+<li><code class="prettyprint">private_vlan</code> - The ID of the private VLAN. </li>
+<li><code class="prettyprint">public_vlan</code> - The ID of the public VLAN.</li>
+<li><code class="prettyprint">worker_count</code> - Number of workers attached to this zone.</li>
+</ul></li>
+</ul></li>
+<li><code class="prettyprint">workers_info</code> - The worker nodes attached to this cluster. Nested <code class="prettyprint">workers_info</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">pool_name</code> - Name of the worker pool to which the worker belongs to.</li>
+</ul></li>
+<li><code class="prettyprint">albs</code> - Application load balancer (ALB)&rsquo;s attached to the cluster
+
+<ul>
+<li><code class="prettyprint">id</code> - The application load balancer (ALB) id.</li>
+<li><code class="prettyprint">name</code> - The name of the application load balancer (ALB).</li>
+<li><code class="prettyprint">alb_type</code> - The application load balancer (ALB) type public or private.</li>
+<li><code class="prettyprint">enable</code> -  Enable (true) or disable(false) application load balancer (ALB).</li>
+<li><code class="prettyprint">state</code> - The status of the application load balancer (ALB)(enabled or disabled).</li>
+<li><code class="prettyprint">num_of_instances</code> - Desired number of application load balancer (ALB) replicas.</li>
+<li><code class="prettyprint">alb_ip</code> - BYOIP VIP to use for application load balancer (ALB). Currently supported only for private application load balancer (ALB).</li>
+<li><code class="prettyprint">resize</code> - Indicate whether resizing should be done.</li>
+<li><code class="prettyprint">disable_deployment</code> - Indicate whether to disable deployment only on disable application load balancer (ALB).</li>
+</ul></li>
+<li><code class="prettyprint">private_service_endpoint_url</code> - Private service endpoint url.</li>
+<li><code class="prettyprint">public_service_endpoint_url</code> - Public service endpoint url.</li>
+</ul>
 
       </div>
     </div>
@@ -755,6 +827,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>

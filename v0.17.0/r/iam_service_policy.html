@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -620,115 +620,146 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_iam_service_id">ibm_iam_service_id</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
-
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
-
-<p>See the section <a href="#using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.16.0">v0.16.0</a></li>
-<li><a href="/tf-ibm-docs/v0.16.1">v0.16.1</a></li>
-<li><a href="/tf-ibm-docs/v0.17.0">v0.17.0</a></li>
-</ul>
+<p>Provides a resource for IAM Service Policy. This allows service policy  to be created, updated and deleted.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  bluemix_api_key    = "${var.ibm_bmx_api_key}"
-  softlayer_username = "${var.ibm_sl_username}"
-  softlayer_api_key  = "${var.ibm_sl_api_key}"
+
+<h3 id="service-policy-for-all-identity-and-access-enabled-services">Service Policy for All Identity and Access enabled services</h3>
+<pre class="highlight plaintext"><code>resource "ibm_iam_service_id" "serviceID" {
+  name = "test"
 }
 
-# Create an SSH key. You can find the SSH key surfaces in the SoftLayer console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
+resource "ibm_iam_service_policy" "policy" {
+  iam_service_id = "${ibm_iam_service_id.serviceID.id}"
+  roles        = ["Viewer"]
 }
 
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud Space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "cleardb"
-  plan       = "cb5"
-  tags       = ["cluster-service", "cluster-bind"]
-}
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">bluemix_api_key</code>, <code class="prettyprint">softlayer_username</code>, and <code class="prettyprint">softlayer_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    bluemix_api_key = ""
-    softlayer_username = ""
-    softlayer_api_key = ""
-
+<h3 id="service-policy-using-service-with-region">Service Policy using service with region</h3>
+<pre class="highlight plaintext"><code>resource "ibm_iam_service_id" "serviceID" {
+  name = "test"
 }
+
+resource "ibm_iam_service_policy" "policy" {
+  iam_service_id = "${ibm_iam_service_id.serviceID.id}"
+  roles        = ["Viewer"]
+
+  resources = [{
+    service = "cloud-object-storage"
+  }]
+}
+
 </code></pre>
 
-<h3 id="environment-variables">Environment variables</h3>
+<h3 id="service-policy-using-resource-instance">Service Policy using resource instance</h3>
+<pre class="highlight plaintext"><code>resource "ibm_iam_service_id" "serviceID" {
+  name = "test"
+}
 
-<p>You can provide your credentials by exporting the <code class="prettyprint">BM_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud API key, SoftLayer user name, and SoftLayer API key, respectively.  </p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
+resource "ibm_resource_instance" "instance" {
+  name     = "test"
+  service  = "kms"
+  plan     = "tiered-pricing"
+  location = "us-south"
+}
+
+resource "ibm_iam_service_policy" "policy" {
+  iam_service_id = "${ibm_iam_service_id.serviceID.id}"
+  roles        = ["Manager", "Viewer", "Administrator"]
+
+  resources = [{
+    service              = "kms"
+    region               = "us-south"
+    resource_instance_id = "${element(split(":",ibm_resource_instance.instance.id),7)}"
+  }]
+}
+
 </code></pre>
 
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>$ export BM_API_KEY="bmx_api_key"
-$ export SL_USERNAME="sl_username"
-$ export SL_API_KEY="sl_api_key"
-$ terraform plan
+<h3 id="service-policy-using-resource-group">Service Policy using resource group</h3>
+<pre class="highlight plaintext"><code>resource "ibm_iam_service_id" "serviceID" {
+  name = "test"
+}
+
+data "ibm_resource_group" "group" {
+  name = "default"
+}
+
+resource "ibm_iam_service_policy" "policy" {
+  iam_service_id = "${ibm_iam_service_id.serviceID.id}"
+  roles        = ["Viewer"]
+
+  resources = [{
+    service           = "containers-kubernetes"
+    resource_group_id = "${data.ibm_resource_group.group.id}"
+  }]
+}
+
+</code></pre>
+
+<h3 id="service-policy-using-resource-and-resource-type">Service Policy using resource and resource type</h3>
+<pre class="highlight plaintext"><code>resource "ibm_iam_service_id" "serviceID" {
+  name = "test"
+}
+
+data "ibm_resource_group" "group" {
+  name = "default"
+}
+
+resource "ibm_iam_service_policy" "policy" {
+  iam_service_id = "${ibm_iam_service_id.serviceID.id}"
+  roles        = ["Administrator"]
+
+  resources = [{
+    resource_type = "resource-group"
+    resource      = "${data.ibm_resource_group.group.id}"
+  }]
+}
+
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (optional) The IBM Cloud API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (optional) The SoftLayer user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (optional) The SoftLayer API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision SoftLayer resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the SoftLayer API key. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">BM_REGION</code> (higher precedence) or <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
+<li><code class="prettyprint">iam_service_id</code> - (Required, string) UUID of the serviceID.</li>
+<li><code class="prettyprint">roles</code> - (Required, list) comma separated list of roles. Valid roles are Writer, Reader, Manager, Administrator, Operator, Viewer, Editor.</li>
+<li><code class="prettyprint">resources</code> - (Optional, list) A nested block describing the resource of this policy.
+Nested <code class="prettyprint">resources</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">service</code> - (Optional, string) Service name of the policy definition.  You can retrieve the value by running the <code class="prettyprint">ibmcloud catalog service-marketplace</code> or <code class="prettyprint">ibmcloud catalog search</code> command in the <a href="https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started">IBM Cloud CLI</a>.</li>
+<li><code class="prettyprint">resource_instance_id</code> - (Optional, string) ID of resource instance of the policy definition.</li>
+<li><code class="prettyprint">region</code> - (Optional, string) Region of the policy definition.</li>
+<li><code class="prettyprint">resource_type</code> - (Optional, string) Resource type of the policy definition.</li>
+<li><code class="prettyprint">resource</code> - (Optional, string) Resource of the policy definition.</li>
+<li><code class="prettyprint">resource_group_id</code> - (Optional, string) The ID of the resource group.  You can retrieve the value from data source <code class="prettyprint">ibm_resource_group</code>. 
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">account_management</code>.</li>
+</ul></li>
+<li><code class="prettyprint">account_management</code> - (Optional, bool) Gives access to all account management services if set to <code class="prettyprint">true</code>. Default value <code class="prettyprint">false</code>. 
+<strong>NOTE</strong>: Conflicts with <code class="prettyprint">resources</code>.</li>
+<li><code class="prettyprint">tags</code> - (Optional, array of strings) Tags associated with the service policy instance.<br>
+<strong>NOTE</strong>: <code class="prettyprint">Tags</code> are managed locally and not stored on the IBM Cloud service endpoint at this moment.</li>
 </ul>
 
-<h2 id="using-terraform-with-the-ibm-cloud-provider">Using Terraform with the IBM Cloud Provider</h2>
+<h2 id="attribute-reference">Attribute Reference</h2>
 
-<p>If you want to run terraform with the IBM Cloud Provider locally on your system, complete the following steps in the IBM Cloud docs for terraform here: <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install" alt="installing IBM terraform provider">Installing the Terraform CLI and IBM Cloud Provide (IBM docs)</a></p>
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><p><code class="prettyprint">id</code> - The unique identifier of the service policy. The id is composed of &lt;iam_service_id&gt;/&lt;service_policy_id&gt;</p></li>
+<li><p><code class="prettyprint">version</code> - Version of the service policy.</p></li>
+</ul>
+
+<h2 id="import">Import</h2>
+
+<p>ibm_iam_service_policy can be imported using serviceID and service policy id, eg</p>
+<pre class="highlight plaintext"><code>$ terraform import ibm_iam_service_policy.example ServiceId-d7bec597-4726-451f-8a63-e62e6f19c32c/cea6651a-bc0a-4438-9f8a-a0770bbf3ebb
+</code></pre>
 
       </div>
     </div>
@@ -755,6 +786,6 @@ $ terraform plan
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
