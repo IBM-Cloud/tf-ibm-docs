@@ -1,3 +1,3 @@
-- [v0.17.2](/tf-ibm-docs/v0.17.2)
 - [v0.17.3](/tf-ibm-docs/v0.17.3)
 - [v0.17.4](/tf-ibm-docs/v0.17.4)
+- [v0.17.5](/tf-ibm-docs/v0.17.5)
