@@ -16,6 +16,8 @@ body {
 }
 
 .tree-toggle {
+    font-weight: 700;
+    padding-bottom: 5px;
     cursor: pointer;
 }
 
@@ -25,11 +27,6 @@ body {
 
 .sidebar-content {
   font-size: 16px !important;
-}
-
-a.tree-toggle {
-  font-weight: 700;
-  padding-bottom: 5px;
 }
 
 .version-header {
