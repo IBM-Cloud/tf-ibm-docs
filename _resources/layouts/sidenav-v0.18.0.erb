@@ -7,623 +7,683 @@ end
 <div id="sidebar-container" class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
     <div class="sidebar-content">
         <ul class="list-unstyled">
-            <li>
-                <label class="tree-toggle">
+            <li<%= sidebar_current("docs-ibm-datasource-cf") %>>
                 <i class="fa fa-caret-down"></i>
-                Cloud Foundry Data Sources
-                </label>
+                <a class="tree-toggle"  href="#">Cloud Foundry Data Sources</a>
                 <ul class="list-unstyled tree">
                     <li<%= sidebar_current("docs-ibm-datasource-account") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/account.html">account</a>
+                    <a href="/docs/providers/ibm/d/account.html">account</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-app") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/app.html">app</a>
+                    <a href="/docs/providers/ibm/d/app.html">app</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-app-domain-private") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/app_domain_private.html">app_domain_private</a>
+                    <a href="/docs/providers/ibm/d/app_domain_private.html">app_domain_private</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-app-domain-shared") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/app_domain_shared.html">app_domain_shared</a>
+                    <a href="/docs/providers/ibm/d/app_domain_shared.html">app_domain_shared</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-app-route") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/app_route.html">app_route</a>
+                    <a href="/docs/providers/ibm/d/app_route.html">app_route</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-org") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/org.html">org</a>
+                    <a href="/docs/providers/ibm/d/org.html">org</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-org-quota") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/org_quota.html">org_quota</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-resource-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/resource_group.html">resource_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-resource-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/resource_instance.html">resource_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-resource-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/resource_key.html">resource_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-resource-quota") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/resource_quota.html">resource_quota</a>
+                    <a href="/docs/providers/ibm/d/org_quota.html">org_quota</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-service-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/service_instance.html">service_instance</a>
+                    <a href="/docs/providers/ibm/d/service_instance.html">service_instance</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-service-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/service_key.html">service_key</a>
+                    <a href="/docs/providers/ibm/d/service_key.html">service_key</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-service-plan") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/service_plan.html">service_plan</a>
+                    <a href="/docs/providers/ibm/d/service_plan.html">service_plan</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-space") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/space.html">space</a>
+                    <a href="/docs/providers/ibm/d/space.html">space</a>
                     </li>
                 </ul>
-            </li>        
+            </li>
             <li<%= sidebar_current("docs-ibm-datasource-cs") %>>
-                <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>
-                Container Data Sources
-                </label>
+                <a class="tree-toggle"  href="#">Container Data Sources</a>
                 <ul class="list-unstyled tree">
                     <li<%= sidebar_current("docs-ibm-datasource-container-cluster") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/container_cluster.html">container_cluster</a>
+                    <a href="/docs/providers/ibm/d/container_cluster.html">container_cluster</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-container-cluster-config") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/container_cluster_config.html">container_cluster_config</a>
+                    <a href="/docs/providers/ibm/d/container_cluster_config.html">container_cluster_config</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-container-cluster-worker") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/container_cluster_worker.html">container_cluster_worker</a>
+                    <a href="/docs/providers/ibm/d/container_cluster_worker.html">container_cluster_worker</a>
                     </li>
                     <li<%= sidebar_current("docs-ibm-datasource-container-cluster-versions") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/container_cluster_versions.html">container_cluster_versions</a>
+                    <a href="/docs/providers/ibm/d/container_cluster_versions.html">container_cluster_versions</a>
                     </li>
+                </ul>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-function") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Function Data Sources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-datasource-function-action") %>>
+                    <a href="/docs/providers/ibm/d/function_action.html">function_action</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-function-package") %>>
+                    <a href="/docs/providers/ibm/d/function_package.html">function_package</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-function-rule") %>>
+                    <a href="/docs/providers/ibm/d/function_rule.html">function_rule</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-function-trigger") %>>
+                    <a href="/docs/providers/ibm/d/function_trigger.html">function_trigger</a>
+                </li>
+                </ul>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-iam") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Identity & Access Data Sources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-datasource-iam-service-id") %>>
+                    <a href="/docs/providers/ibm/d/iam_service_id.html">iam_service_id</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-iam-service-policy") %>>
+                    <a href="/docs/providers/ibm/d/iam_service_policy.html">iam_service_policy</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-iam-user-policy") %>>
+                    <a href="/docs/providers/ibm/d/iam_user_policy.html">iam_user_policy</a>
+                </li>
                 </ul>
             </li>
             <li<%= sidebar_current("docs-ibm-datasource-infra") %>>
-                <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>
-                Infrastructure Data Sources
-                </label>
+                <a class="tree-toggle"  href="#">Infrastructure Data Sources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-datasource-cis") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/cis.html">cis</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-cis-domain") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/cis_domain.html">cis_domain</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-cis-ip-addresses") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/cis_ip_addresses.html">cis_ip_addresses</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-compute-bare-metal") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/compute_bare_metal.html">compute_bare_metal</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-compute-image-template") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/compute_image_template.html">compute_image_template</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-compute-placement-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/compute_placement_group.html">compute_placement_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-compute-ssh-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/compute_ssh_key.html">compute_ssh_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-compute-vm-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/compute_vm_instance.html">compute_vm_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-database") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/database.html">database</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-dns-domain") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/dns_domain.html">dns_domain</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-dns-domain-registration") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/dns_domain_registration.html">dns_domain_registration</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-dns-secondary") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/dns_secondary.html">dns_secondary</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-lbaas") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/lbaas.html">lbaas</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-network-vlan") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/network_vlan.html">network_vlan</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-security-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/security_group.html">security_group</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-datasource-cis") %>>
+                    <a href="/docs/providers/ibm/d/cis.html">cis</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-cis-domain") %>>
+                    <a href="/docs/providers/ibm/d/cis_domain.html">cis_domain</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-cis-ip-addresses") %>>
+                    <a href="/docs/providers/ibm/d/cis_ip_addresses.html">cis_ip_addresses</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-compute-bare-metal") %>>
+                    <a href="/docs/providers/ibm/d/compute_bare_metal.html">compute_bare_metal</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-compute-image-template") %>>
+                    <a href="/docs/providers/ibm/d/compute_image_template.html">compute_image_template</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-compute-placement-group") %>>
+                    <a href="/docs/providers/ibm/d/compute_placement_group.html">compute_placement_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-compute-ssh-key") %>>
+                    <a href="/docs/providers/ibm/d/compute_ssh_key.html">compute_ssh_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-compute-vm-instance") %>>
+                    <a href="/docs/providers/ibm/d/compute_vm_instance.html">compute_vm_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-database") %>>
+                    <a href="/docs/providers/ibm/d/database.html">database</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-dns-domain") %>>
+                    <a href="/docs/providers/ibm/d/dns_domain.html">dns_domain</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-dns-domain-registration") %>>
+                    <a href="/docs/providers/ibm/d/dns_domain_registration.html">dns_domain_registration</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-dns-secondary") %>>
+                    <a href="/docs/providers/ibm/d/dns_secondary.html">dns_secondary</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-lbaas") %>>
+                    <a href="/docs/providers/ibm/d/lbaas.html">lbaas</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-network-vlan") %>>
+                    <a href="/docs/providers/ibm/d/network_vlan.html">network_vlan</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-security-group") %>>
+                    <a href="/docs/providers/ibm/d/security_group.html">security_group</a>
+                </li>
                 </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-infra") %>>
-                <label class="tree-toggle">
+            <li<%= sidebar_current("docs-ibm-datasource-resource") %>>
                 <i class="fa fa-caret-down"></i>
-                VPC Services Data Sources
-                </label>
+                <a class="tree-toggle"  href="#">Resource Management Data Sources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-datasource-is-image") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/is_image.html">is_image</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-images") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_images.html">is_images</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-instance-profile") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_instance_profile.html">is_instance_profile</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-instance-profiles") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_instance_profiles.html">is_instance_profiles</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-region") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_region.html">is_region</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-ssh-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_ssh_key.html">is_ssh_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-subnet") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_subnet.html">is_subnet</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-vpc") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_vpc.html">is_vpc</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-zone") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_zone.html">is_zone</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-is-zones") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/is_zones.html">is_zones</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-datasource-resource-group") %>>
+                    <a href="/docs/providers/ibm/d/resource_group.html">resource_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-resource-instance") %>>
+                    <a href="/docs/providers/ibm/d/resource_instance.html">resource_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-resource-key") %>>
+                    <a href="/docs/providers/ibm/d/resource_key.html">resource_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-resource-quota") %>>
+                    <a href="/docs/providers/ibm/d/resource_quota.html">resource_quota</a>
+                </li>
                 </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-datasource-functions") %>>
-                <label class="tree-toggle">
+            <li<%= sidebar_current("docs-ibm-datasource-pi") %>>
                 <i class="fa fa-caret-down"></i>
-                Functions Data Sources
-                </label>
+                <a class="tree-toggle"  href="#">Power Virtual Server Data Sources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-datasource-function-action") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/function_action.html">function_action</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-function-package") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/function_package.html">function_package</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-function-rule") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/function_rule.html">function_rule</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-function-trigger") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/function_trigger.html">function_trigger</a>
-                    </li>
-                </ul>
-            </li>            
-            <li<%= sidebar_current("docs-ibm-datasource-iam") %>>
-            <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Identity &amp; Access Data Sources
-            </label>
-                <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-datasource-iam-service-id") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/iam_service_id.html">iam_service_id</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-iam-service-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/iam_service_policy.html">iam_service_policy</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-iam-user-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/d/iam_user_policy.html">iam_user_policy</a>
-                    </li>
-                </ul>
-            </li>            
-
-            <li<%= sidebar_current("docs-ibm-datasource-iam") %>>
-            <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            Power IaaS Data Sources
-            </label>
-                <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-image") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_image.html">pi_image</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-images") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_images.html">pi_images</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-instance") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_instance.html">pi_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-key") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_key.html">pi_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-network") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_network.html">pi_network</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-public-network") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_public_network.html">pi_public_network</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-tenant") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_tenant.html">pi_tenant</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-volume") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_volume.html">pi_volume</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-datasource-pi-instance-volume") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/d/pi_instance_volumes.html">pi_instance_volumes</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-image") %>>
+                    <a href="/docs/providers/ibm/d/pi_image.html">pi_image</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-images") %>>
+                    <a href="/docs/providers/ibm/d/pi_images.html">pi_images</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-instance") %>>
+                    <a href="/docs/providers/ibm/d/pi_instance.html">pi_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-key") %>>
+                    <a href="/docs/providers/ibm/d/pi_key.html">pi_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-network") %>>
+                    <a href="/docs/providers/ibm/d/pi_network.html">pi_network</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-public-network") %>>
+                    <a href="/docs/providers/ibm/d/pi_public_network.html">pi_public_network</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-tenant") %>>
+                    <a href="/docs/providers/ibm/d/pi_tenant.html">pi_tenant</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-volume") %>>
+                    <a href="/docs/providers/ibm/d/pi_volume.html">pi_volume</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-pi-instance-volumes") %>>
+                    <a href="/docs/providers/ibm/d/pi_instance_volumes.html">pi_instance_volumes</a>
+                </li>
                 </ul>
             </li>
-
-
+            <li<%= sidebar_current("docs-ibm-datasource-is") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Virtual Private Cloud Classic Services Data Sources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-datasource-is-image") %>>
+                    <a href="/docs/providers/ibm/d/is_image.html">is_image</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-images") %>>
+                    <a href="/docs/providers/ibm/d/is_images.html">is_images</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-instance-profile") %>>
+                    <a href="/docs/providers/ibm/d/is_instance_profile.html">is_instance_profile</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-instance-profiles") %>>
+                    <a href="/docs/providers/ibm/d/is_instance_profiles.html">is_instance_profiles</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-region") %>>
+                    <a href="/docs/providers/ibm/d/is_region.html">is_region</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-ssh-key") %>>
+                    <a href="/docs/providers/ibm/d/is_ssh_key.html">is_ssh_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-subnet") %>>
+                    <a href="/docs/providers/ibm/d/is_subnet.html">is_subnet</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-vpc") %>>
+                    <a href="/docs/providers/ibm/d/is_vpc.html">is_vpc</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-zone") %>>
+                    <a href="/docs/providers/ibm/d/is_zone.html">is_zone</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-zones") %>>
+                    <a href="/docs/providers/ibm/d/is_zones.html">is_zones</a>
+                </li>
+                </ul>
+            </li>
+            <li<%= sidebar_current("docs-ibm-datasource-is") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Virtual Private Cloud NextGen Services Data Sources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-datasource-is-image") %>>
+                    <a href="/docs/providers/ibm/d/is_image.html">is_image</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-images") %>>
+                    <a href="/docs/providers/ibm/d/is_images.html">is_images</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-instance-profile") %>>
+                    <a href="/docs/providers/ibm/d/is_instance_profile.html">is_instance_profile</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-instance-profiles") %>>
+                    <a href="/docs/providers/ibm/d/is_instance_profiles.html">is_instance_profiles</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-region") %>>
+                    <a href="/docs/providers/ibm/d/is_region.html">is_region</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-ssh-key") %>>
+                    <a href="/docs/providers/ibm/d/is_ssh_key.html">is_ssh_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-subnet") %>>
+                    <a href="/docs/providers/ibm/d/is_subnet.html">is_subnet</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-vpc") %>>
+                    <a href="/docs/providers/ibm/d/is_vpc.html">is_vpc</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-zone") %>>
+                    <a href="/docs/providers/ibm/d/is_zone.html">is_zone</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-datasource-is-zones") %>>
+                    <a href="/docs/providers/ibm/d/is_zones.html">is_zones</a>
+                </li>
+                </ul>
+            </li>
             <li<%= sidebar_current("docs-ibm-resource-cf") %>>
-                <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>
-                Cloud Foundry Resources
-                </label>
-                <ul class="list-unstyled tree">              
-                    <li<%= sidebar_current("docs-ibm-resource-app") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/app.html">app</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-app-domain-private") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/app_domain_private.html">app_domain_private</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-app-domain-shared") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/app_domain_shared.html">app_domain_shared</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-app-route") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/app_route.html">app_route</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-org") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/org.html">org</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-resource-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/resource_group.html">resource_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-resource-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/resource_instance.html">resource_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-resource-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/resource_key.html">resource_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-service-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/service_instance.html">service_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-service-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/service_key.html">service_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-space") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/space.html">space</a>
-                    </li>
+                <a class="tree-toggle"  href="#">Cloud Foundry Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-app") %>>
+                    <a href="/docs/providers/ibm/r/app.html">app</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-app-domain-private") %>>
+                    <a href="/docs/providers/ibm/r/app_domain_private.html">app_domain_private</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-app-domain-shared") %>>
+                    <a href="/docs/providers/ibm/r/app_domain_shared.html">app_domain_shared</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-app-route") %>>
+                    <a href="/docs/providers/ibm/r/app_route.html">app_route</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-org") %>>
+                    <a href="/docs/providers/ibm/r/org.html">org</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-service-instance") %>>
+                    <a href="/docs/providers/ibm/r/service_instance.html">service_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-service-key") %>>
+                    <a href="/docs/providers/ibm/r/service_key.html">service_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-space") %>>
+                    <a href="/docs/providers/ibm/r/space.html">space</a>
+                </li>
                 </ul>
             </li>
             <li<%= sidebar_current("docs-ibm-resource-cs") %>>
-                <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>
-                Container Resources
-                </label>
+                <a class="tree-toggle"  href="#">Container Resources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-resource-container-alb") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_alb.html">container_alb</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-container-alb-cert") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_alb_cert.html">container_alb_cert</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-container-bind-service") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_bind_service.html">container_bind_service</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-container-cluster") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_cluster.html">container_cluster</a>
-                    </li> 
-                    <li<%= sidebar_current("docs-ibm-resource-container-cluster-feature") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_cluster_feature.html">container_cluster_feature</a>
-                      </li>               
-                    <li<%= sidebar_current("docs-ibm-resource-container-worker-pool") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_worker_pool.html">container_worker_pool</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-container-worker-pool-zone-attachment") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/container_worker_pool_zone_attachment.html">container_worker_pool_zone_attachment</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-alb") %>>
+                    <a href="/docs/providers/ibm/r/container_alb.html">container_alb</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-alb-cert") %>>
+                    <a href="/docs/providers/ibm/r/container_alb_cert.html">container_alb_cert</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-bind-service") %>>
+                    <a href="/docs/providers/ibm/r/container_bind_service.html">container_bind_service</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-cluster") %>>
+                    <a href="/docs/providers/ibm/r/container_cluster.html">container_cluster</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-cluster-feature") %>>
+                    <a href="/docs/providers/ibm/r/container_cluster_feature.html">container_cluster_feature</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-worker-pool") %>>
+                    <a href="/docs/providers/ibm/r/container_worker_pool.html">container_worker_pool</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-container-worker-pool-zone-attachment") %>>
+                    <a href="/docs/providers/ibm/r/container_worker_pool_zone_attachment.html">container_worker_pool_zone_attachment</a>
+                </li>
+                </ul>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-function") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Function Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-function-action") %>>
+                    <a href="/docs/providers/ibm/r/function_action.html">function_action</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-function-package") %>>
+                    <a href="/docs/providers/ibm/r/function_package.html">function_package</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-function-rule") %>>
+                    <a href="/docs/providers/ibm/r/function_rule.html">function_rule</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-function-trigger") %>>
+                    <a href="/docs/providers/ibm/r/function_trigger.html">function_trigger</a>
+                </li>
+                </ul>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-iam") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Identity & Access Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-iam-access-group") %>>
+                    <a href="/docs/providers/ibm/r/iam_access_group.html">iam_access_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-iam-access-group-members") %>>
+                    <a href="/docs/providers/ibm/r/iam_access_group_members.html">iam_access_group_members</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-iam-access-group-policy") %>>
+                    <a href="/docs/providers/ibm/r/iam_access_group_policy.html">iam_access_group_policy</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-iam-service-id") %>>
+                    <a href="/docs/providers/ibm/r/iam_service_id.html">iam_service_id</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-iam-service-policy") %>>
+                    <a href="/docs/providers/ibm/r/iam_service_policy.html">iam_service_policy</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-iam-user-policy") %>>
+                    <a href="/docs/providers/ibm/r/iam_user_policy.html">iam_user_policy</a>
+                </li>
                 </ul>
             </li>
             <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-                <label class="tree-toggle">
                 <i class="fa fa-caret-down"></i>
-                Cloud Object Storage (COS) Resources
-                </label>
+                <a class="tree-toggle"  href="#">Infrastructure Resources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-resource-cos-bucket") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/cos_bucket.html">cos_bucket</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-resource-cdn") %>>
+                    <a href="/docs/providers/ibm/r/cdn.html">cdn</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis") %>>
+                    <a href="/docs/providers/ibm/r/cis.html">cis</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-domain") %>>
+                    <a href="/docs/providers/ibm/r/cis_domain.html">cis_domain</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-domain-settings") %>>
+                    <a href="/docs/providers/ibm/r/cis_domain_settings.html">cis_domain_settings</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-dns-record") %>>
+                    <a href="/docs/providers/ibm/r/cis_dns_record.html">cis_dns_record</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-global-load-balancer") %>>
+                    <a href="/docs/providers/ibm/r/cis_global_load_balancer.html">cis_global_load_balancer</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-healthcheck") %>>
+                    <a href="/docs/providers/ibm/r/cis_healthcheck.html">cis_healthcheck</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-cis-origin-pool") %>>
+                    <a href="/docs/providers/ibm/r/cis_origin_pool.html">cis_origin_pool</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-group") %>>
+                    <a href="/docs/providers/ibm/r/compute_autoscale_group.html">compute_autoscale_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-policy") %>>
+                    <a href="/docs/providers/ibm/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-bare-metal") %>>
+                    <a href="/docs/providers/ibm/r/compute_bare_metal.html">compute_bare_metal</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-dedicated-host") %>>
+                    <a href="/docs/providers/ibm/r/compute_dedicated_host.html">compute_dedicated_host</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-monitor") %>>
+                    <a href="/docs/providers/ibm/r/compute_monitor.html">compute_monitor</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-placement-group") %>>
+                    <a href="/docs/providers/ibm/r/compute_placement_group.html">compute_placement_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-provisioning-hook") %>>
+                    <a href="/docs/providers/ibm/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-ssh-key") %>>
+                    <a href="/docs/providers/ibm/r/compute_ssh_key.html">compute_ssh_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-ssl-certificate") %>>
+                    <a href="/docs/providers/ibm/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-user") %>>
+                    <a href="/docs/providers/ibm/r/compute_user.html">compute_user</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-compute-vm-instance") %>>
+                    <a href="/docs/providers/ibm/r/compute_vm_instance.html">compute_vm_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-database") %>>
+                    <a href="/docs/providers/ibm/r/database.html">database</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-dns-domain") %>>
+                    <a href="/docs/providers/ibm/r/dns_domain.html">dns_domain</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-dns-domain-registration-nameservers") %>>
+                    <a href="/docs/providers/ibm/r/dns_domain_registration_nameservers.html">dns_domain_registration_nameservers</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-dns-secondary") %>>
+                    <a href="/docs/providers/ibm/r/dns_secondary.html">dns_secondary</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-dns-reverse-record") %>>
+                    <a href="/docs/providers/ibm/r/dns_reverse_record.html">dns_reverse-record</a>
+                </li> 
+                <li<%= sidebar_current("docs-ibm-resource-dns-record") %>>
+                    <a href="/docs/providers/ibm/r/dns_record.html">dns_record</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-firewall") %>>
+                    <a href="/docs/providers/ibm/r/firewall.html">firewall</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-firewall-multivlan") %>>
+                    <a href="/docs/providers/ibm/r/multivlan_firewall.html">multivlan-firewall</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-firewall-policy") %>>
+                    <a href="/docs/providers/ibm/r/firewall_policy.html">firewall_policy</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-hardware-firewall-shared") %>>
+                    <a href="/docs/providers/ibm/r/hardware_firewall_shared.html">hardware_firewall_shared</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb") %>>
+                    <a href="/docs/providers/ibm/r/lb.html">lb</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lbaas") %>>
+                    <a href="/docs/providers/ibm/r/lbaas.html">lbaas</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lbaas-health-monitor") %>>
+                    <a href="/docs/providers/ibm/r/lbaas_health_monitor.html">lbaas_health_monitor</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lbaas-server-instance-attachment") %>>
+                    <a href="/docs/providers/ibm/r/lbaas_server_instance_attachment.html">lbaas_server_instance_attachment</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-service") %>>
+                    <a href="/docs/providers/ibm/r/lb_service.html">lb_service</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-service-group") %>>
+                    <a href="/docs/providers/ibm/r/lb_service_group.html">lb_service_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-vpx") %>>
+                    <a href="/docs/providers/ibm/r/lb_vpx.html">lb_vpx</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-vpx-ha") %>>
+                    <a href="/docs/providers/ibm/r/lb_vpx_ha.html">lb_vpx_ha</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-vpx-service") %>>
+                    <a href="/docs/providers/ibm/r/lb_vpx_service.html">lb_vpx_service</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-lb-vpx-vip") %>>
+                    <a href="/docs/providers/ibm/r/lb_vpx_vip.html">lb_vpx_vip</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-gateway") %>>
+                    <a href="/docs/providers/ibm/r/network_gateway.html">network_gateway</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-gateway-vlan-association") %>>
+                    <a href="/docs/providers/ibm/r/network_gateway_vlan_association.html">network_gateway_vlan_association</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-interface-sg-attachment") %>>
+                    <a href="/docs/providers/ibm/r/network_interface_sg_attachment.html">network_interface_sg_attachment</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-public-ip") %>>
+                    <a href="/docs/providers/ibm/r/network_public_ip.html">network_public_ip</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-vlan") %>>
+                    <a href="/docs/providers/ibm/r/network_vlan.html">network_vlan</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-network-vlan-spanning") %>>
+                    <a href="/docs/providers/ibm/r/network_vlan_spanning.html">network_vlan_spanning</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-object-storage-account") %>>
+                    <a href="/docs/providers/ibm/r/object_storage_account.html">object_storage_account</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-security-group") %>>
+                    <a href="/docs/providers/ibm/r/security_group.html">security_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-security-group-rule") %>>
+                    <a href="/docs/providers/ibm/r/security_group_rule.html">security_group_rule</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-storage-block") %>>
+                    <a href="/docs/providers/ibm/r/storage_block.html">storage_block</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-storage-evault") %>>
+                    <a href="/docs/providers/ibm/r/storage_evault.html">storage_evault</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-storage-file") %>>
+                    <a href="/docs/providers/ibm/r/storage_file.html">storage_file</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-subnet") %>>
+                    <a href="/docs/providers/ibm/r/subnet.html">subnet</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-ssl-certificate") %>>
+                    <a href="/docs/providers/ibm/r/ssl_certificate.html">ssl_certificate</a>
+                </li>
                 </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-                <label class="tree-toggle">
+            <li<%= sidebar_current("docs-ibm-resource-cos") %>>
                 <i class="fa fa-caret-down"></i>
-                Function Resources
-                </label>
+                <a class="tree-toggle"  href="#">Object Storage Resources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-resource-function-action") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/function_action.html">function_action</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-function-package") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/function_package.html">function_package</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-function-rule") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/function_rule.html">function_rule</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-function-trigger") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/function_trigger.html">function_trigger</a>
-                    </li>
+                <li<%= sidebar_current("docs-ibm-resource-cos-bucket") %>>
+                    <a href="/docs/providers/ibm/r/cos_bucket.html">cos_bucket</a>
+                </li>
+                </u1>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-pi") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Power Virtual Server Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-pi-instance") %>>
+                    <a href="/docs/providers/ibm/r/pi_instance.html">pi_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-pi-key") %>>
+                    <a href="/docs/providers/ibm/r/pi_key.html">pi_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-pi-network") %>>
+                    <a href="/docs/providers/ibm/r/pi_network.html">pi_network</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-pi-volume") %>>
+                    <a href="/docs/providers/ibm/r/pi_volume.html">pi_volume</a>
+                </li>
+                </u1>
+            </li>
+            <li<%= sidebar_current("docs-ibm-resource-resource") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Resource Management Services Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-resource-group") %>>
+                    <a href="/docs/providers/ibm/r/resource_group.html">resource_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-resource-instance") %>>
+                    <a href="/docs/providers/ibm/r/resource_instance.html">resource_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-resource-key") %>>
+                    <a href="/docs/providers/ibm/r/resource_key.html">resource_key</a>
+                </li>
                 </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-                <label class="tree-toggle">
+            <li<%= sidebar_current("docs-ibm-resource-is") %>>
                 <i class="fa fa-caret-down"></i>
-                Identity &amp; Access Resources
-                </label>
+                <a class="tree-toggle"  href="#">Virtual Private Cloud Classic Services Resources</a>
                 <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-resource-iam-access-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_access_group.html">iam_access_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-iam-access-group-members") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_access_group_members.html">iam_access_group_members</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-iam-access-group-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_access_group_policy.html">iam_access_group_policy</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-iam-service-id") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_service_id.html">iam_service_id</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-iam-service-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_service_policy.html">iam_service_policy</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-iam-user-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/iam_user_policy.html">iam_user_policy</a>
-                    </li>
-                </ul>
-            </li>
-        
-            <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-                <label class="tree-toggle">
-                <i class="fa fa-caret-down"></i>
-                Infrastructure Resources
-                </label>
-                <ul class="list-unstyled tree">
-                    <li<%= sidebar_current("docs-ibm-resource-cdn") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/cdn.html">cdn</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis.html">cis</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-domain") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_domain.html">cis_domain</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-domain-settings") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_domain_settings.html">cis_domain_settings</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-dns-record") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_dns_record.html">cis_dns_record</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-global-load-balancer") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_global_load_balancer.html">cis_global_load_balancer</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-healthcheck") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_healthcheck.html">cis_healthcheck</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-cis-origin-pool") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/cis_origin_pool.html">cis_origin_pool</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_autoscale_group.html">compute_autoscale_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-autoscale-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_autoscale_policy.html">compute_autoscale_policy</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-bare-metal") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_bare_metal.html">compute_bare_metal</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-dedicated-host") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_dedicated_host.html">compute_dedicated_host</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-monitor") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_monitor.html">compute_monitor</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-placement-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_placement_group.html">compute_placement_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-provisioning-hook") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_provisioning_hook.html">compute_provisioning_hook</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-ssh-key") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_ssh_key.html">compute_ssh_key</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-ssl-certificate") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_ssl_certificate.html">compute_ssl_certificate</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-user") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_user.html">compute_user</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-compute-vm-instance") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/compute_vm_instance.html">compute_vm_instance</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-database") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/database.html">database</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-dns-domain") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/dns_domain.html">dns_domain</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-dns-domain-registration-nameservers") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/dns_domain_registration_nameservers.html">dns_domain_registration_nameservers</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-dns-secondary") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/dns_secondary.html">dns_secondary</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-dns-record") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/dns_record.html">dns_record</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-firewall") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/firewall.html">firewall</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-firewall-multivlan") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/multivlan_firewall.html">multivlan-firewall</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-firewall-policy") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/firewall_policy.html">firewall_policy</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-hardware-firewall-shared") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/hardware_firewall_shared.html">hardware_firewall_shared</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb.html">lb</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lbaas") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lbaas.html">lbaas</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lbaas-health-monitor") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lbaas_health_monitor.html">lbaas_health_monitor</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lbaas-server-instance-attachment") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lbaas_server_instance_attachment.html">lbaas_server_instance_attachment</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-service") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_service.html">lb_service</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-service-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_service_group.html">lb_service_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_vpx.html">lb_vpx</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-ha") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_vpx_ha.html">lb_vpx_ha</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-service") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_vpx_service.html">lb_vpx_service</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-lb-vpx-vip") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/lb_vpx_vip.html">lb_vpx_vip</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-gateway") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_gateway.html">network_gateway</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-gateway-vlan-association") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_gateway_vlan_association.html">network_gateway_vlan_association</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-interface-sg-attachment") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_interface_sg_attachment.html">network_interface_sg_attachment</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-public-ip") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_public_ip.html">network_public_ip</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-vlan") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_vlan.html">network_vlan</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-network-vlan-spanning") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/network_vlan_spanning.html">network_vlan_spanning</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-object-storage-account") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/object_storage_account.html">object_storage_account</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-security-group") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/security_group.html">security_group</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-security-group-rule") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/security_group_rule.html">security_group_rule</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-storage-block") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/storage_block.html">storage_block</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-storage-evault") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/storage_evault.html">storage_evault</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-storage-file") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/storage_file.html">storage_file</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-subnet") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/subnet.html">subnet</a>
-                    </li>
-                    <li<%= sidebar_current("docs-ibm-resource-ssl-certificate") %>>
-                        <a href="/tf-ibm-docs/v0.18.0/r/ssl_certificate.html">ssl_certificate</a>
-                    </li>
-                </ul>
-            </li>
-
-        <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-            <label class="tree-toggle">
-            <i class="fa fa-caret-down"></i>
-            VPC Services Resources
-            </label>
-            <ul class="list-unstyled tree">
                 <li<%= sidebar_current("docs-ibm-resource-is-floating-ip") %>>
-                <a href="/tf-ibm-docs/v0.18.0/r/is_floating_ip.html">is_floating_ip</a>
+                    <a href="/docs/providers/ibm/r/is_floating_ip.html">is_floating_ip</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-ike-policy") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_ike_policy.html">is_ike_policy</a>
+                    <a href="/docs/providers/ibm/r/is_ike_policy.html">is_ike_policy</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-ipsec-policy") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_ipsec_policy.html">is_ipsec_policy</a>
+                    <a href="/docs/providers/ibm/r/is_ipsec_policy.html">is_ipsec_policy</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-instance") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_instance.html">is_instance</a>
+                    <a href="/docs/providers/ibm/r/is_instance.html">is_instance</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-public-gateway") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_public_gateway.html">is_public_gateway</a>
+                    <a href="/docs/providers/ibm/r/is_public_gateway.html">is_public_gateway</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-vpc") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_vpc.html">is_vpc</a>
+                    <a href="/docs/providers/ibm/r/is_vpc.html">is_vpc</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-vpc-address-prefix") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_vpc_address_prefix.html">is_vpc_address_prefix</a>
+                    <a href="/docs/providers/ibm/r/is_vpc_address_prefix.html">is_vpc_address_prefix</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-vpc-route") %>>
+                    <a href="/docs/providers/ibm/r/is_vpc_route.html">is_vpc_route</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-network-acl") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_network_acl.html">is_network_acl</a>
+                    <a href="/docs/providers/ibm/r/is_network_acl.html">is_network_acl</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-security-group") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_security_group.html">is_security_group</a>
+                    <a href="/docs/providers/ibm/r/is_security_group.html">is_security_group</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-security-group-rule") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_security_group_rule.html">is_security_group_rule</a>
+                    <a href="/docs/providers/ibm/r/is_security_group_rule.html">is_security_group_rule</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-security-group-network-interface-attachment") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_security_group_network_interface_attachment.html">is_security_group_network_interface_attachment</a>
+                    <a href="/docs/providers/ibm/r/is_security_group_network_interface_attachment.html">is_security_group_network_interface_attachment</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-subnet") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_subnet.html">is_subnet</a>
+                    <a href="/docs/providers/ibm/r/is_subnet.html">is_subnet</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-ssh-key") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_ssh_key.html">is_ssh_key</a>
+                    <a href="/docs/providers/ibm/r/is_ssh_key.html">is_ssh_key</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-vpn-gateway") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_vpn_gateway.html">is_vpn_gateway</a>
+                    <a href="/docs/providers/ibm/r/is_vpn_gateway.html">is_vpn_gateway</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-vpn-gateway-connection") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_vpn_gateway_connection.html">is_vpn_gateway_connection</a>
+                    <a href="/docs/providers/ibm/r/is_vpn_gateway_connection.html">is_vpn_gateway_connection</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-lb") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_lb.html">is_lb</a>
+                    <a href="/docs/providers/ibm/r/is_lb.html">is_lb</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-lb-listener") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_lb_listener.html">is_lb_listener</a>
+                    <a href="/docs/providers/ibm/r/is_lb_listener.html">is_lb_listener</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-lb-pool") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_lb_pool.html">is_lb_pool</a>
+                    <a href="/docs/providers/ibm/r/is_lb_pool.html">is_lb_pool</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-lb-pool-member") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_lb_pool_member.html">is_lb_pool_member</a>
+                    <a href="/docs/providers/ibm/r/is_lb_pool_member.html">is_lb_pool_member</a>
                 </li>
                 <li<%= sidebar_current("docs-ibm-resource-is-volume") %>>
-                    <a href="/tf-ibm-docs/v0.18.0/r/is_volume.html">is_volume</a>
+                    <a href="/docs/providers/ibm/r/is_volume.html">is_volume</a>
                 </li>
-            </ul>
-        </li>
-        <li<%= sidebar_current("docs-ibm-resource-infra") %>>
-        <label class="tree-toggle">
-        <i class="fa fa-caret-down"></i>
-        Power IaaS Resources
-        </label>
-        <ul class="list-unstyled tree">
-            <li<%= sidebar_current("docs-ibm-resource-pi-instance") %>>
-                <a href="/tf-ibm-docs/v0.18.0/r/pi_instance.html">pi_instance</a>
+                </ul>
             </li>
-            <li<%= sidebar_current("docs-ibm-resource-pi-key") %>>
-                <a href="/tf-ibm-docs/v0.18.0/r/pi_key.html">pi_key</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-pi-network") %>>
-                <a href="/tf-ibm-docs/v0.18.0/r/pi_network.html">pi_network</a>
-            </li>
-            <li<%= sidebar_current("docs-ibm-resource-pi-volume") %>>
-                <a href="/tf-ibm-docs/v0.18.0/r/pi_volume.html">pi_volume</a>
+            <li<%= sidebar_current("docs-ibm-resource-is") %>>
+                <i class="fa fa-caret-down"></i>
+                <a class="tree-toggle"  href="#">Virtual Private Cloud NextGen Services Resources</a>
+                <ul class="list-unstyled tree">
+                <li<%= sidebar_current("docs-ibm-resource-is-floating-ip") %>>
+                    <a href="/docs/providers/ibm/r/is_floating_ip.html">is_floating_ip</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-instance") %>>
+                    <a href="/docs/providers/ibm/r/is_instance.html">is_instance</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-public-gateway") %>>
+                    <a href="/docs/providers/ibm/r/is_public_gateway.html">is_public_gateway</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-vpc") %>>
+                    <a href="/docs/providers/ibm/r/is_vpc.html">is_vpc</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-vpc-address-prefix") %>>
+                    <a href="/docs/providers/ibm/r/is_vpc_address_prefix.html">is_vpc_address_prefix</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-security-group") %>>
+                    <a href="/docs/providers/ibm/r/is_security_group.html">is_security_group</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-security-group-rule") %>>
+                    <a href="/docs/providers/ibm/r/is_security_group_rule.html">is_security_group_rule</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-security-group-network-interface-attachment") %>>
+                    <a href="/docs/providers/ibm/r/is_security_group_network_interface_attachment.html">is_security_group_network_interface_attachment</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-subnet") %>>
+                    <a href="/docs/providers/ibm/r/is_subnet.html">is_subnet</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-ssh-key") %>>
+                    <a href="/docs/providers/ibm/r/is_ssh_key.html">is_ssh_key</a>
+                </li>
+                <li<%= sidebar_current("docs-ibm-resource-is-volume") %>>
+                    <a href="/docs/providers/ibm/r/is_volume.html">is_volume</a>
+                </li>
+                </ul>
             </li>
         </ul>
     </li>
