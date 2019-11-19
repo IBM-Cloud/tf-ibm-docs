@@ -12,7 +12,9 @@ The IBM Cloud provider is used to manage the provisioning and orchestration of I
 
 Use the navigation menu on the left to read about the available data sources and resources.
 
-See the section [Using Terraform with the IBM Cloud Provider](#using-terraform-with-the-ibm-cloud-provider) for information on how to install and configure the IBM Cloud Provider.
+See the section [Installing the Terraform CLI and the the IBM Cloud Provider](https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install) for information on how to install and configure the IBM Cloud Provider.
+
+> **IMPORTANT**: _The IBM Cloud Provider plug-in is not yet verified to work with Terraform version 0.12.x. To use the IBM Cloud Provider plug-in, install Terraform version 0.11.x._ 
 
 ### Versions
 
