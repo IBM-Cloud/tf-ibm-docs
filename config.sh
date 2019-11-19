@@ -9,7 +9,7 @@ RELEASES=( \
 )
 
 # The version of the provider that schematics is using
-LATEST_VERSION="v0.19.0"
+LATEST_VERSION="v0.19.1"
 
 # The repos that contains the terraform docs
 LEGACYREPO="https://github.com/IBM-Cloud/terraform"
