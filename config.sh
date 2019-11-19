@@ -4,7 +4,8 @@ LEGACYRELEASES=( \
 
 RELEASES=( \
   "v0.18.0" \
-  "v0.19.0"
+  "v0.19.0" \
+  "v0.19.1"
 )
 
 # The version of the provider that schematics is using
