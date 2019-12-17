@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -839,95 +839,29 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_is_instance">ibm_is_instance</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
-
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
-
-<p>See the section <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install">Installing the Terraform CLI and the the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<blockquote>
-<p><strong>IMPORTANT</strong>: <em>The IBM Cloud Provider plug-in is not yet verified to work with Terraform version 0.12.x. To use the IBM Cloud Provider plug-in, install Terraform version 0.11.x.</em> </p>
-</blockquote>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.19.1">v0.19.1</a></li>
-<li><a href="/tf-ibm-docs/v0.20.0">v0.20.0</a></li>
-<li><a href="/tf-ibm-docs/v0.21.0">v0.21.0</a></li>
-</ul>
+<p>Provides a instance resource. This allows instance to be created, updated, and cancelled.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  ibmcloud_api_key    = "${var.ibm_bmx_api_key}"
-  iaas_classic_username = "${var.ibm_sl_username}"
-  iaas_classic_api_key  = "${var.ibm_sl_api_key}"
-}
-
-# Create an IBM Cloud infrastructure SSH key. You can find the SSH key surfaces in the infrastructure console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
-
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "speech_to_text"
-  plan       = "lite"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-
-# Create a Cloud Functions action
-resource "ibm_function_action" "nodehello" {
-  name = "action-name"
-  exec = {
-    kind = "nodejs:6"
-    code = "${file("hellonode.js")}"
-  }
-}
-
-# Create a IS VPC and instance
-resource "ibm_is_vpc" "testacc_vpc" {
-  name = "testvpc1"
+<pre class="highlight plaintext"><code>resource "ibm_is_vpc" "testacc_vpc" {
+  name = "testvpc"
 }
 
 resource "ibm_is_subnet" "testacc_subnet" {
-  name            = "testsubnet1"
+  name            = "testsubnet"
   vpc             = "${ibm_is_vpc.testacc_vpc.id}"
   zone            = "us-south-1"
   ipv4_cidr_block = "10.240.0.0/24"
 }
 
 resource "ibm_is_ssh_key" "testacc_sshkey" {
-  name       = "testssh1"
+  name       = "testssh"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCKVmnMOlHKcZK8tpt3MP1lqOLAcqcJzhsvJcjscgVERRN7/9484SOBJ3HSKxxNG5JN8owAjy5f9yYwcUg+JaUVuytn5Pv3aeYROHGGg+5G346xaq3DAwX6Y5ykr2fvjObgncQBnuU5KHWCECO/4h8uWuwh/kfniXPVjFToc+gnkqA+3RKpAecZhFXwfalQ9mMuYGFxn+fwn8cYEApsJbsEmb0iJwPiZ5hjFC8wREuiTlhPHDgkBLOiycd20op2nXzDbHfCHInquEe/gYxEitALONxm0swBOwJZwlTDOB7C6y2dzlrtxr1L59m7pCkWI4EtTRLvleehBoj3u7jB4usR"
 }
 
 resource "ibm_is_instance" "testacc_instance" {
-  name    = "testinstance1"
+  name    = "testinstance"
   image   = "7eb4e35b-4257-56f8-d7da-326d85452591"
   profile = "b-2x8"
 
@@ -935,81 +869,136 @@ resource "ibm_is_instance" "testacc_instance" {
     subnet     = "${ibm_is_subnet.testacc_subnet.id}"
   }
 
+  network_interfaces = {
+    name       = "eth1"
+    subnet     = "${ibm_is_subnet.testacc_subnet.id}"
+  }
+
+
   vpc  = "${ibm_is_vpc.testacc_vpc.id}"
   zone = "us-south-1"
   keys = ["${ibm_is_ssh_key.testacc_sshkey.id}"]
-  user_data = "${file("nginx.sh")}"
-}
 
-resource "ibm_is_floating_ip" "testacc_floatingip" {
-  name   = "testfip"
-  target = "${ibm_is_instance.testacc_instance.primary_network_interface.0.id}"
+  //User can configure timeouts
+    timeouts {
+        create = "90m"
+        delete = "30m"
+    }
 }
 
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
+<h2 id="timeouts">Timeouts</h2>
 
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
+<p>ibm_is_instance provides the following <a href="https://www.terraform.io/docs/configuration/resources.html#timeouts">Timeouts</a> configuration options:</p>
 
 <ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
+<li><code class="prettyprint">create</code> - (Default 60 minutes) Used for creating Instance.</li>
+<li><code class="prettyprint">delete</code> - (Default 60 minutes) Used for deleting Instance.</li>
 </ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">ibmcloud_api_key</code>, <code class="prettyprint">iaas_classic_username</code>, and <code class="prettyprint">iaas_classic_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    ibmcloud_api_key = ""
-    iaas_classic_username = ""
-    iaas_classic_api_key = ""
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">IC_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud platform API key, IBM Cloud Classic Infrastructure (SoftLayer) user name, and IBM Cloud infrastructure API key, respectively.</p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">IC_API_KEY</span><span class="o">=</span><span class="s2">"bmx_api_key"</span>
-<span class="nb">export </span><span class="nv">SL_USERNAME</span><span class="o">=</span><span class="s2">"sl_username"</span>
-<span class="nb">export </span><span class="nv">SL_API_KEY</span><span class="o">=</span><span class="s2">"sl_api_key"</span>
-terraform plan
-</code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">ibmcloud_api_key</code> - (optional) The IBM Cloud platform API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IC_API_KEY</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Cloud Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>. <code class="prettyprint">ibmcloud_api_key</code> will have higher precedence than <code class="prettyprint">bluemix_api_key</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (deprecated, optional) The IBM Cloud platform API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Cloud Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">ibmcloud_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">IC_TIMEOUT</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>. <code class="prettyprint">ibmcloud_timeout</code> will have higher precedence than <code class="prettyprint">bluemix_timeout</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (deprecated, optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure (SoftLayer) user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable. <code class="prettyprint">iaas_classic_username</code> will have higher precedence than <code class="prettyprint">softlayer_username</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_username</code> - (optional) The IBM Cloud Classic Infrastructure (SoftLayer) user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IAAS_CLASSIC_USERNAME</code>  environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision infrastructure resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>. <code class="prettyprint">iaas_classic_api_key</code> will have higher precedence than <code class="prettyprint">softlayer_api_key</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_api_key</code> - (optional) The IBM Cloud Classic Infrastructure API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IAAS_CLASSIC_API_KEY</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_endpoint_url</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure endpoint url. You can also source it from the <code class="prettyprint">SL_ENDPOINT_URL</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_ENDPOINT_URL</code> environment variable. <code class="prettyprint">iaas_classic_endpoint_url</code> will have higher precedence than <code class="prettyprint">softlayer_endpoint_url</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_endpoint_url</code> - (optional) The IBM Cloud Classic Infrastructure endpoint url. You can also source it from the <code class="prettyprint">IAAS_CLASSIC_ENDPOINT_URL</code> environment variable. The default value is <code class="prettyprint">https://api.softlayer.com/rest/v3</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the IBM Cloud Classic Infrastructure APIs. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. <code class="prettyprint">iaas_classic_timeout</code> will have higher precedence than <code class="prettyprint">softlayer_timeout</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_timeout</code> - (optional) The timeout, expressed in seconds, for the IBM Cloud Clasic Infrastructure APIs. You can also source the timeout from the <code class="prettyprint">IAAS_CLASSIC_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">IC_REGION</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_REGION</code> <code class="prettyprint">BM_REGION</code> <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
-<li><p><code class="prettyprint">resource_group</code> - (optional) The Resource Group ID. You can also source it from the <code class="prettyprint">IC_RESOURCE_GROUP</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_RESOURCE_GROUP</code> <code class="prettyprint">BM_RESOURCE_GROUP</code> <code class="prettyprint">BLUEMIX_RESOURCE_GROUP</code> environment variable.</p></li>
-<li><p><code class="prettyprint">max_retries</code> - (Optional) This is the maximum number of times an IBM Cloud infrastructure API call is retried, in the case where requests are getting network related timeout and rate limit exceeded error code. You can also source it from the <code class="prettyprint">MAX_RETRIES</code> environment variable. The default value is <code class="prettyprint">10</code>.</p></li>
-<li><p><code class="prettyprint">function_namespace</code> - (Optional) Your Cloud Functions namespace is composed from your IBM Cloud org and space like &lt;org&gt;<em>&lt;space&gt;. This attribute is required only when creating a Cloud Functions resource. It must be provided when you are creating such resources in IBM Cloud. You can also source it from the FUNCTION</em>NAMESPACE environment variable.</p></li>
-<li><p><code class="prettyprint">riaas_endpoint</code> - (deprected, Optional) The next generation infrastructure service API endpoint . It can also be sourced from the <code class="prettyprint">RIAAS_ENDPOINT</code>. Default value: <code class="prettyprint">us-south.iaas.cloud.ibm.com</code>. </p></li>
-<li><p><code class="prettyprint">generation</code> - (Optional) The generation of Virtual Private Cloud. It can also be sourced from the <code class="prettyprint">IC_GENERATION</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_GENERATION</code> environment variable. Default value: <code class="prettyprint">2</code>. <code class="prettyprint">1</code> for VPC Classic and <code class="prettyprint">2</code> for VPC NextGen.</p></li>
+<li><code class="prettyprint">name</code> - (Optional, string) The instance name.</li>
+<li><code class="prettyprint">vpc</code> - (Required, Forces new resource, string) The vpc id. </li>
+<li><code class="prettyprint">zone</code> - (Required, Forces new resource, string) Name of the zone. </li>
+<li><code class="prettyprint">profile</code> - (Required, string) The profile name. </li>
+<li><code class="prettyprint">image</code> - (Required, string) ID of the image. </li>
+<li><code class="prettyprint">boot_volume</code> - (Optional, list) A block describing the boot volume of this instance.<br>
+<code class="prettyprint">boot_volume</code> block have the following structure:
+
+<ul>
+<li><code class="prettyprint">name</code> - (Optional, string) The name of the boot volume.</li>
+<li><code class="prettyprint">encryption</code> -(Optional, string) The encryption of the boot volume.</li>
+</ul></li>
+<li><code class="prettyprint">keys</code> - (Required, list) Comma separated IDs of ssh keys.<br></li>
+<li><code class="prettyprint">primary_network_interface</code> - (Required, list) A nested block describing the primary network interface of this instance. We can have only one primary network interface.
+Nested <code class="prettyprint">primary_network_interface</code> block have the following structure:
+
+<ul>
+<li><code class="prettyprint">name</code> - (Optional, string) The name of the network interface.</li>
+<li><code class="prettyprint">port_speed</code> - (Deprecated, int) Speed of the network interface.</li>
+<li><code class="prettyprint">subnet</code> -  (Required, string) ID of the subnet.</li>
+<li><code class="prettyprint">security_groups</code> - (Optional, list) Comma separated IDs of security groups.</li>
+</ul></li>
+<li><p><code class="prettyprint">network_interfaces</code> - (Optional, Forces new resource, list) A nested block describing the additional network interface of this instance.
+Nested <code class="prettyprint">network_interfaces</code> block have the following structure:</p>
+
+<ul>
+<li><code class="prettyprint">name</code> - (Optional, string) The name of the network interface.</li>
+<li><code class="prettyprint">subnet</code> -  (Required, string) ID of the subnet.</li>
+<li><code class="prettyprint">security_groups</code> - (Optional, list) Comma separated IDs of security groups.</li>
+</ul></li>
+<li><p><code class="prettyprint">volumes</code> - (Optional, list) Comma separated IDs of volumes. </p></li>
+<li><p><code class="prettyprint">user_data</code> - (Optional, string) User data to transfer to the server instance.</p></li>
+<li><p><code class="prettyprint">resource_group</code> - (Optional, Forces new resource, string) The resource group ID for this instance.</p></li>
 </ul>
 
-<p><strong><em>Note</em></strong>
-The CloudFoundry endpoint has been updated in this release of IBM Cloud Terraform provider v0.17.4.  If you are using an earlier version of IBM Cloud Terraform provider, export the <code class="prettyprint">IBMCLOUD_UAA_ENDPOINT</code> to the new authentication endpoint, as illustrated below</p>
-<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">IBMCLOUD_UAA_ENDPOINT</span><span class="o">=</span><span class="s2">"https://iam.cloud.ibm.com/cloudfoundry/login/&lt;region&gt;/"</span>
+<h2 id="attribute-reference">Attribute Reference</h2>
+
+<p>The following attributes are exported:</p>
+
+<ul>
+<li><code class="prettyprint">id</code> - The id of the instance.</li>
+<li><code class="prettyprint">memory</code> - Memory of the instance.</li>
+<li><code class="prettyprint">status</code> - Status of the instance.</li>
+<li><code class="prettyprint">vcpu</code> - A nested block describing the VCPU configuration of this instance.
+Nested <code class="prettyprint">vcpu</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">architecture</code> - The architecture of the instance.</li>
+<li><code class="prettyprint">count</code> - The number of VCPUs assigned to the instance.</li>
+</ul></li>
+<li><code class="prettyprint">gpu</code> - A nested block describing the gpu of this instance.
+Nested <code class="prettyprint">gpu</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">cores</code> - The cores of the gpu.</li>
+<li><code class="prettyprint">count</code> - Count of the gpu.</li>
+<li><code class="prettyprint">manufacture</code> - Manufacture of the gpu.</li>
+<li><code class="prettyprint">memory</code> - Memory of the gpu.</li>
+<li><code class="prettyprint">model</code> - Model of the gpu.</li>
+</ul></li>
+<li><code class="prettyprint">primary_network_interface</code> - A nested block describing the primary network interface of this instance.
+Nested <code class="prettyprint">primary_network_interface</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">id</code> - The id of the network interface.</li>
+<li><code class="prettyprint">name</code> - The name of the network interface.</li>
+<li><code class="prettyprint">subnet</code> -  ID of the subnet.</li>
+<li><code class="prettyprint">security_groups</code> -  List of security groups.</li>
+<li><code class="prettyprint">primary_ipv4_address</code> - The primary IPv4 address.</li>
+</ul></li>
+<li><code class="prettyprint">network_interfaces</code> - A nested block describing the additional network interface of this instance.
+Nested <code class="prettyprint">network_interfaces</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">id</code> - The id of the network interface.</li>
+<li><code class="prettyprint">name</code> - The name of the network interface.</li>
+<li><code class="prettyprint">subnet</code> -  ID of the subnet.</li>
+<li><code class="prettyprint">security_groups</code> -  List of security groups.</li>
+<li><code class="prettyprint">primary_ipv4_address</code> - The primary IPv4 address.</li>
+</ul></li>
+<li><code class="prettyprint">boot_volume</code> - A nested block describing the boot volume.
+Nested <code class="prettyprint">boot_volume</code> blocks have the following structure:
+
+<ul>
+<li><code class="prettyprint">name</code> - The name of the boot volume.</li>
+<li><code class="prettyprint">size</code> -  Capacity of the volume in GB.</li>
+<li><code class="prettyprint">iops</code> -  Input/Output Operations Per Second for the volume.</li>
+<li><code class="prettyprint">profile</code> - The profile of the volume.</li>
+<li><code class="prettyprint">encryption</code> - The encryption of the boot volume.</li>
+</ul></li>
+<li><code class="prettyprint">resource_controller_url</code> - The URL of the IBM Cloud dashboard that can be used to explore and view details about this instance.</li>
+</ul>
+
+<h2 id="import">Import</h2>
+
+<p>ibm_is_instance can be imported using instanceID, eg</p>
+<pre class="highlight plaintext"><code>$ terraform import ibm_is_instance.example d7bec597-4726-451f-8a63-e62e6f19c32c
 </code></pre>
 
       </div>
@@ -1037,6 +1026,6 @@ The CloudFoundry endpoint has been updated in this release of IBM Cloud Terrafor
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
