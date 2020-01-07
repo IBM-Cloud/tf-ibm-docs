@@ -14,7 +14,7 @@ Use the navigation menu on the left to read about the available data sources and
 
 See the section [Installing the Terraform CLI and the the IBM Cloud Provider](https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install) for information on how to install and configure the IBM Cloud Provider.
 
-> **IMPORTANT**: _The IBM Cloud Provider plug-in is not yet verified to work with Terraform version 0.12.x. To use the IBM Cloud Provider plug-in, install Terraform version 0.11.x._ 
+> **IMPORTANT**: _Version 1.x and beyond of the IBM Cloud Provider for Terraform is made to work with Terraform version 0.12.x. Version 0.22.x and earlier of the IBM Cloud Provider are made to work with Terraform version 0.11.x_ 
 
 ### Versions
 
