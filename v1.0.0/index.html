@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../stylesheets/main.css" rel="stylesheet" />
+    <link href="../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -877,43 +877,29 @@
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
         <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>The IBM Cloud provider is used to manage IBM Cloud resources. The provider must be configured with the proper credentials before it can be used.</p>
 
 <p>Use the navigation menu on the left to read about the available data sources and resources.</p>
-
-<p>See the section <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install">Installing the Terraform CLI and the the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<blockquote>
-<p><strong>IMPORTANT</strong>: <em>Version 1.x and beyond of the IBM Cloud Provider for Terraform is made to work with Terraform version 0.12.x. Version 0.22.x and earlier of the IBM Cloud Provider are made to work with Terraform version 0.11.x</em> </p>
-</blockquote>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.21.0">v0.21.0</a></li>
-<li><a href="/tf-ibm-docs/v0.22.0">v0.22.0</a></li>
-<li><a href="/tf-ibm-docs/v1.0.0">v1.0.0</a></li>
-</ul>
 
 <h2 id="example-usage">Example Usage</h2>
 <pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
 provider "ibm" {
-  ibmcloud_api_key    = "${var.ibm_bmx_api_key}"
-  iaas_classic_username = "${var.ibm_sl_username}"
-  iaas_classic_api_key  = "${var.ibm_sl_api_key}"
+  ibmcloud_api_key      = var.ibm_bmx_api_key
+  iaas_classic_username = var.ibm_sl_username
+  iaas_classic_api_key  = var.ibm_sl_api_key
 }
 
 # Create an IBM Cloud infrastructure SSH key. You can find the SSH key surfaces in the infrastructure console under Devices &gt; Manage &gt; SSH Keys
 resource "ibm_compute_ssh_key" "test_key_1" {
   label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
+  public_key = var.ssh_public_key
 }
 
 # Create a virtual server with the SSH key
 resource "ibm_compute_vm_instance" "my_server_2" {
   hostname          = "host-b.example.com"
   domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
+  ssh_key_ids       = [123456, ibm_compute_ssh_key.test_key_1.id]
   os_reference_code = "CENTOS_6_64"
   datacenter        = "ams01"
   network_speed     = 10
@@ -923,14 +909,14 @@ resource "ibm_compute_vm_instance" "my_server_2" {
 
 # Reference details of the IBM Cloud space
 data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
+  space = var.space
+  org   = var.org
 }
 
 # Create an instance of an IBM service
 resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
+  name       = var.instance_name
+  space_guid = data.ibm_space.space.id
   service    = "speech_to_text"
   plan       = "lite"
   tags       = ["cluster-service", "cluster-bind"]
@@ -939,9 +925,9 @@ resource "ibm_service_instance" "service" {
 # Create a Cloud Functions action
 resource "ibm_function_action" "nodehello" {
   name = "action-name"
-  exec = {
+  exec {
     kind = "nodejs:6"
-    code = "${file("hellonode.js")}"
+    code = file("hellonode.js")
   }
 }
 
@@ -952,7 +938,7 @@ resource "ibm_is_vpc" "testacc_vpc" {
 
 resource "ibm_is_subnet" "testacc_subnet" {
   name            = "testsubnet1"
-  vpc             = "${ibm_is_vpc.testacc_vpc.id}"
+  vpc             = ibm_is_vpc.testacc_vpc.id
   zone            = "us-south-1"
   ipv4_cidr_block = "10.240.0.0/24"
 }
@@ -967,19 +953,19 @@ resource "ibm_is_instance" "testacc_instance" {
   image   = "7eb4e35b-4257-56f8-d7da-326d85452591"
   profile = "b-2x8"
 
-  primary_network_interface = {
-    subnet     = "${ibm_is_subnet.testacc_subnet.id}"
+  primary_network_interface {
+    subnet = ibm_is_subnet.testacc_subnet.id
   }
 
-  vpc  = "${ibm_is_vpc.testacc_vpc.id}"
-  zone = "us-south-1"
-  keys = ["${ibm_is_ssh_key.testacc_sshkey.id}"]
-  user_data = "${file("nginx.sh")}"
+  vpc       = ibm_is_vpc.testacc_vpc.id
+  zone      = "us-south-1"
+  keys      = [ibm_is_ssh_key.testacc_sshkey.id]
+  user_data = file("nginx.sh")
 }
 
 resource "ibm_is_floating_ip" "testacc_floatingip" {
   name   = "testfip"
-  target = "${ibm_is_instance.testacc_instance.primary_network_interface.0.id}"
+  target = ibm_is_instance.testacc_instance.primary_network_interface[0].id
 }
 
 </code></pre>
@@ -1007,14 +993,14 @@ resource "ibm_is_floating_ip" "testacc_floatingip" {
 
 <h3 id="environment-variables">Environment variables</h3>
 
-<p>You can provide your credentials by exporting the <code class="prettyprint">IC_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud platform API key, IBM Cloud Classic Infrastructure (SoftLayer) user name, and IBM Cloud infrastructure API key, respectively.</p>
+<p>You can provide your credentials by exporting the <code class="prettyprint">IC_API_KEY</code>, <code class="prettyprint">IAAS_CLASSIC_USERNAME</code>, and <code class="prettyprint">IAAS_CLASSIC_API_KEY</code> environment variables, representing your IBM Cloud platform API key, IBM Cloud Classic Infrastructure (SoftLayer) user name, and IBM Cloud infrastructure API key, respectively.</p>
 <pre class="highlight plaintext"><code>provider "ibm" {}
 </code></pre>
 
 <p>Usage:</p>
 <pre class="highlight shell"><code><span class="nb">export </span><span class="nv">IC_API_KEY</span><span class="o">=</span><span class="s2">"bmx_api_key"</span>
-<span class="nb">export </span><span class="nv">SL_USERNAME</span><span class="o">=</span><span class="s2">"sl_username"</span>
-<span class="nb">export </span><span class="nv">SL_API_KEY</span><span class="o">=</span><span class="s2">"sl_api_key"</span>
+<span class="nb">export </span><span class="nv">IAAS_CLASSIC_USERNAME</span><span class="o">=</span><span class="s2">"sl_username"</span>
+<span class="nb">export </span><span class="nv">IAAS_CLASSIC_API_KEY</span><span class="o">=</span><span class="s2">"sl_api_key"</span>
 terraform plan
 </code></pre>
 
@@ -1073,6 +1059,6 @@ The CloudFoundry endpoint has been updated in this release of IBM Cloud Terrafor
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../javascript/sidemenu.js"></script>
 </body>
 </html>
