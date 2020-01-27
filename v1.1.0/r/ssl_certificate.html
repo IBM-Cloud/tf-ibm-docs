@@ -9,12 +9,12 @@
     <title>
       IBM Cloud Provider for Terraform(tm) Documentation
     </title>
-    <link href="stylesheets/normalize.css" rel="stylesheet" />
+    <link href="../../stylesheets/normalize.css" rel="stylesheet" />
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link href="stylesheets/main.css" rel="stylesheet" />
-    <link href="stylesheets/custom.css" rel="stylesheet" />
+    <link href="../../stylesheets/main.css" rel="stylesheet" />
+    <link href="../../stylesheets/custom.css" rel="stylesheet" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <!-- these were in footer_scripts.html but need to load early or refactor -->
@@ -896,178 +896,193 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
-        <h1 id="ibm-cloud-provider">IBM Cloud Provider</h1>
+        <h1 id="ibm_ssl_certificate">ibm_ssl_certificate</h1>
 
-<p>The IBM Cloud provider is used to manage the provisioning and orchestration of IBM Cloud resources with the Terraform &trade; opensource provisioning engine. The provider must be configured with the proper credentials before it can be used.</p>
+<p>Provides an SSL certificate resource. This allows SSL certificates to be requested, and delete request for ssl certificates.</p>
 
-<p>Use the navigation menu on the left to read about the available data sources and resources.</p>
-
-<p>See the section <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-getting-started#install">Installing the Terraform CLI and the the IBM Cloud Provider</a> for information on how to install and configure the IBM Cloud Provider.</p>
-
-<blockquote>
-<p><strong>IMPORTANT</strong>: <em>Version 1.x and beyond of the IBM Cloud Provider for Terraform is made to work with Terraform version 0.12.x. Version 0.22.x and earlier of the IBM Cloud Provider are made to work with Terraform version 0.11.x</em> </p>
-</blockquote>
-
-<h3 id="versions">Versions</h3>
-
-<ul>
-<li><a href="/tf-ibm-docs/v0.22.0">v0.22.0</a></li>
-<li><a href="/tf-ibm-docs/v1.0.0">v1.0.0</a></li>
-<li><a href="/tf-ibm-docs/v1.1.0">v1.1.0</a></li>
-</ul>
+<p>For additional details, see the <a href="http://sldn.softlayer.com/reference/datatypes/SoftLayer_Security_Certificate/Request">IBM Cloud Classic Infrastructure(SoftLayer) security certificates Request docs</a>.</p>
 
 <h2 id="example-usage">Example Usage</h2>
-<pre class="highlight plaintext"><code># Configure the IBM Cloud Provider
-provider "ibm" {
-  ibmcloud_api_key    = "${var.ibm_bmx_api_key}"
-  iaas_classic_username = "${var.ibm_sl_username}"
-  iaas_classic_api_key  = "${var.ibm_sl_api_key}"
-}
 
-# Create an IBM Cloud infrastructure SSH key. You can find the SSH key surfaces in the infrastructure console under Devices &gt; Manage &gt; SSH Keys
-resource "ibm_compute_ssh_key" "test_key_1" {
-  label      = "test_key_1"
-  public_key = "${var.ssh_public_key}"
-}
-
-# Create a virtual server with the SSH key
-resource "ibm_compute_vm_instance" "my_server_2" {
-  hostname          = "host-b.example.com"
-  domain            = "example.com"
-  ssh_key_ids       = [123456, "${ibm_compute_ssh_key.test_key_1.id}"]
-  os_reference_code = "CENTOS_6_64"
-  datacenter        = "ams01"
-  network_speed     = 10
-  cores             = 1
-  memory            = 1024
-}
-
-# Reference details of the IBM Cloud space
-data "ibm_space" "space" {
-  space = "${var.space}"
-  org   = "${var.org}"
-}
-
-# Create an instance of an IBM service
-resource "ibm_service_instance" "service" {
-  name       = "${var.instance_name}"
-  space_guid = "${data.ibm_space.space.id}"
-  service    = "speech_to_text"
-  plan       = "lite"
-  tags       = ["cluster-service", "cluster-bind"]
-}
-
-# Create a Cloud Functions action
-resource "ibm_function_action" "nodehello" {
-  name = "action-name"
-  exec = {
-    kind = "nodejs:6"
-    code = "${file("hellonode.js")}"
+<p>In the following example, you can use a certificate on file:</p>
+<pre class="highlight plaintext"><code>resource "ibm_ssl_certificate" "my_ssllllll" {
+  certificate_signing_request = "-----BEGIN CERTIFICATE REQUEST-----\nCERTIFICATE CONTENT\n-----END CERTIFICATE REQUEST-----"
+  organization_information {
+    org_address {
+      org_address_line1 = "abc"
+      org_address_line2 = "xyz"
+      org_city          = "pune"
+      org_country_code  = "IN"
+      org_state         = "MH"
+      org_postal_code   = "411045"
+    }
+    org_organization_name = "GSLAB"
+    org_phone_number      = "8657072955"
+    org_fax_number        = ""
   }
-}
-
-# Create a IS VPC and instance
-resource "ibm_is_vpc" "testacc_vpc" {
-  name = "testvpc1"
-}
-
-resource "ibm_is_subnet" "testacc_subnet" {
-  name            = "testsubnet1"
-  vpc             = "${ibm_is_vpc.testacc_vpc.id}"
-  zone            = "us-south-1"
-  ipv4_cidr_block = "10.240.0.0/24"
-}
-
-resource "ibm_is_ssh_key" "testacc_sshkey" {
-  name       = "testssh1"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCKVmnMOlHKcZK8tpt3MP1lqOLAcqcJzhsvJcjscgVERRN7/9484SOBJ3HSKxxNG5JN8owAjy5f9yYwcUg+JaUVuytn5Pv3aeYROHGGg+5G346xaq3DAwX6Y5ykr2fvjObgncQBnuU5KHWCECO/4h8uWuwh/kfniXPVjFToc+gnkqA+3RKpAecZhFXwfalQ9mMuYGFxn+fwn8cYEApsJbsEmb0iJwPiZ5hjFC8wREuiTlhPHDgkBLOiycd20op2nXzDbHfCHInquEe/gYxEitALONxm0swBOwJZwlTDOB7C6y2dzlrtxr1L59m7pCkWI4EtTRLvleehBoj3u7jB4usR"
-}
-
-resource "ibm_is_instance" "testacc_instance" {
-  name    = "testinstance1"
-  image   = "7eb4e35b-4257-56f8-d7da-326d85452591"
-  profile = "b-2x8"
-
-  primary_network_interface = {
-    subnet     = "${ibm_is_subnet.testacc_subnet.id}"
+  technical_contact_same_as_org_address_flag = "false"
+  technical_contact {
+    tech_address {
+      tech_address_line1 = "fcb"
+      tech_address_line2 = "pqr"
+      tech_city          = "pune"
+      tech_country_code  = "IN"
+      tech_state         = "MH"
+      tech_postal_code   = "411045"
+    }
+    tech_organization_name = "IBM"
+    tech_phone_number      = "8657072955"
+    tech_fax_number        = ""
+    tech_first_name        = "qwerty"
+    tech_last_name         = "ytrewq"
+    tech_email_address     = "abc@gmail.com"
+    tech_title             = "SSL CERT"
   }
-
-  vpc  = "${ibm_is_vpc.testacc_vpc.id}"
-  zone = "us-south-1"
-  keys = ["${ibm_is_ssh_key.testacc_sshkey.id}"]
-  user_data = "${file("nginx.sh")}"
+  billing_contact {
+    billing_address {
+      billing_address_line1 = "plk"
+      billing_address_line2 = "PLO"
+      billing_city          = "PUNE"
+      billing_country_code  = "IN"
+      billing_state         = "MH"
+      billing_postal_code   = "411045"
+    }
+    billing_organization_name = "IBM"
+    billing_phone_number      = "8657072955"
+    billing_fax_number        = ""
+    billing_first_name        = "ERTYU"
+    billing_last_name         = "SDFGHJK"
+    billing_email_address     = "kjjj@gsd.com"
+    billing_title             = "PFGHJK"
+  }
+  administrative_contact {
+    admin_address {
+      admin_address_line1 = "fghds"
+      admin_address_line2 = "twyu"
+      admin_city          = "pune"
+      admin_country_code  = "IN"
+      admin_state         = "MH"
+      admin_postal_code   = "411045"
+    }
+    admin_organization_name = "GSLAB"
+    admin_phone_number      = "8657072955"
+    admin_fax_number        = ""
+    admin_first_name        = "DFGHJ"
+    admin_last_name         = "dfghjkl"
+    admin_email_address     = "fghjk@gshhds.com"
+    admin_title             = "POIUYGHJK"
+  }
+  administrative_contact_same_as_technical_flag    = "false"
+  billing_contact_same_as_technical_flag           = "false"
+  billing_address_same_as_organization_flag        = "false"
+  administrative_address_same_as_organization_flag = "false"
+  ssl_type                                         = "SSL_CERTIFICATE_QUICKSSL_PREMIUM_2_YEAR"
+  renewal_flag                                     = true
+  server_count                                     = 1
+  server_type                                      = "apache2"
+  validity_months                                  = 24
+  order_approver_email_address                     = "admin@pune.in"
 }
 
-resource "ibm_is_floating_ip" "testacc_floatingip" {
-  name   = "testfip"
-  target = "${ibm_is_instance.testacc_instance.primary_network_interface.0.id}"
-}
-
-</code></pre>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>The IBM Cloud provider offers a flexible means of providing credentials for authentication. The following methods are supported, in this order, and explained below:</p>
-
-<ul>
-<li>Static credentials</li>
-<li>Environment variables</li>
-</ul>
-
-<h3 id="static-credentials">Static credentials</h3>
-
-<p>You can provide your static credentials by adding the <code class="prettyprint">ibmcloud_api_key</code>, <code class="prettyprint">iaas_classic_username</code>, and <code class="prettyprint">iaas_classic_api_key</code> arguments in the IBM Cloud provider block.</p>
-
-<p>Usage:</p>
-<pre class="highlight plaintext"><code>provider "ibm" {
-    ibmcloud_api_key = ""
-    iaas_classic_username = ""
-    iaas_classic_api_key = ""
-}
-</code></pre>
-
-<h3 id="environment-variables">Environment variables</h3>
-
-<p>You can provide your credentials by exporting the <code class="prettyprint">IC_API_KEY</code>, <code class="prettyprint">SL_USERNAME</code>, and <code class="prettyprint">SL_API_KEY</code> environment variables, representing your IBM Cloud platform API key, IBM Cloud Classic Infrastructure (SoftLayer) user name, and IBM Cloud infrastructure API key, respectively.</p>
-<pre class="highlight plaintext"><code>provider "ibm" {}
-</code></pre>
-
-<p>Usage:</p>
-<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">IC_API_KEY</span><span class="o">=</span><span class="s2">"bmx_api_key"</span>
-<span class="nb">export </span><span class="nv">SL_USERNAME</span><span class="o">=</span><span class="s2">"sl_username"</span>
-<span class="nb">export </span><span class="nv">SL_API_KEY</span><span class="o">=</span><span class="s2">"sl_api_key"</span>
-terraform plan
 </code></pre>
 
 <h2 id="argument-reference">Argument Reference</h2>
 
-<p>The following arguments are supported in the <code class="prettyprint">provider</code> block:</p>
+<p>The following arguments are supported:</p>
 
 <ul>
-<li><p><code class="prettyprint">ibmcloud_api_key</code> - (optional) The IBM Cloud platform API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IC_API_KEY</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Cloud Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>. <code class="prettyprint">ibmcloud_api_key</code> will have higher precedence than <code class="prettyprint">bluemix_api_key</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_api_key</code> - (deprecated, optional) The IBM Cloud platform API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">BM_API_KEY</code> (higher precedence) or <code class="prettyprint">BLUEMIX_API_KEY</code> environment variable. The key is required to provision Cloud Foundry or IBM Cloud Container Service resources, such as any resource that begins with <code class="prettyprint">ibm</code> or <code class="prettyprint">ibm_container</code>.</p></li>
-<li><p><code class="prettyprint">ibmcloud_timeout</code> - (optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">IC_TIMEOUT</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>. <code class="prettyprint">ibmcloud_timeout</code> will have higher precedence than <code class="prettyprint">bluemix_timeout</code>.</p></li>
-<li><p><code class="prettyprint">bluemix_timeout</code> - (deprecated, optional) The timeout, expressed in seconds, for interacting with IBM Cloud APIs. You can also source the timeout from the <code class="prettyprint">BM_TIMEOUT</code> (higher precedence) or <code class="prettyprint">BLUEMIX_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_username</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure (SoftLayer) user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_USERNAME</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_USERNAME</code> environment variable. <code class="prettyprint">iaas_classic_username</code> will have higher precedence than <code class="prettyprint">softlayer_username</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_username</code> - (optional) The IBM Cloud Classic Infrastructure (SoftLayer) user name. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IAAS_CLASSIC_USERNAME</code>  environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_api_key</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">SL_API_KEY</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_API_KEY</code> environment variable. The key is required to provision infrastructure resources, such as any resource that begins with <code class="prettyprint">ibm_compute</code>. <code class="prettyprint">iaas_classic_api_key</code> will have higher precedence than <code class="prettyprint">softlayer_api_key</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_api_key</code> - (optional) The IBM Cloud Classic Infrastructure API key. You must either add it as a credential in the provider block or source it from the <code class="prettyprint">IAAS_CLASSIC_API_KEY</code> environment variable.</p></li>
-<li><p><code class="prettyprint">softlayer_endpoint_url</code> - (deprecated, optional) The IBM Cloud Classic Infrastructure endpoint url. You can also source it from the <code class="prettyprint">SL_ENDPOINT_URL</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_ENDPOINT_URL</code> environment variable. <code class="prettyprint">iaas_classic_endpoint_url</code> will have higher precedence than <code class="prettyprint">softlayer_endpoint_url</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_endpoint_url</code> - (optional) The IBM Cloud Classic Infrastructure endpoint url. You can also source it from the <code class="prettyprint">IAAS_CLASSIC_ENDPOINT_URL</code> environment variable. The default value is <code class="prettyprint">https://api.softlayer.com/rest/v3</code>.</p></li>
-<li><p><code class="prettyprint">softlayer_timeout</code> - (optional) The timeout, expressed in seconds, for the IBM Cloud Classic Infrastructure APIs. You can also source the timeout from the <code class="prettyprint">SL_TIMEOUT</code> (higher precedence) or <code class="prettyprint">SOFTLAYER_TIMEOUT</code> environment variable. <code class="prettyprint">iaas_classic_timeout</code> will have higher precedence than <code class="prettyprint">softlayer_timeout</code>.</p></li>
-<li><p><code class="prettyprint">iaas_classic_timeout</code> - (optional) The timeout, expressed in seconds, for the IBM Cloud Clasic Infrastructure APIs. You can also source the timeout from the <code class="prettyprint">IAAS_CLASSIC_TIMEOUT</code> environment variable. The default value is <code class="prettyprint">60</code>.</p></li>
-<li><p><code class="prettyprint">region</code> - (optional) The IBM Cloud region. You can also source it from the <code class="prettyprint">IC_REGION</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_REGION</code> <code class="prettyprint">BM_REGION</code> <code class="prettyprint">BLUEMIX_REGION</code> environment variable. The default value is <code class="prettyprint">us-south</code>.</p></li>
-<li><p><code class="prettyprint">resource_group</code> - (optional) The Resource Group ID. You can also source it from the <code class="prettyprint">IC_RESOURCE_GROUP</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_RESOURCE_GROUP</code> <code class="prettyprint">BM_RESOURCE_GROUP</code> <code class="prettyprint">BLUEMIX_RESOURCE_GROUP</code> environment variable.</p></li>
-<li><p><code class="prettyprint">max_retries</code> - (Optional) This is the maximum number of times an IBM Cloud infrastructure API call is retried, in the case where requests are getting network related timeout and rate limit exceeded error code. You can also source it from the <code class="prettyprint">MAX_RETRIES</code> environment variable. The default value is <code class="prettyprint">10</code>.</p></li>
-<li><p><code class="prettyprint">function_namespace</code> - (Optional) Your Cloud Functions namespace is composed from your IBM Cloud org and space like &lt;org&gt;<em>&lt;space&gt;. This attribute is required only when creating a Cloud Functions resource. It must be provided when you are creating such resources in IBM Cloud. You can also source it from the FUNCTION</em>NAMESPACE environment variable.</p></li>
-<li><p><code class="prettyprint">riaas_endpoint</code> - (deprected, Optional) The next generation infrastructure service API endpoint . It can also be sourced from the <code class="prettyprint">RIAAS_ENDPOINT</code>. Default value: <code class="prettyprint">us-south.iaas.cloud.ibm.com</code>. </p></li>
-<li><p><code class="prettyprint">generation</code> - (Optional) The generation of Virtual Private Cloud. It can also be sourced from the <code class="prettyprint">IC_GENERATION</code> (higher precedence) or <code class="prettyprint">IBMCLOUD_GENERATION</code> environment variable. Default value: <code class="prettyprint">2</code>. <code class="prettyprint">1</code> for VPC Classic and <code class="prettyprint">2</code> for VPC NextGen.</p></li>
-</ul>
+<li><code class="prettyprint">certificateSigningRequest</code> - (Required, string) The Certificate Signing Request which is specially formatted encrypted message sent from a Secure Sockets Layer (SSL) digital certificate applicant to a certificate authority.</li>
+<li><code class="prettyprint">sslType</code> - (Required, string) The ssl certificate type.</li>
+<li><code class="prettyprint">serverType</code> - (Required, string) The server type for which we are requesting ssl certficate.</li>
+<li><code class="prettyprint">serverCount</code> - (Required, string) The number of servers with provided server tye .</li>
+<li><code class="prettyprint">validityMonths</code> - (Required, integer) The validity of ssl certificate in months it should be multiple of 12.</li>
+<li><code class="prettyprint">orderApproverEmailAddress</code> - (Required, string) The email of approver to approve ssl certificate request.</li>
+<li><code class="prettyprint">organization_information</code>- (Required, set) Organization information from issuer belongs to.
 
-<p><strong><em>Note</em></strong>
-The CloudFoundry endpoint has been updated in this release of IBM Cloud Terraform provider v0.17.4.  If you are using an earlier version of IBM Cloud Terraform provider, export the <code class="prettyprint">IBMCLOUD_UAA_ENDPOINT</code> to the new authentication endpoint, as illustrated below</p>
-<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">IBMCLOUD_UAA_ENDPOINT</span><span class="o">=</span><span class="s2">"https://iam.cloud.ibm.com/cloudfoundry/login/&lt;region&gt;/"</span>
-</code></pre>
+<ul>
+<li><code class="prettyprint">org_address</code>- (Required, string) Organization address of the issuer.
+
+<ul>
+<li><code class="prettyprint">org_addressLine1</code> - (Required, string) The address of organization who is requesting for ssl certificate.</li>
+<li><code class="prettyprint">org_addressLine2</code> - (optional, string) The address of organization who is requesting for ssl certificate.</li>
+<li><code class="prettyprint">org_city</code> - (Required, string) The city of organization which is requesting for ssl certificate .</li>
+<li><code class="prettyprint">org_postalCode</code> - (Required, integer) The postal code for the city of organization.</li>
+<li><code class="prettyprint">org_state</code> - (Required, string) The two letter state code of organization who is requesting for ssl certificate. Allowed value for country which doesn&rsquo;t have states is <code class="prettyprint">OT</code>.</li>
+<li><code class="prettyprint">org_countryCode</code> - (Required, string) The two letter country code of organization.</li>
+</ul></li>
+<li><code class="prettyprint">org_organizationName</code> - (Required, string) Name of organization.</li>
+<li><code class="prettyprint">org_phone_number</code> - (Required, string) Phone number of organization</li>
+<li><code class="prettyprint">org_fax_number</code> - (Optional, string) Fax number for organization</li>
+</ul></li>
+<li><code class="prettyprint">technical_contact</code> - (Required, set) Technical contact details of issuer.
+
+<ul>
+<li><code class="prettyprint">tech_address</code> - (Optional, set) Technical address details
+
+<ul>
+<li><code class="prettyprint">tech_addressLine1</code> - (Required, string) The address for technical contact.</li>
+<li><code class="prettyprint">tech_addressLine2</code> - (Optional, string) The address for technical contact.</li>
+<li><code class="prettyprint">tech_city</code> - (Required, string) The city for technical contact.</li>
+<li><code class="prettyprint">tech_postalCode</code> - (Required, integer) The postal code for technical contact.</li>
+<li><code class="prettyprint">tech_state</code> - (Required, string) The two letter state code of technical contact. Allowed value for country which doesn&rsquo;t have states is <code class="prettyprint">OT</code>.</li>
+<li><code class="prettyprint">tech_countryCode</code> - (Required, string) The two letter country code for technical contact.</li>
+</ul></li>
+<li><code class="prettyprint">tech_organizationName</code> - (Required, string) Name of organization for technical contact.</li>
+<li><code class="prettyprint">tech_firstName</code> - (Required, string) The first name for technical contact.</li>
+<li><code class="prettyprint">tech_lastName</code> - (Required, string) The last name for technical contact.</li>
+<li><code class="prettyprint">tech_title</code> - (Required, string) The title for for technical contact.</li>
+<li><code class="prettyprint">tech_emailAddress</code> -(Required, string) email address for technical contact.</li>
+<li><code class="prettyprint">tech_phone_number</code>- (Required, string) phone number for technical detail.</li>
+<li><code class="prettyprint">tech_fax_number</code> - (Optional, string) Fax number for technical detail.</li>
+</ul></li>
+<li><p><code class="prettyprint">administrative_contact</code> - (Optional, set) Administrator contact details.</p>
+
+<ul>
+<li><code class="prettyprint">admin_address</code> - (Optional, set) Administrator address details.
+
+<ul>
+<li><code class="prettyprint">admin_addressLine1</code> - (Optional, string) The address for administrative contact.</li>
+<li><code class="prettyprint">admin_addressLine2</code> - (optional, string) The address for administrative contact.</li>
+<li><code class="prettyprint">admin_city</code> - (Optional, string) The city for administrative contact.</li>
+<li><code class="prettyprint">admin_postalCode</code> - (Optional, integer) The postal code for administrative contact.</li>
+<li><code class="prettyprint">admin_state</code> - (Optional, string) The two letter state code of administrative contact. Allowed value for country which doesn&rsquo;t have states is <code class="prettyprint">OT</code>.</li>
+<li><code class="prettyprint">admin_countryCode</code> - (Optional, string) The two letter country code for administrative contact.</li>
+</ul></li>
+<li><code class="prettyprint">admin_organizationName</code> - (Optional, string) Name of organization for administrative contact.</li>
+<li><code class="prettyprint">admin_firstName</code> - (Optional, string) The first name for administrative contact.</li>
+<li><code class="prettyprint">admin_lastName</code> - (Optional, string) The last name for administrative contact.</li>
+<li><code class="prettyprint">admin_title</code> - (Optional, string) The title for for administrative contact.</li>
+<li><code class="prettyprint">admin_emailAddress</code> -(Optional, string) email address for administrative contact.</li>
+<li><code class="prettyprint">admin_phone_number</code> - (Optional, string) Phone number of administrator.</li>
+<li><code class="prettyprint">admin_fax_number</code> - (Optional, string) Fax number for administrator.</li>
+</ul></li>
+<li><p><code class="prettyprint">billing_contact</code> - (Optional, set) Billing Contact details.</p>
+
+<ul>
+<li><code class="prettyprint">billing_address</code> - (Optional, set) Billing address details.
+
+<ul>
+<li><code class="prettyprint">billing_addressLine1</code> - (Optional, string) The address for billing contact.</li>
+<li><code class="prettyprint">billing_addressLine2</code> - (optional, string) The address for billing contact.</li>
+<li><code class="prettyprint">billing_city</code> - (Optional, string) The city for billing contact.</li>
+<li><code class="prettyprint">billing_postalCode</code> - (Optional, integer) The postal code for billing contact.</li>
+<li><code class="prettyprint">billing_state</code> - (Optional, string) The two letter state code of billing contact. Allowed value for country which doesn&rsquo;t have states is <code class="prettyprint">OT</code>.</li>
+<li><code class="prettyprint">billing_countryCode</code> - (Optional, string) The two letter country code for billing contact.</li>
+</ul></li>
+<li><code class="prettyprint">billing_organizationName</code> - (Optional, string) Name of organization for billing contact.</li>
+<li><code class="prettyprint">billing_firstName</code> - (Optional, string) The first name for billing contact.</li>
+<li><code class="prettyprint">billing_lastName</code> - (Optional, string) The last name for billing contact.</li>
+<li><code class="prettyprint">billing_title</code> - (Optional, string) The title for for billing contact.</li>
+<li><code class="prettyprint">billing_emailAddress</code> - (Optional, string) email address for billing contact.</li>
+<li><code class="prettyprint">billing_phone_number</code> - (Optional, string) Phone number for billing contact.</li>
+<li><code class="prettyprint">billing_fax_number</code> - (Optional, string) Fax number for billing contact.</li>
+</ul></li>
+<li><p><code class="prettyprint">technicalContactSameAsOrgAddressFlag</code> -(Optional, bool) If your organization address and technical contact address is the same make this flag as true and skip technical contact address details.</p></li>
+<li><p><code class="prettyprint">administrativeContactSameAsTechnicalFlag</code> -(Required, bool)- If your technical contact details and administrative contact details is the same then make this as true and skip details of administrative contact.</p></li>
+<li><p><code class="prettyprint">billingContactSameAsTechnicalFlag</code> -(Required, bool)- If your technical contact details and billing contact details is the same then make this as true and skip details of billing contact. </p></li>
+<li><p><code class="prettyprint">administrativeAddressSameAsOrganizationFlag</code> -(Required,bool)If administrative address is same as organization address then make this flag as true and skip address details.</p></li>
+<li><p><code class="prettyprint">billingAddressSameAsOrganizationFlag</code> -(Required,bool)If billing address is same as organization address then make this flag as true and skip address details. </p></li>
+</ul>
 
       </div>
     </div>
@@ -1094,6 +1109,6 @@ The CloudFoundry endpoint has been updated in this release of IBM Cloud Terrafor
   </div>
 </footer>
 
-  <script src="javascript/sidemenu.js"></script>
+  <script src="../../javascript/sidemenu.js"></script>
 </body>
 </html>
