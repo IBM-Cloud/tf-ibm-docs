@@ -5,6 +5,7 @@ LEGACYRELEASES=( \
 RELEASES=( \
   "v0.22.0" \
   "v1.0.0"  \
+  "v0.23.0" \
   "v1.1.0"
 )
 
