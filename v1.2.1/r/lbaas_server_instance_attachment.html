@@ -902,6 +902,13 @@
 </div>
 
       <div  id="content-container" class="content col-lg-10 col-md-9 col-sm-6 col-xs-12">
+        <div style="background-color: lightgrey; font-weight: bold;">
+    <blockquote><i>Documentation for the IBM Cloud Provider for Terraform has moved to 
+    <a href="https://cloud.ibm.com/docs/terraform?topic=terraform-tf-provider">https://cloud.ibm.com/docs/terraform?topic=terraform-tf-provider</a>. 
+    This site will be deprecated soon. Please adjust your links.</i>
+    </blockquote>
+</div>
+
         <h1 id="ibm_lbaas_server_instance_attachment">ibm_lbaas_server_instance_attachment</h1>
 
 <p>Provides a resource for attaching the server instance to IBM cloud load balancer. This allows to attach, detach and update server instances as loadbalancer members to IBM cloud load balancer. A <code class="prettyprint">depends_on</code> statement is required for the associated load balancer to ensure that attach and detach only occur after and before load balancer creation and deletion. If the <code class="prettyprint">depends_on</code> is ommited intemitent attach failures will occur on creation and load balancer deletion will fail. Typically when apply or destroy is rerun the operation will be successful. </p>
