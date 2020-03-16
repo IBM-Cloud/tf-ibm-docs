@@ -3,12 +3,12 @@ LEGACYRELEASES=( \
 )
 
 RELEASES=( \
-  "v0.24.3" \
-  "v1.2.3"
+  "v0.24.4" \
+  "v1.2.4"
 )
 
 # The version of the provider that schematics is using
-LATEST_VERSION="v1.2.3"
+LATEST_VERSION="v1.2.4"
 
 # The repos that contains the terraform docs
 LEGACYREPO="https://github.com/IBM-Cloud/terraform"
