@@ -7,8 +7,6 @@
 set -e
 PARENT_DIR=$(pwd)
 
-cd build
-
 echo "*********************************************************"
 echo "SITE IS AVAILABLE AT http://localhost:8000"
 echo "*********************************************************"

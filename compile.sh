@@ -51,6 +51,16 @@ function getdocs() {
 # $1 is the release version
 # ----------------------
 #
+
+if [[ $# -eq 0 ]] ; then
+    echo "Please enter a release version:"
+    for release in "${RELEASES[@]}"
+      do
+        echo "$release"
+    done
+    exit 1
+fi
+
 function compile() {
   addtoversionlist $1
   getdocs $1 $REPO "website/docs/*"
